@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Checkout | AI Video Bootcamp</title>
     
-    <!-- CAPI Tracking Active -->
+    <!-- No Tracking Active -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -271,7 +271,6 @@
                                 <h4 style="margin:0; font-size: 0.9rem;">Verification</h4>
                                 <p style="font-size: 0.8rem; margin-bottom: 1rem; color: #94a3b8;">Send screenshot to support for activation.</p>
                                 <a href="https://wa.me/923218050258?text=Hi!%20I%20have%20sent%20the%20payment.%20Here%20is%20my%20screenshot." 
-                                   onclick="if(window.CAPIBridge) CAPIBridge.purchase('whatsapp_click');"
                                    target="_blank" 
                                    class="btn-primary full-width" 
                                    style="background: #10b981; border: none; text-decoration: none; padding: 1rem; border-radius: 8px; display: block; text-align: center; font-weight: 700; color: white;">
@@ -345,17 +344,6 @@
                 }, 2000);
             });
         }
-    </script>
-    <script src="assets/js/capi-bridge.js"></script>
-    <script>
-        // Fire InitiateCheckout when bridge is ready
-        function onReady(fn) {
-            if (document.readyState !== 'loading') { fn(); }
-            else { document.addEventListener('DOMContentLoaded', fn); }
-        }
-        onReady(function() {
-            if(window.CAPIBridge) CAPIBridge.initiateCheckout();
-        });
     </script>
 </body>
 </html>
