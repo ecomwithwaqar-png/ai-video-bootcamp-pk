@@ -32,8 +32,19 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: var(--font-body); background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; position: relative; }
+html, body { 
+    max-width: 100%; 
+    overflow-x: hidden !important; 
+    width: 100%; 
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font-body); background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+@media (max-width: 768px) {
+    body { padding-bottom: 80px; }
+}
 
 h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight: 700; }
 h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
@@ -76,7 +87,7 @@ ul { list-style: none; }
 .urgency-badge { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; }
 
 /* Navbar */
-.navbar { position: sticky; top: 0; width: 100%; z-index: 1000; padding: 1rem 0; transition: var(--transition-normal); background: transparent; backdrop-filter: blur(0); border-bottom: 1px solid transparent; pointer-events: auto; }
+.navbar { position: sticky; top: 0; left: 0; right: 0; width: auto; z-index: 1000; padding: 1rem 0; transition: var(--transition-normal); background: transparent; backdrop-filter: blur(0); border-bottom: 1px solid transparent; pointer-events: auto; }
 .navbar.scrolled { background: rgba(5, 5, 10, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 0.75rem 0; }
 .nav-content { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1001; }
 .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; }
@@ -378,9 +389,10 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    padding: 1rem 1.25rem;
-    background: rgba(5, 5, 10, 0.9);
+    right: 0;
+    width: auto;
+    padding: 0.75rem 1rem;
+    background: rgba(5, 5, 10, 0.95);
     backdrop-filter: blur(12px);
     border-top: 1px solid var(--border-light);
     z-index: 9998;
@@ -399,9 +411,16 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
     .mobile-sticky-cta {
         display: flex;
     }
-    .btn-large {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
+    .mobile-sticky-cta .btn-primary {
+        width: 100%;
+        padding: 0.85rem;
+        font-size: 0.95rem;
+        border-radius: 12px;
+    }
+    /* Move WhatsApp float up when CTA is visible */
+    .mobile-sticky-cta.visible ~ .whatsapp-float {
+        bottom: 85px;
     }
 }
+
 
