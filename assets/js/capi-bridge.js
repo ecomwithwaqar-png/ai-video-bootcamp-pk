@@ -1,113 +1,77 @@
-
-/**
- * Meta Conversions API (CAPI) Bridge
- * Sends server-side events to /api/capi alongside browser pixel events.
- * Deduplication is handled via matching event_id on both sides.
- */
-
 const CAPIBridge = (function () {
     const PIXEL_ID = '993205486461512';
 
-    // Generates a unique event ID for deduplication
     function generateEventId() {
         return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
 
-    // Detects if traffic is from a paid ad
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
         return params.has('fbclid') || params.has('utm_source');
     }
 
-    // Sends event to both the browser Pixel AND the server-side CAPI
-    function track(eventName, customData = {}, userData = {}) {
+    // Sends event to both Pixel and CAPI
+    function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         const eventId = generateEventId();
         const trafficType = isAdTraffic() ? 'paid' : 'organic';
 
-        // --- 1. Browser Pixel (Client-Side) ---
+        // --- 1. Browser Pixel (PURE STANDARD ONLY) ---
+        // We only send standard Meta parameters to the Pixel to ensure "Standard Event" status.
+        // We do NOT send traffic_type here; we send it via CAPI. Meta will merge them using the eventId.
         if (window.fbq) {
-            fbq('track', eventName, {
-                ...customData,
-                traffic_type: trafficType
-            }, {
-                eventID: eventId  // <-- Deduplication key
-            });
+            fbq('track', eventName, standardParams, { eventID: eventId });
         }
 
-        // --- 2. Server-Side CAPI (Bypass Ad Blockers) ---
+        // --- 2. Server-Side CAPI (RICH DATA) ---
+        // This is where we send the 'traffic_type' and other custom labels.
         const payload = {
             event_name: eventName,
-            event_id: eventId,  // <-- Same key for deduplication
+            event_id: eventId,
             event_source_url: window.location.href,
             user_data: userData,
             custom_data: {
-                ...customData,
+                ...standardParams,
+                ...customParams,
                 traffic_type: trafficType
             }
         };
 
-        // Fire and forget — does not block the user's action
         fetch('/api/capi', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            keepalive: true,  // Ensures the request completes even if page navigates away
+            keepalive: true,
             body: JSON.stringify(payload)
-        }).catch(() => {
-            // Silent fail — browser pixel already captured the event
-        });
+        }).catch(() => {});
     }
 
-    // --- Pre-built event helpers ---
     return {
         pageView: function () {
-            // Standard PageView — no custom params so Meta classifies it correctly
-            const eventId = generateEventId();
-            if (window.fbq) {
-                fbq('track', 'PageView', {}, { eventID: eventId });
-            }
-            fetch('/api/capi', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                keepalive: true,
-                body: JSON.stringify({
-                    event_name: 'PageView',
-                    event_id: eventId,
-                    event_source_url: window.location.href,
-                    user_data: {},
-                    custom_data: {}
-                })
-            }).catch(() => {});
+            track('PageView');
         },
         initiateCheckout: function () {
             track('InitiateCheckout', {
                 content_name: 'AI Video Bootcamp',
                 currency: 'PKR',
-                value: 3500,
-                traffic_type: isAdTraffic() ? 'paid' : 'organic'
+                value: 3500
             });
         },
         purchase: function (method = 'whatsapp_click') {
             track('Purchase', {
                 content_name: 'AI Video Bootcamp',
                 currency: 'PKR',
-                value: 3500,
-                traffic_type: isAdTraffic() ? 'paid' : 'organic',
+                value: 3500
+            }, {
                 method: method
             });
         }
     };
 })();
 
-// Safe ready helper — fires immediately if DOM already loaded
 function onReady(fn) {
-    if (document.readyState !== 'loading') {
-        fn();
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
+    if (document.readyState !== 'loading') { fn(); }
+    else { document.addEventListener('DOMContentLoaded', fn); }
 }
 
-// Auto-fire PageView on load
 onReady(function () {
     CAPIBridge.pageView();
 });
