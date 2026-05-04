@@ -15,7 +15,6 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('set', 'autoConfig', false, '993205486461512');
     fbq('init', '993205486461512');
     // PageView + InitiateCheckout fired by CAPI Bridge (with deduplication)
     </script>
@@ -372,13 +371,6 @@
         }
         onReady(function() {
             if(window.CAPIBridge) CAPIBridge.initiateCheckout();
-        });
-    </script>
-</body>
-</html>
-            e.preventDefault();
-            alert('Verification Request Sent! Please also send your screenshot to WhatsApp for faster activation.');
-            window.location.href = "https://wa.me/923218050258?text=Hi!%20I%20have%20just%20paid%20PKR%203500%20for%20the%20AI%20Bootcamp.%20Here%20is%20my%20TID%20and%20receipt.";
         });
     </script>
 </body>
