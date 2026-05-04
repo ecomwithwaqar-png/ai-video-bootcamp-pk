@@ -1,6 +1,4 @@
 const CAPIBridge = (function () {
-    const PIXEL_ID = '993205486461512';
-
     function generateEventId() {
         return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
@@ -10,20 +8,11 @@ const CAPIBridge = (function () {
         return params.has('fbclid') || params.has('utm_source');
     }
 
-    // Sends event to both Pixel and CAPI
+    // Sends event to server-side CAPI ONLY
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         const eventId = generateEventId();
         const trafficType = isAdTraffic() ? 'paid' : 'organic';
 
-        // --- 1. Browser Pixel (PURE STANDARD ONLY) ---
-        // We only send standard Meta parameters to the Pixel to ensure "Standard Event" status.
-        // We do NOT send traffic_type here; we send it via CAPI. Meta will merge them using the eventId.
-        if (window.fbq) {
-            fbq('track', eventName, standardParams, { eventID: eventId });
-        }
-
-        // --- 2. Server-Side CAPI (RICH DATA) ---
-        // This is where we send the 'traffic_type' and other custom labels.
         const payload = {
             event_name: eventName,
             event_id: eventId,
