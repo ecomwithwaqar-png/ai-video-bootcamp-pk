@@ -192,7 +192,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
 @media (max-width: 768px) {
   h1 { font-size: 2rem; line-height: 1.1; margin-bottom: 0.75rem; }
   h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
-  .hero { padding: 2.5rem 0 1.5rem; min-height: auto; }
+  .hero { padding: 2.5rem 0 0.5rem; min-height: auto; }
   .hero-subtext { font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.5; }
   .urdu-text { font-size: 1.4rem !important; margin-bottom: 0.5rem !important; }
   .section-header { margin-bottom: 2rem; }
@@ -201,6 +201,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
   .logo { font-size: 1.15rem; }
   .btn-primary { font-size: 0.8rem; padding: 0.5rem 1rem; }
   .glass-card { padding: 1.5rem; overflow: hidden; }
+  section { padding: 3rem 0 !important; }
   .vsl-container { margin-bottom: 1.5rem; padding: 6px; }
   .grid-3 { grid-template-columns: 1fr; }
   .pricing-wrapper { padding: 1rem; }
