@@ -98,7 +98,16 @@ const CAPIBridge = (function () {
     };
 })();
 
+// Safe ready helper — fires immediately if DOM already loaded
+function onReady(fn) {
+    if (document.readyState !== 'loading') {
+        fn();
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+
 // Auto-fire PageView on load
-document.addEventListener('DOMContentLoaded', function () {
+onReady(function () {
     CAPIBridge.pageView();
 });

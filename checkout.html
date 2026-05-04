@@ -364,9 +364,13 @@
         }
     </script>
     <script src="assets/js/capi-bridge.js"></script>
-    <!-- Fire InitiateCheckout via CAPI Bridge on page load -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Fire InitiateCheckout when bridge is ready
+        function onReady(fn) {
+            if (document.readyState !== 'loading') { fn(); }
+            else { document.addEventListener('DOMContentLoaded', fn); }
+        }
+        onReady(function() {
             if(window.CAPIBridge) CAPIBridge.initiateCheckout();
         });
     </script>
