@@ -192,7 +192,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
 @media (max-width: 768px) {
   h1 { font-size: 2rem; line-height: 1.1; margin-bottom: 0.75rem; }
   h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
-  .hero { padding: 2.5rem 0 0.5rem; min-height: auto; }
+  .hero { padding: 0.75rem 0 0.5rem; min-height: auto; }
   .hero-subtext { font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.5; }
   .urdu-text { font-size: 1.4rem !important; margin-bottom: 0.5rem !important; }
   .section-header { margin-bottom: 2rem; }
@@ -205,6 +205,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
   .vsl-container { margin-bottom: 1.5rem; padding: 6px; }
   .grid-3 { grid-template-columns: 1fr; }
   .pricing-wrapper { padding: 1rem; }
+  .badge { margin-bottom: 1rem !important; }
   .footer-content { flex-direction: column; text-align: center; }
 }
 
