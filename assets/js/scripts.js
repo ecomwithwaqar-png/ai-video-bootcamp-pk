@@ -61,4 +61,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // VSL Player — handled inline via playVSL() function
+
+    // Scroll Effects: Sticky Header & Mobile CTA
+    const navbar = document.getElementById('navbar');
+    const mobileCta = document.getElementById('mobile-cta');
+
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY;
+
+        // Sticky Navbar background
+        if (scrollPos > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Mobile Sticky CTA visibility (appears after hero)
+        if (mobileCta) {
+            if (scrollPos > 600) {
+                mobileCta.classList.add('visible');
+            } else {
+                mobileCta.classList.remove('visible');
+            }
+        }
+    });
 });
