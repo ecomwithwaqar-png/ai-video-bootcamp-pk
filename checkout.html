@@ -134,9 +134,12 @@
 
         @media (max-width: 968px) {
             .checkout-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .checkout-container { padding: 8rem 0; }
+            .checkout-container { padding: 8rem 0 4rem; }
             .offer-info { text-align: center; }
-            .offer-info h1 { font-size: 4rem; }
+            .price-display { justify-content: center !important; gap: 1rem !important; }
+            .price-display h1 { font-size: 3.5rem !important; }
+            .price-display .pkr-price { font-size: 1.5rem !important; }
+            .price-display .old-price { font-size: 0.9rem !important; }
         }
     </style>
 </head>
@@ -160,11 +163,11 @@
                 <div class="badge" style="background: rgba(249, 115, 22, 0.2); color: #fdba74; border-color: rgba(249, 115, 22, 0.4);">
                     🚀 LAUNCH PRICE — FIRST 50 STUDENTS ONLY
                 </div>
-                <div style="display: flex; align-items: baseline; gap: 1rem; margin: 1.5rem 0;">
+                <div class="price-display" style="display: flex; align-items: baseline; gap: 1.5rem; margin: 1.5rem 0;">
                     <h1 style="font-size: 5rem; margin: 0; line-height: 1;">$12</h1>
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 2rem; font-weight: 800; color: white;">Rs. 3,500</span>
-                        <span style="text-decoration: line-through; color: var(--text-muted); font-size: 1rem;">Was $35 | Rs. 15,000</span>
+                    <div style="display: flex; flex-direction: column; text-align: left;">
+                        <span class="pkr-price" style="font-size: 2rem; font-weight: 800; color: white;">Rs. 3,500</span>
+                        <span class="old-price" style="text-decoration: line-through; color: var(--text-muted); font-size: 1rem;">Was $35 | Rs. 15,000</span>
                     </div>
                 </div>
                 

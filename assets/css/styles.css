@@ -179,11 +179,12 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border-light); margin-top:
 }
 
 @media (max-width: 768px) {
-  h1 { font-size: 2rem; line-height: 1.1; margin-bottom: 1rem; }
+  h1 { font-size: 2rem; line-height: 1.1; margin-bottom: 0.75rem; }
   h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
-  .hero { padding: 3rem 0 2rem; min-height: auto; }
-  .hero-subtext { font-size: 1rem; margin-bottom: 2rem; line-height: 1.5; }
-  .section-header { margin-bottom: 2.5rem; }
+  .hero { padding: 2.5rem 0 1.5rem; min-height: auto; }
+  .hero-subtext { font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.5; }
+  .urdu-text { font-size: 1.4rem !important; margin-bottom: 0.5rem !important; }
+  .section-header { margin-bottom: 2rem; }
   .navbar { padding: 0.75rem 0; }
   .nav-content { padding: 0 1.25rem; }
   .logo { font-size: 1.25rem; }
