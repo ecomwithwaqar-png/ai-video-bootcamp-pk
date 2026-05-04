@@ -128,13 +128,13 @@ ul { list-style: none; }
 
 /* Modules */
 .modules { padding: 6rem 0; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+.grid-3, .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 .module-number { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 0.5rem; }
 .highlight-card { border-color: var(--primary); background: linear-gradient(180deg, rgba(139,92,246,0.1) 0%, rgba(20,20,30,0.6) 100%); }
 
 /* Social Proof */
 .social-proof { padding: 5rem 0; background: rgba(255,255,255,0.02); }
-.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 .rating { margin-bottom: 1rem; letter-spacing: 2px; }
 .review { font-style: italic; font-size: 1.1rem; color: var(--text-main); margin-bottom: 1.5rem; }
 .student { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--border-light); padding-top: 1rem; }
