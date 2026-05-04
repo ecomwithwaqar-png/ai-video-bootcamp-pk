@@ -60,16 +60,38 @@ const CAPIBridge = (function () {
     // --- Pre-built event helpers ---
     return {
         pageView: function () {
-            track('PageView');
+            // Standard PageView — no custom params so Meta classifies it correctly
+            const eventId = generateEventId();
+            if (window.fbq) {
+                fbq('track', 'PageView', {}, { eventID: eventId });
+            }
+            fetch('/api/capi', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                keepalive: true,
+                body: JSON.stringify({
+                    event_name: 'PageView',
+                    event_id: eventId,
+                    event_source_url: window.location.href,
+                    user_data: {},
+                    custom_data: {}
+                })
+            }).catch(() => {});
         },
         initiateCheckout: function () {
-            track('InitiateCheckout', { content_name: 'AI Video Bootcamp', currency: 'PKR', value: 3500 });
+            track('InitiateCheckout', {
+                content_name: 'AI Video Bootcamp',
+                currency: 'PKR',
+                value: 3500,
+                traffic_type: isAdTraffic() ? 'paid' : 'organic'
+            });
         },
         purchase: function (method = 'whatsapp_click') {
             track('Purchase', {
                 content_name: 'AI Video Bootcamp',
                 currency: 'PKR',
                 value: 3500,
+                traffic_type: isAdTraffic() ? 'paid' : 'organic',
                 method: method
             });
         }
