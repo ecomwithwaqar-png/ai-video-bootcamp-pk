@@ -1,0 +1,8 @@
+{
+  "name": "ai-video-bootcamp",
+  "version": "1.0.0",
+  "description": "AI Video Bootcamp landing page with Meta CAPI tracking",
+  "engines": {
+    "node": ">=18"
+  }
+}
