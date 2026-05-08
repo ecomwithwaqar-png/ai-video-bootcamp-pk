@@ -705,7 +705,14 @@
     </a>
 
     <!-- Scripts -->
+    <script src="assets/js/capi-bridge.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script>
+        onReady(function() {
+            if (window.CAPIBridge) {
+                CAPIBridge.viewContent();
+            }
+        });
+    </script>
 </body>
-
 </html>
