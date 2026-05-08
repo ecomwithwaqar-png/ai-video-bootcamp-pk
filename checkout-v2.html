@@ -389,7 +389,10 @@
     onReady(function() {
         if (window.CAPIBridge) {
             CAPIBridge.pageView();
-            CAPIBridge.initiateCheckout();
+            // Small delay to prevent event clashing
+            setTimeout(() => {
+                CAPIBridge.initiateCheckout();
+            }, 500);
         }
     });
 </script>
