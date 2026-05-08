@@ -1,4 +1,25 @@
-const CAPIBridge = (function () {
+// Global error tracker to catch hidden issues
+window.addEventListener('error', function(e) {
+    console.error('❌ [CAPIBridge] Global Error:', e.message, 'at', e.filename, 'line', e.lineno);
+});
+
+function onReady(fn) {
+    console.log('[CAPIBridge] onReady check. State:', document.readyState);
+    if (document.readyState !== 'loading') { 
+        console.log('[CAPIBridge] onReady executing immediately');
+        fn(); 
+    } else { 
+        console.log('[CAPIBridge] onReady waiting for DOMContentLoaded');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[CAPIBridge] onReady DOMContentLoaded fired');
+            fn();
+        });
+    }
+}
+
+console.log('🚀 [CAPIBridge] Script initialized');
+
+window.CAPIBridge = (function () {
     // Configuration
     const TEST_EVENT_CODE = 'TEST72689'; // Matches the server-side code
 
@@ -116,8 +137,3 @@ const CAPIBridge = (function () {
         }
     };
 })();
-
-function onReady(fn) {
-    if (document.readyState !== 'loading') { fn(); }
-    else { document.addEventListener('DOMContentLoaded', fn); }
-}

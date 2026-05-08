@@ -1,6 +1,18 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
+    // 0. Health Check for debugging
+    if (req.method === 'GET') {
+        return res.status(200).json({ 
+            status: 'online', 
+            time: new Date().toISOString(),
+            config: {
+                has_meta_token: !!process.env.META_ACCESS_TOKEN,
+                has_webhook: !!process.env.LEADS_SHEET_WEBHOOK
+            }
+        });
+    }
+
     // 1. Method Check
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -9,7 +21,8 @@ module.exports = async (req, res) => {
     const { event_name, event_id, event_source_url, user_data = {}, custom_data = {}, test_event_code } = req.body;
     const PIXEL_ID = '993205486461512';
     const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
-    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK;
+    // FORCED FIX: Ignoring environment variable to bypass old Vercel settings
+    const SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbz50jY_uuDyAhBxEZFsYZ-RWoBOupBs_b4-Ekf3gkFZisQ1TBmTIhaxQVhBMe_Y5qYF/exec';
     
     // Use request test code if provided, otherwise fallback to default
     const FINAL_TEST_CODE = test_event_code || 'TEST72689';
@@ -77,32 +90,48 @@ module.exports = async (req, res) => {
     if (event_name === 'Lead') {
         if (SHEETS_WEBHOOK) {
             sheetsStatus = 'pending';
-            // Include both standard and common keys to avoid missing data in Sheets
-            const sheetData = {
-                timestamp: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
-                event_id: event_id,
-                name: user_data.fn || user_data.name || user_data.external_id || 'N/A',
-                phone: user_data.ph || user_data.phone || 'N/A',
-                // Keep ph/fn for compatibility with some scripts
-                fn: user_data.fn || user_data.name || 'N/A',
-                ph: user_data.ph || user_data.phone || 'N/A',
-                city: custom_data.city || 'N/A',
-                url: event_source_url,
-                traffic: custom_data.traffic_type || 'organic'
+            
+            // Multi-format Master Fix for Google Sheets
+            const params = new URLSearchParams();
+            const timestamp = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+            const name = user_data.fn || user_data.name || user_data.external_id || 'N/A';
+            const phone = user_data.ph || user_data.phone || 'N/A';
+            const city = custom_data.city || 'N/A';
+            const url = event_source_url;
+            const traffic = custom_data.traffic_type || 'organic';
+
+            // Add both casing styles to be 100% safe
+            const dataToSubmit = {
+                "Timestamp": timestamp, "timestamp": timestamp,
+                "Name": name, "name": name,
+                "Event ID": event_id, "event_id": event_id,
+                "Phone": phone, "phone": phone,
+                "City": city, "city": city,
+                "URL": url, "url": url,
+                "Traffic Type": traffic, "traffic": traffic
             };
 
+            Object.entries(dataToSubmit).forEach(([key, val]) => params.append(key, val));
+
+            const finalWebhookUrl = SHEETS_WEBHOOK.includes('?') 
+                ? `${SHEETS_WEBHOOK}&${params.toString()}` 
+                : `${SHEETS_WEBHOOK}?${params.toString()}`;
+
             tasks.push(
-                fetch(SHEETS_WEBHOOK, {
+                fetch(finalWebhookUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(sheetData)
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
                 })
-                .then(r => {
-                    console.log(`[CAPI] Sheets Webhook Status: ${r.status}`);
-                    return { success: r.ok, status: r.status };
+                .then(async r => {
+                    const text = await r.text();
+                    console.log(`[CAPI] Sheets Status: ${r.status}, Response: ${text.substring(0, 50)}`);
+                    sheetsStatus = 'success';
+                    return { success: r.ok, status: r.status, response: text };
                 })
                 .catch(err => {
                     console.error('[CAPI] Sheets Webhook Error:', err);
+                    sheetsStatus = 'error';
                     return { error: 'Sheets Webhook Failed', details: err.message };
                 })
             );
