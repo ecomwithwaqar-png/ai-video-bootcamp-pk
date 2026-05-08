@@ -8,7 +8,7 @@ const CAPIBridge = (function () {
         return params.has('fbclid') || params.has('utm_source');
     }
 
-    function track(eventName, standardParams = {}, customParams = {}) {
+    function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         const eventId = generateEventId();
         const trafficType = isAdTraffic() ? 'paid' : 'organic';
 
@@ -22,7 +22,7 @@ const CAPIBridge = (function () {
             event_name: eventName,
             event_id: eventId,
             event_source_url: window.location.href,
-            user_data: {},
+            user_data: userData,
             custom_data: {
                 ...standardParams,
                 ...customParams,
@@ -48,12 +48,12 @@ const CAPIBridge = (function () {
                 currency: 'PKR'
             });
         },
-        lead: function (customParams = {}) {
+        lead: function (customParams = {}, userData = {}) {
             track('Lead', {
                 content_name: 'AI Video Bootcamp',
                 currency: 'PKR',
                 value: 1499
-            }, customParams);
+            }, customParams, userData);
         },
         initiateCheckout: function () {
             track('InitiateCheckout', {

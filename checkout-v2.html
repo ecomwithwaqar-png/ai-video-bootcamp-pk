@@ -365,7 +365,10 @@
 
         // Track Lead
         if (window.CAPIBridge) {
-            CAPIBridge.lead({ city: city || 'Not specified' });
+            CAPIBridge.lead(
+                { city: city || 'Not specified' },
+                { external_id: name, phone: phone }
+            );
         }
 
         // Scroll to payment on mobile
