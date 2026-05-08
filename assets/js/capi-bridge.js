@@ -44,22 +44,29 @@ const CAPIBridge = (function () {
             track('ViewContent', {
                 content_name: 'AI Video Bootcamp',
                 content_category: 'Online Course',
-                value: 3500,
+                value: 1499,
                 currency: 'PKR'
             });
+        },
+        lead: function (customParams = {}) {
+            track('Lead', {
+                content_name: 'AI Video Bootcamp',
+                currency: 'PKR',
+                value: 1499
+            }, customParams);
         },
         initiateCheckout: function () {
             track('InitiateCheckout', {
                 content_name: 'AI Video Bootcamp',
                 currency: 'PKR',
-                value: 3500
+                value: 1499
             });
         },
         purchase: function (method = 'whatsapp_click') {
             track('Purchase', {
                 content_name: 'AI Video Bootcamp',
                 currency: 'PKR',
-                value: 3500
+                value: 1499
             }, {
                 method: method
             });
