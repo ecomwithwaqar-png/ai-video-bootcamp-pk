@@ -26,8 +26,10 @@
     <script src="assets/js/capi-bridge.js"></script>
     <script>
         onReady(function () {
-            CAPIBridge.pageView();
-            CAPIBridge.viewContent();
+            if (window.CAPIBridge) {
+                CAPIBridge.pageView();
+                // ViewContent is handled at the bottom of the page to ensure script is loaded
+            }
         });
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -665,7 +667,7 @@
                     style="font-size: 1.15rem; color: #cbd5e1; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
                     Every day you wait is a day someone else takes your client. The AI revolution is happening right now
                     in Pakistan — don't get left behind.</p>
-                <a href="checkout-v2.html" onclick="if(window.fbq) fbq('track', 'InitiateCheckout');"
+                <a href="checkout-v2.html" onclick="if(window.CAPIBridge) CAPIBridge.initiateCheckout();"
                     class="btn-primary glow-btn btn-large" style="text-decoration: none; background: linear-gradient(135deg, #f97316, #ec4899);">Enroll Now — Start Today</a>
                 <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #94a3b8; font-weight: 500;">33 spots left at this price
                     · Lifetime access · Private community</p>
@@ -676,7 +678,7 @@
     <!-- Sticky Mobile CTA -->
     <div class="mobile-sticky-cta" id="mobile-cta">
         <a href="checkout-v2.html" class="btn-primary glow-btn full-width" 
-           onclick="if(window.fbq) fbq('track', 'InitiateCheckout'); if(window.CAPIBridge) CAPIBridge.initiateCheckout();"
+           onclick="if(window.CAPIBridge) CAPIBridge.initiateCheckout();"
            style="text-decoration: none;">
             Enroll Now — PKR 1,499
         </a>

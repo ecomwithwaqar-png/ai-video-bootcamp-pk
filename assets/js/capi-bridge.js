@@ -1,33 +1,53 @@
 const CAPIBridge = (function () {
+    // Configuration
+    const TEST_EVENT_CODE = 'TEST72689'; // Matches the server-side code
+
     function generateEventId() {
         return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
 
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
-        return params.has('fbclid') || params.has('utm_source');
+        return params.has('fbclid') || params.has('utm_source') || params.has('utm_medium');
     }
 
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         const eventId = generateEventId();
         const trafficType = isAdTraffic() ? 'paid' : 'organic';
 
-        // 1. Browser Pixel (Standard Parameters ONLY for clean classification)
+        console.log(`[CAPIBridge] Tracking ${eventName}`, { eventId, standardParams, customParams, userData });
+
+        // 1. Browser Pixel
         if (window.fbq) {
-            fbq('track', eventName, standardParams, { eventID: eventId });
+            // Combine parameters for the browser pixel
+            const pixelParams = { ...standardParams, ...customParams };
+            
+            // For Pixel, we don't send the user_data here (it's handled via init or automatic matching)
+            // But we MUST send the eventID for deduplication
+            fbq('track', eventName, pixelParams, { eventID: eventId });
+        } else {
+            console.warn('[CAPIBridge] Meta Pixel (fbq) not found');
         }
 
-        // 2. Server CAPI (Rich Data including traffic_type)
+        // 2. Server CAPI (Rich Data)
+        // Map user data to Meta standard keys
+        const mappedUserData = {};
+        if (userData.phone) mappedUserData.ph = userData.phone.replace(/\D/g, '');
+        if (userData.email) mappedUserData.em = userData.email.toLowerCase().trim();
+        if (userData.external_id) mappedUserData.external_id = userData.external_id;
+        if (userData.fn) mappedUserData.fn = userData.fn.toLowerCase().trim();
+        
         const payload = {
             event_name: eventName,
             event_id: eventId,
             event_source_url: window.location.href,
-            user_data: userData,
+            user_data: mappedUserData,
             custom_data: {
                 ...standardParams,
                 ...customParams,
                 traffic_type: trafficType
-            }
+            },
+            test_event_code: TEST_EVENT_CODE
         };
 
         fetch('/api/capi', {
@@ -35,7 +55,18 @@ const CAPIBridge = (function () {
             headers: { 'Content-Type': 'application/json' },
             keepalive: true,
             body: JSON.stringify(payload)
-        }).catch(() => {});
+        })
+        .then(async r => {
+            const data = await r.json();
+            if (r.ok) {
+                console.log(`[CAPIBridge] ✅ ${eventName} tracked successfully:`, data);
+            } else {
+                console.error(`[CAPIBridge] ❌ ${eventName} server error:`, data);
+            }
+        })
+        .catch(err => {
+            console.error(`[CAPIBridge] ❌ ${eventName} network error:`, err);
+        });
     }
 
     return {
@@ -44,20 +75,30 @@ const CAPIBridge = (function () {
             track('ViewContent', {
                 content_name: 'AI Video Bootcamp',
                 content_category: 'Online Course',
+                content_ids: ['avb_001'],
+                content_type: 'product',
                 value: 1499,
                 currency: 'PKR'
             });
         },
         lead: function (customParams = {}, userData = {}) {
+            // Support both formats to be safe
+            const normalizedUserData = { ...userData };
+            if (!normalizedUserData.fn && normalizedUserData.name) normalizedUserData.fn = normalizedUserData.name;
+            if (!normalizedUserData.phone && normalizedUserData.ph) normalizedUserData.phone = normalizedUserData.ph;
+
             track('Lead', {
                 content_name: 'AI Video Bootcamp',
+                content_category: 'Online Course',
                 currency: 'PKR',
                 value: 1499
-            }, customParams, userData);
+            }, customParams, normalizedUserData);
         },
         initiateCheckout: function () {
             track('InitiateCheckout', {
                 content_name: 'AI Video Bootcamp',
+                content_ids: ['avb_001'],
+                content_type: 'product',
                 currency: 'PKR',
                 value: 1499
             });
@@ -65,10 +106,12 @@ const CAPIBridge = (function () {
         purchase: function (method = 'whatsapp_click') {
             track('Purchase', {
                 content_name: 'AI Video Bootcamp',
+                content_ids: ['avb_001'],
+                content_type: 'product',
                 currency: 'PKR',
                 value: 1499
             }, {
-                method: method
+                payment_method: method
             });
         }
     };

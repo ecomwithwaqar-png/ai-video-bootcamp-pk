@@ -20,8 +20,10 @@
     <script src="assets/js/capi-bridge.js"></script>
     <script>
     onReady(function() {
-        CAPIBridge.pageView();
-        CAPIBridge.purchase('success_page');
+        if (window.CAPIBridge) {
+            CAPIBridge.pageView();
+            CAPIBridge.purchase('success_page');
+        }
     });
     </script>
     <noscript><img height="1" width="1" style="display:none"

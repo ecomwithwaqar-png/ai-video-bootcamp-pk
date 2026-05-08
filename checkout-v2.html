@@ -209,15 +209,15 @@
         <div class="card active-card" id="formCard">
             <div class="card-title">Step 1 of 2 — Your Enrollment Details</div>
             <div class="form-group">
-                <label>Full Name</label>
+                <label for="inp-name">Full Name</label>
                 <input type="text" id="inp-name" placeholder="e.g. Muhammad Ali" autocomplete="name">
             </div>
             <div class="form-group">
-                <label>WhatsApp Number</label>
+                <label for="inp-phone">WhatsApp Number</label>
                 <input type="tel" id="inp-phone" placeholder="03XX XXXXXXX" autocomplete="tel">
             </div>
             <div class="form-group">
-                <label>City</label>
+                <label for="inp-city">City</label>
                 <select id="inp-city">
                     <option value="">Select your city</option>
                     <option>Karachi</option>
@@ -367,7 +367,11 @@
         if (window.CAPIBridge) {
             CAPIBridge.lead(
                 { city: city || 'Not specified' },
-                { external_id: name, phone: phone }
+                { 
+                    fn: name, 
+                    phone: phone,
+                    external_id: name // Use name as external_id if no other unique ID exists
+                }
             );
         }
 
