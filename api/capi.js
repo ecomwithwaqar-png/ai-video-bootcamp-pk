@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
     const PIXEL_ID = '993205486461512';
     const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
     const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK;
+    const TEST_EVENT_CODE = 'TEST72689'; // Added from user screenshot
 
     if (!ACCESS_TOKEN) {
         console.error('META_ACCESS_TOKEN is missing');
@@ -27,7 +28,8 @@ module.exports = async (req, res) => {
                 ...user_data
             },
             custom_data: custom_data
-        }]
+        }],
+        test_event_code: TEST_EVENT_CODE
     };
 
     // Parallel execution: Meta CAPI and Google Sheets (if Lead)
