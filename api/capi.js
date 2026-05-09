@@ -42,12 +42,15 @@ module.exports = async (req, res) => {
     };
 
     // Prepare User Data (Hashed for Meta)
+    const city = custom_data.city || user_data.ct || user_data.city;
+    
     const hashedUserData = {
         client_ip_address: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
         client_user_agent: req.headers['user-agent'],
         ph: hash(user_data.ph),
         em: hash(user_data.em),
         fn: hash(user_data.fn),
+        ct: hash(city),
         external_id: user_data.external_id 
     };
 
@@ -96,7 +99,7 @@ module.exports = async (req, res) => {
             const timestamp = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
             const name = user_data.fn || user_data.name || user_data.external_id || 'N/A';
             const phone = user_data.ph || user_data.phone || 'N/A';
-            const city = custom_data.city || 'N/A';
+            const cityForSheets = city || 'N/A';
             const url = event_source_url;
             const traffic = custom_data.traffic_type || 'organic';
 
@@ -106,7 +109,7 @@ module.exports = async (req, res) => {
                 "Name": name, "name": name,
                 "Event ID": event_id, "event_id": event_id,
                 "Phone": phone, "phone": phone,
-                "City": city, "city": city,
+                "City": cityForSheets, "city": cityForSheets,
                 "URL": url, "url": url,
                 "Traffic Type": traffic, "traffic": traffic
             };
