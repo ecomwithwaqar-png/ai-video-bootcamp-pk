@@ -29,7 +29,14 @@ window.CAPIBridge = (function () {
 
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
-        return params.has('fbclid') || params.has('utm_source') || params.has('utm_medium');
+        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium');
+        
+        if (hasParams) {
+            sessionStorage.setItem('is_paid_traffic', 'true');
+            return true;
+        }
+        
+        return sessionStorage.getItem('is_paid_traffic') === 'true';
     }
 
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
