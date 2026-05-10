@@ -27,6 +27,30 @@ window.CAPIBridge = (function () {
         return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
 
+    // ─── FBC / FBP ATTRIBUTION ───────────────────────────────────────────────
+    // Reads fbclid from URL and formats it as the Meta fbc parameter.
+    // Stored in localStorage so it survives navigation between pages.
+    function captureFbc() {
+        const params = new URLSearchParams(window.location.search);
+        const fbclid = params.get('fbclid');
+        if (fbclid) {
+            const fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+            localStorage.setItem('meta_fbc', fbc);
+            console.log('[CAPIBridge] ✅ fbc captured and stored:', fbc);
+            return fbc;
+        }
+        return localStorage.getItem('meta_fbc') || null;
+    }
+
+    // Reads the _fbp cookie set automatically by the Meta Pixel.
+    function getFbp() {
+        const match = document.cookie.match(/(^|;)\s*_fbp=([^;]+)/);
+        const fbp = match ? match[2] : null;
+        if (fbp) localStorage.setItem('meta_fbp', fbp);
+        return fbp || localStorage.getItem('meta_fbp') || null;
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
         const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium');
@@ -39,33 +63,35 @@ window.CAPIBridge = (function () {
         return sessionStorage.getItem('is_paid_traffic') === 'true';
     }
 
+    // Run fbc capture immediately on script load (catches fbclid on landing page)
+    captureFbc();
+
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         // Event ID Locking: Reuse the same ID for the same event type in a session
         // This ensures Meta deduplicates accidental double-clicks or refreshes.
         const sessionKey = `meta_eid_${eventName.toLowerCase()}`;
         let eventId = sessionStorage.getItem(sessionKey);
+        let isNewEvent = false;
         
         if (!eventId) {
             eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             sessionStorage.setItem(sessionKey, eventId);
+            isNewEvent = true;
             console.log(`[CAPIBridge] Generated NEW ID for ${eventName}: ${eventId}`);
         } else {
-            console.log(`[CAPIBridge] Reusing LOCKED ID for ${eventName}: ${eventId}`);
+            console.log(`[CAPIBridge] Reusing LOCKED ID for ${eventName}: ${eventId} (browser pixel skipped)`);
         }
 
         const trafficType = isAdTraffic() ? 'paid' : 'organic';
 
-        console.log(`[CAPIBridge] Tracking ${eventName}`, { eventId, standardParams, customParams, userData });
+        console.log(`[CAPIBridge] Tracking ${eventName}`, { eventId, isNewEvent, standardParams, customParams, userData });
 
-        // 1. Browser Pixel
-        if (window.fbq) {
-            // Combine parameters for the browser pixel
+        // 1. Browser Pixel — only fire if this is the FIRST time this event fires in this session
+        // Prevents duplicate pixel warnings while server CAPI handles deduplication
+        if (window.fbq && isNewEvent) {
             const pixelParams = { ...standardParams, ...customParams };
-            
-            // For Pixel, we don't send the user_data here (it's handled via init or automatic matching)
-            // But we MUST send the eventID for deduplication
             fbq('track', eventName, pixelParams, { eventID: eventId });
-        } else {
+        } else if (!window.fbq) {
             console.warn('[CAPIBridge] Meta Pixel (fbq) not found');
         }
 
@@ -77,6 +103,12 @@ window.CAPIBridge = (function () {
         if (userData.external_id) mappedUserData.external_id = userData.external_id;
         if (userData.fn) mappedUserData.fn = userData.fn.toLowerCase().trim();
         
+        // Attach fbc and fbp for campaign attribution
+        const fbc = captureFbc();
+        const fbp = getFbp();
+        if (fbc) mappedUserData.fbc = fbc;
+        if (fbp) mappedUserData.fbp = fbp;
+
         const payload = {
             event_name: eventName,
             event_id: eventId,

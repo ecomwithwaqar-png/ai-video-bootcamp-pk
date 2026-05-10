@@ -23,7 +23,7 @@
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '993205486461512');
     </script>
-    <script src="assets/js/capi-bridge.js?v=1.0.1"></script>
+    <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=993205486461512&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
@@ -369,16 +369,38 @@
         // Start Timer
         startTimer(15 * 60);
 
-        // Track Lead
-        if (window.CAPIBridge) {
-            CAPIBridge.lead(
-                { city: city || 'Not specified' },
-                { 
-                    fn: name, 
-                    phone: phone,
-                    external_id: phone // Using phone as external_id is more stable than name
+        // PRIMARY: Always send lead directly to server (bypasses adblockers on browser)
+        const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        // Read attribution identifiers stored by capi-bridge.js
+        const metaFbc = localStorage.getItem('meta_fbc') || undefined;
+        const metaFbp = localStorage.getItem('meta_fbp') || undefined;
+        fetch('/api/capi', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+                event_name: 'Lead',
+                event_id: eventId,
+                event_source_url: window.location.href,
+                user_data: {
+                    fn: name,
+                    ph: phone,
+                    external_id: phone,
+                    fbc: metaFbc,
+                    fbp: metaFbp
+                },
+                custom_data: {
+                    city: city || 'Not specified',
+                    content_name: 'AI Video Bootcamp',
+                    currency: 'PKR',
+                    value: 1499
                 }
-            );
+            })
+        }).catch(function() { /* silent fail - server-side logged */ });
+
+        // SECONDARY: Also fire browser pixel if not blocked
+        if (window.fbq) {
+            fbq('track', 'Lead', { content_name: 'AI Video Bootcamp', currency: 'PKR', value: 1499 });
         }
 
         // Scroll to payment on mobile

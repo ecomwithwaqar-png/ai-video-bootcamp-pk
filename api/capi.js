@@ -51,8 +51,18 @@ module.exports = async (req, res) => {
         em: hash(user_data.em),
         fn: hash(user_data.fn),
         ct: hash(city),
-        external_id: user_data.external_id 
+        external_id: user_data.external_id,
+        // fbc and fbp are NOT hashed — they are click/browser identifiers, not PII
+        // fbc links the event to the exact ad click (campaign/adset attribution)
+        fbc: user_data.fbc || null,
+        fbp: user_data.fbp || null
     };
+
+    // Remove null attribution fields to keep payload clean
+    if (!hashedUserData.fbc) delete hashedUserData.fbc;
+    if (!hashedUserData.fbp) delete hashedUserData.fbp;
+
+    console.log(`[CAPI] Attribution: fbc=${user_data.fbc ? '✅ present' : '❌ missing'}, fbp=${user_data.fbp ? '✅ present' : '❌ missing'}`);
 
     // 2. Meta CAPI Payload
     const payload = {
@@ -111,7 +121,9 @@ module.exports = async (req, res) => {
                 "Phone": phone, "phone": phone,
                 "City": cityForSheets, "city": cityForSheets,
                 "URL": url, "url": url,
-                "Traffic Type": traffic, "traffic": traffic
+                "Traffic Type": traffic, "traffic": traffic,
+                // Attribution: fbc is the Meta click ID that links back to the ad campaign
+                "fbc": user_data.fbc || '', "Fbc": user_data.fbc || ''
             };
 
             Object.entries(dataToSubmit).forEach(([key, val]) => params.append(key, val));

@@ -6,8 +6,10 @@
  * 2. Delete any code there and paste this entire script.
  * 3. Replace the PIXEL_ID and ACCESS_TOKEN variables below with your real Meta credentials.
  * 4. Save the script (Ctrl+S).
- * 5. In your Sheet, ensure you have a column named "Payment Verified" with Checkboxes.
- * 6. You must setup an "On Edit" trigger in Apps Script for this to run automatically:
+ * 5. Your Sheet columns should include: Name | Phone | fbc | Payment Verified
+ *    - "fbc" is auto-populated by the server from the checkout form submission.
+ *    - "Payment Verified" column must use Checkboxes (Insert -> Checkbox).
+ * 6. Set up an "On Edit" trigger in Apps Script for this to run automatically:
  *    - Click the Alarm Clock icon (Triggers) on the left sidebar.
  *    - Click "Add Trigger" (bottom right).
  *    - Choose function to run: `onEditTrigger`
@@ -32,18 +34,21 @@ function onEditTrigger(e) {
   
   // Get all headers to find which column is what
   const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const checkboxColIdx = headers.indexOf('Payment Verified') + 1; // Find the Checkbox column
+  const checkboxColIdx = headers.indexOf('Payment Verified') + 1;
   const nameColIdx = headers.indexOf('Name') + 1;
   const phoneColIdx = headers.indexOf('Phone') + 1;
+  const fbcColIdx = headers.indexOf('fbc') + 1; // Attribution: Meta click ID
   
   // Check if the edited cell was the "Payment Verified" checkbox AND it was checked (true)
   if (colIndex === checkboxColIdx && range.getValue() === true) {
     const name = sheet.getRange(rowIndex, nameColIdx).getValue().toString();
     const phone = sheet.getRange(rowIndex, phoneColIdx).getValue().toString();
+    // Read fbc if the column exists (will be empty string if missing, which is fine)
+    const fbc = fbcColIdx > 0 ? sheet.getRange(rowIndex, fbcColIdx).getValue().toString() : '';
     
     // Fire the purchase event
     if (name && phone) {
-      sendPurchaseToMeta(name, phone);
+      sendPurchaseToMeta(name, phone, fbc);
       // Optional: Prevent firing twice by unchecking or changing text
       range.setValue(false); 
       sheet.getRange(rowIndex, checkboxColIdx + 1).setValue("Pixel Fired ✓");
@@ -51,7 +56,7 @@ function onEditTrigger(e) {
   }
 }
 
-function sendPurchaseToMeta(name, phone) {
+function sendPurchaseToMeta(name, phone, fbc) {
   // Clean phone number (remove +, spaces, leading 0s, ensure country code)
   let cleanPhone = phone.replace(/\D/g, '');
   if (cleanPhone.startsWith('0')) { cleanPhone = '92' + cleanPhone.substring(1); }
@@ -60,12 +65,25 @@ function sendPurchaseToMeta(name, phone) {
   // Clean Name
   const cleanName = name.toLowerCase().trim();
 
-  // Meta Requires SHA256 Hashing
+  // Meta Requires SHA256 Hashing for PII
   const hashedPhone = hashSHA256(cleanPhone);
   const hashedName = hashSHA256(cleanName);
   
   // Create a unique event ID so it never duplicates
   const eventId = 'buy_' + new Date().getTime() + '_' + Math.floor(Math.random() * 1000);
+
+  // Build user_data — fbc is NOT hashed (it's a click ID, not PII)
+  const userData = {
+    ph: [hashedPhone],
+    fn: [hashedName]
+  };
+  // Only attach fbc if it exists — this is what attributes the purchase to a campaign
+  if (fbc && fbc.trim() !== '') {
+    userData.fbc = fbc.trim();
+    console.log('Attribution fbc attached: ' + fbc.trim());
+  } else {
+    console.warn('No fbc found — purchase will not be attributed to a specific ad campaign.');
+  }
 
   const payload = {
     data: [
@@ -74,10 +92,7 @@ function sendPurchaseToMeta(name, phone) {
         event_time: Math.floor(new Date().getTime() / 1000),
         action_source: 'system_generated',
         event_id: eventId,
-        user_data: {
-          ph: [hashedPhone],
-          fn: [hashedName]
-        },
+        user_data: userData,
         custom_data: {
           currency: 'PKR',
           value: 1499
