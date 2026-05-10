@@ -349,6 +349,7 @@
     tickerEl.style.transition = 'opacity 0.4s';
 
     function revealPayment() {
+        const btn = document.querySelector('.btn-reveal');
         const name = document.getElementById('inp-name').value.trim();
         const phone = document.getElementById('inp-phone').value.trim();
         const city = document.getElementById('inp-city').value;
@@ -356,18 +357,17 @@
         if (!name) { alert('Please enter your name.'); return; }
         if (!phone || phone.length < 10) { alert('Please enter a valid WhatsApp number.'); return; }
 
+        // Button Debouncing: Prevent double clicks
+        if (btn.disabled) return;
+        btn.disabled = true;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span style="display:flex;align-items:center;justify-content:center;gap:8px;"><svg class="animate-spin" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" style="animation: spin 1s linear infinite;"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg> Processing...</span>';
+
         // Build WhatsApp link with lead data pre-filled
         const msg = encodeURIComponent(
             `Hi! I want to enroll in the AIBootcamp.\n\nName: ${name}\nPhone: ${phone}\nCity: ${city || 'Not specified'}\n\nI am sending the payment now. Please confirm my spot.`
         );
         document.getElementById('waLink').href = `https://wa.me/923180298090?text=${msg}`;
-
-        // Hide form, show payment
-        document.getElementById('formCard').style.display = 'none';
-        document.getElementById('paymentSection').classList.add('visible');
-
-        // Start Timer
-        startTimer(15 * 60);
 
         // Track Lead
         if (window.CAPIBridge) {
@@ -376,14 +376,29 @@
                 { 
                     fn: name, 
                     phone: phone,
-                    external_id: phone // Using phone as external_id is more stable than name
+                    external_id: phone 
                 }
             );
         }
 
-        // Scroll to payment on mobile
-        document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Delay slightly to show processing state then reveal
+        setTimeout(() => {
+            // Hide form, show payment
+            document.getElementById('formCard').style.display = 'none';
+            document.getElementById('paymentSection').classList.add('visible');
+
+            // Start Timer
+            startTimer(15 * 60);
+
+            // Scroll to payment on mobile
+            document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 800);
     }
+
+    // Add spinner animation if not exists
+    const style = document.createElement('style');
+    style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+    document.head.appendChild(style);
 
     function startTimer(duration) {
         let timer = duration, minutes, seconds;

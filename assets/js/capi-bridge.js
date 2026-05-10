@@ -40,7 +40,19 @@ window.CAPIBridge = (function () {
     }
 
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
-        const eventId = generateEventId();
+        // Event ID Locking: Reuse the same ID for the same event type in a session
+        // This ensures Meta deduplicates accidental double-clicks or refreshes.
+        const sessionKey = `meta_eid_${eventName.toLowerCase()}`;
+        let eventId = sessionStorage.getItem(sessionKey);
+        
+        if (!eventId) {
+            eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem(sessionKey, eventId);
+            console.log(`[CAPIBridge] Generated NEW ID for ${eventName}: ${eventId}`);
+        } else {
+            console.log(`[CAPIBridge] Reusing LOCKED ID for ${eventName}: ${eventId}`);
+        }
+
         const trafficType = isAdTraffic() ? 'paid' : 'organic';
 
         console.log(`[CAPIBridge] Tracking ${eventName}`, { eventId, standardParams, customParams, userData });
