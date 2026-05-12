@@ -245,29 +245,17 @@
         );
         document.getElementById('waLink').href = `https://wa.me/923180298090?text=${msg}`;
 
-        // PRIMARY: Always send lead directly to server (bypasses adblockers on browser)
-        const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        fetch('/api/capi', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            keepalive: true,
-            body: JSON.stringify({
-                event_name: 'Lead',
-                event_id: eventId,
-                event_source_url: window.location.href,
-                user_data: {
-                    fn: name,
-                    ph: phone,
-                    external_id: phone
-                },
-                custom_data: {
-                    city: city || 'Not specified',
-                    content_name: 'AI Video Bootcamp',
-                    currency: 'PKR',
-                    value: 1499
-                }
-            })
-        }).catch(function() { /* silent fail - server-side logged */ });
+        // PRIMARY: Always send lead via Bridge (handles Meta + Google Sheets)
+        if (window.CAPIBridge) {
+            CAPIBridge.lead({
+                city: city || 'Not specified'
+            }, {
+                name: name,
+                phone: phone
+            });
+        } else {
+            console.error('[CAPIBridge] Bridge not found on Lead submit');
+        }
 
         // SECONDARY: Also fire browser pixel if not blocked
         if (window.fbq) {

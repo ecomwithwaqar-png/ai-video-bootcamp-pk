@@ -112,6 +112,7 @@ module.exports = async (req, res) => {
             const cityForSheets = city || 'N/A';
             const url = event_source_url;
             const traffic = custom_data.traffic_type || 'organic';
+            const gclid = req.body.gclid || ''; // Extract gclid from top level
 
             // Add both casing styles to be 100% safe
             const dataToSubmit = {
@@ -123,7 +124,9 @@ module.exports = async (req, res) => {
                 "URL": url, "url": url,
                 "Traffic Type": traffic, "traffic": traffic,
                 // Attribution: fbc is the Meta click ID that links back to the ad campaign
-                "fbc": user_data.fbc || '', "Fbc": user_data.fbc || ''
+                "fbc": user_data.fbc || '', "Fbc": user_data.fbc || '',
+                // Google Attribution: gclid is the Google Click ID
+                "gclid": gclid
             };
 
             Object.entries(dataToSubmit).forEach(([key, val]) => params.append(key, val));
