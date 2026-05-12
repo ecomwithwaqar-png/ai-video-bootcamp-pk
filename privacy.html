@@ -3,38 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | AIBootcamp</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Privacy Policy | AIBootcamp PK</title>
+    <meta name="description" content="Privacy Policy for AIBootcamp PK — how we collect, use, and protect your data.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #080810; --text: #e8eaf6; --muted: #8890b8; --or: #F97316; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; padding: 40px 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: var(--or); font-size: 2.5rem; margin-bottom: 30px; }
-        h2 { color: #fff; margin-top: 30px; }
-        p { margin-bottom: 20px; color: var(--muted); }
-        .back-link { display: inline-block; margin-bottom: 20px; color: var(--or); text-decoration: none; font-weight: 600; }
+        :root {
+            --bg: #080810;
+            --bg2: #0f0f1a;
+            --text: #e8eaf6;
+            --muted: #8890b8;
+            --or: #F97316;
+            --or-dim: rgba(249,115,22,0.12);
+            --border: rgba(255,255,255,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.75;
+            padding: 0;
+        }
+
+        /* ── Header ── */
+        .page-header {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header a {
+            color: var(--or);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .page-header a:hover { opacity: 1; }
+        .page-header .brand {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #0f0f1a 0%, #080810 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 24px 50px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .hero h1 span { color: var(--or); }
+        .hero p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--or-dim);
+            color: var(--or);
+            border: 1px solid rgba(249,115,22,0.3);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* ── Content ── */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+        .section:hover { border-color: rgba(249,115,22,0.2); }
+
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--or-dim);
+            color: var(--or);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        p, li {
+            color: var(--muted);
+            font-size: 0.93rem;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        li { margin-bottom: 6px; }
+
+        /* ── Google Callout ── */
+        .google-callout {
+            background: rgba(66, 133, 244, 0.08);
+            border: 1px solid rgba(66, 133, 244, 0.25);
+            border-left: 3px solid #4285F4;
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-top: 14px;
+        }
+        .google-callout p {
+            color: #a8c4ff;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .google-callout p:last-child { margin-bottom: 0; }
+        .google-callout a { color: #7eb3ff; }
+
+        /* ── Cookie table ── */
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.85rem;
+        }
+        .cookie-table th {
+            background: rgba(249,115,22,0.1);
+            color: var(--or);
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 600;
+        }
+        .cookie-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--muted);
+        }
+        .cookie-table tr:last-child td { border-bottom: none; }
+
+        /* ── Footer ── */
+        .page-footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 28px 24px;
+        }
+        .page-footer p { color: var(--muted); font-size: 0.82rem; margin-bottom: 0; }
+        .page-footer a { color: var(--or); text-decoration: none; }
+
+        a { color: var(--or); }
+        strong { color: var(--text); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="./" class="back-link">← Back to Home</a>
-        <h1>Privacy Policy</h1>
-        <p>Last updated: May 10, 2026</p>
-        
-        <h2>1. Information We Collect</h2>
-        <p>We collect information you provide directly to us, such as when you enroll in our bootcamp, sign up for our newsletter, or contact us for support. This may include your name, email address, WhatsApp number, and city.</p>
 
-        <h2>2. How We Use Your Information</h2>
-        <p>We use the information we collect to provide, maintain, and improve our services, to process your enrollment, and to communicate with you about your progress and updates to the bootcamp.</p>
+    <!-- Header -->
+    <header class="page-header">
+        <a href="./">← Back to Home</a>
+        <span class="brand">AIBootcamp PK</span>
+    </header>
 
-        <h2>3. Data Sharing</h2>
-        <p>We do not share your personal information with third parties except as required to provide our services (e.g., payment processing via JazzCash/EasyPaisa) or as required by law.</p>
-
-        <h2>4. Your Choices</h2>
-        <p>You can contact us at any time to request access to, correction of, or deletion of your personal information.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us via WhatsApp at +92 318 0298090.</p>
+    <!-- Hero -->
+    <div class="hero">
+        <div class="badge">Legal</div>
+        <h1>Privacy <span>Policy</span></h1>
+        <p>Last updated: May 13, 2026 — How we collect, use, and protect your information.</p>
     </div>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- 1. Who We Are -->
+        <div class="section">
+            <h2><span class="section-num">1</span> Who We Are</h2>
+            <p>AIBootcamp PK ("we", "us", "our") is an online education platform teaching practical AI skills to students in Pakistan. Our website is <strong>aibootcamp.pk</strong> (hosted on Vercel). We are operated by an individual business owner and can be reached via WhatsApp at <strong>+92 318 0298090</strong>.</p>
+        </div>
+
+        <!-- 2. Information We Collect -->
+        <div class="section">
+            <h2><span class="section-num">2</span> Information We Collect</h2>
+            <p>We collect the following information when you interact with our website or enroll in our programs:</p>
+            <ul>
+                <li><strong>Personal identifiers:</strong> Full name, email address, WhatsApp/phone number, and city</li>
+                <li><strong>Payment information:</strong> Transaction references from JazzCash, EasyPaisa, or bank transfer (we do not store card details)</li>
+                <li><strong>Technical data:</strong> IP address, browser type, device type, pages visited, time on site</li>
+                <li><strong>Advertising identifiers:</strong> Google Click ID (GCLID), Meta Pixel ID, UTM parameters, and cookies from ad platforms</li>
+            </ul>
+        </div>
+
+        <!-- 3. Cookies & Tracking Technologies -->
+        <div class="section">
+            <h2><span class="section-num">3</span> Cookies &amp; Tracking Technologies</h2>
+            <p>We use cookies and similar tracking technologies to operate and improve our services, and to serve you relevant advertising.</p>
+
+            <table class="cookie-table">
+                <tr>
+                    <th>Cookie / Technology</th>
+                    <th>Provider</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>_ga, _gid, _gat</td>
+                    <td>Google Analytics</td>
+                    <td>Website traffic analysis, user behavior</td>
+                </tr>
+                <tr>
+                    <td>_gcl_au, GCLID</td>
+                    <td>Google Ads</td>
+                    <td>Conversion tracking, ad performance measurement</td>
+                </tr>
+                <tr>
+                    <td>_fbp, _fbc</td>
+                    <td>Meta (Facebook)</td>
+                    <td>Remarketing, conversion tracking via Meta Pixel &amp; CAPI</td>
+                </tr>
+                <tr>
+                    <td>Session cookies</td>
+                    <td>AIBootcamp</td>
+                    <td>Keeping you logged in, form state</td>
+                </tr>
+                <tr>
+                    <td>localStorage keys</td>
+                    <td>AIBootcamp</td>
+                    <td>Attribution tracking (paid vs organic traffic)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 4. Google Ads & Remarketing Disclosure -->
+        <div class="section">
+            <h2><span class="section-num">4</span> Google Ads &amp; Remarketing Disclosure</h2>
+            <p>We use <strong>Google Ads</strong> (including Demand Gen and Search campaigns) to promote our bootcamp. This involves:</p>
+            <ul>
+                <li>Using <strong>Google Conversion Tracking</strong> to measure when a user who clicked our ad completes an enrollment or checkout action</li>
+                <li>Using <strong>Google Remarketing</strong> (via Google tag / gtag.js) to show our ads to past visitors across the Google Display Network and YouTube</li>
+                <li>Collecting and transmitting your <strong>Google Click ID (GCLID)</strong> to our backend for server-side conversion attribution</li>
+                <li>Using <strong>Google Analytics 4 (GA4)</strong> to understand user behavior on our website</li>
+            </ul>
+
+            <div class="google-callout">
+                <p><strong>🔍 Your Advertising Choices with Google</strong></p>
+                <p>Google uses cookies and device identifiers to serve ads based on your prior visits to our site and other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">google.com/settings/ads</a>.</p>
+                <p>You can also opt out via the <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">Network Advertising Initiative opt-out page</a>.</p>
+                <p>To learn more about how Google uses data, visit: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses data when you use our partners' sites or apps</a>.</p>
+            </div>
+        </div>
+
+        <!-- 5. Meta Pixel & CAPI Disclosure -->
+        <div class="section">
+            <h2><span class="section-num">5</span> Meta Pixel &amp; Conversions API</h2>
+            <p>We use the <strong>Meta Pixel</strong> (browser-side) and <strong>Meta Conversions API (CAPI)</strong> (server-side) to measure the effectiveness of our Facebook and Instagram advertising campaigns.</p>
+            <ul>
+                <li>This allows Meta to attribute conversions (enrollments) to the correct ad campaigns</li>
+                <li>We may share hashed versions of your email or phone number with Meta via CAPI for matching purposes</li>
+                <li>All data is hashed (SHA-256) before transmission and is not shared in plain text</li>
+            </ul>
+            <p>To opt out of Meta's use of your data for ad targeting, visit your <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noopener">Facebook Ad Preferences</a>.</p>
+        </div>
+
+        <!-- 6. How We Use Your Information -->
+        <div class="section">
+            <h2><span class="section-num">6</span> How We Use Your Information</h2>
+            <ul>
+                <li>To process your enrollment and communicate about your bootcamp progress</li>
+                <li>To send relevant course updates, announcements, and support via WhatsApp or email</li>
+                <li>To measure and optimize the performance of our advertising campaigns</li>
+                <li>To improve our website and user experience through analytics</li>
+                <li>To prevent fraud and ensure payment integrity</li>
+                <li>To comply with legal obligations</li>
+            </ul>
+        </div>
+
+        <!-- 7. Data Sharing -->
+        <div class="section">
+            <h2><span class="section-num">7</span> Data Sharing &amp; Third Parties</h2>
+            <p>We do not sell your personal data. We share data only with the following categories of third parties, and only to the extent necessary:</p>
+            <ul>
+                <li><strong>Google LLC</strong> — For analytics (GA4) and advertising (Google Ads). <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy →</a></li>
+                <li><strong>Meta Platforms, Inc.</strong> — For advertising measurement via Pixel and CAPI. <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Meta Privacy Policy →</a></li>
+                <li><strong>Vercel, Inc.</strong> — Our website hosting provider. Data may pass through their servers. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel Privacy Policy →</a></li>
+                <li><strong>Google (Sheets/Apps Script)</strong> — Enrollment data is stored in Google Sheets via Google Apps Script webhooks for order management</li>
+                <li><strong>Payment processors</strong> — JazzCash, EasyPaisa, or bank transfers handle payment processing under their own privacy policies</li>
+            </ul>
+        </div>
+
+        <!-- 8. Data Retention -->
+        <div class="section">
+            <h2><span class="section-num">8</span> Data Retention</h2>
+            <p>We retain your personal data for as long as necessary to provide our services and comply with legal obligations. Enrollment records are retained indefinitely for course access purposes. You may request deletion at any time (see section below).</p>
+        </div>
+
+        <!-- 9. Your Rights -->
+        <div class="section">
+            <h2><span class="section-num">9</span> Your Rights &amp; Choices</h2>
+            <ul>
+                <li><strong>Access:</strong> Request a copy of the data we hold about you</li>
+                <li><strong>Correction:</strong> Ask us to correct inaccurate data</li>
+                <li><strong>Deletion:</strong> Request deletion of your personal data (subject to legal requirements)</li>
+                <li><strong>Opt-out of ads:</strong> Use the Google and Meta opt-out links provided in sections 4 and 5 above</li>
+                <li><strong>Cookie control:</strong> Adjust your browser settings to block or delete cookies</li>
+            </ul>
+            <p>To exercise these rights, contact us via WhatsApp at <strong>+92 318 0298090</strong> or email (if listed on our website).</p>
+        </div>
+
+        <!-- 10. Children -->
+        <div class="section">
+            <h2><span class="section-num">10</span> Children's Privacy</h2>
+            <p>Our services are not directed to children under 18. We do not knowingly collect personal information from minors. If you believe a minor has submitted data to us, please contact us immediately.</p>
+        </div>
+
+        <!-- 11. Changes -->
+        <div class="section">
+            <h2><span class="section-num">11</span> Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. The "Last updated" date at the top will always reflect the most recent version. Continued use of our website after changes constitutes acceptance of the updated policy.</p>
+        </div>
+
+        <!-- 12. Contact -->
+        <div class="section">
+            <h2><span class="section-num">12</span> Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or how we handle your data, please contact us:</p>
+            <ul>
+                <li><strong>WhatsApp:</strong> <a href="https://wa.me/923180298090" target="_blank" rel="noopener">+92 318 0298090</a></li>
+                <li><strong>Business:</strong> AIBootcamp PK, Pakistan</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <p>© 2026 AIBootcamp PK. All rights reserved. &nbsp;|&nbsp; <a href="./terms.html">Terms of Service</a></p>
+    </footer>
+
 </body>
 </html>

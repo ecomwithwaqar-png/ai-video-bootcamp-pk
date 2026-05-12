@@ -3,41 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service | AIBootcamp</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Terms of Service | AIBootcamp PK</title>
+    <meta name="description" content="Terms of Service for AIBootcamp PK — your rights, refund policy, and program conditions.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #080810; --text: #e8eaf6; --muted: #8890b8; --or: #F97316; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; padding: 40px 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: var(--or); font-size: 2.5rem; margin-bottom: 30px; }
-        h2 { color: #fff; margin-top: 30px; }
-        p { margin-bottom: 20px; color: var(--muted); }
-        .back-link { display: inline-block; margin-bottom: 20px; color: var(--or); text-decoration: none; font-weight: 600; }
+        :root {
+            --bg: #080810;
+            --bg2: #0f0f1a;
+            --text: #e8eaf6;
+            --muted: #8890b8;
+            --or: #F97316;
+            --or-dim: rgba(249,115,22,0.12);
+            --border: rgba(255,255,255,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.75;
+        }
+
+        .page-header {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header a {
+            color: var(--or);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .page-header a:hover { opacity: 1; }
+        .page-header .brand { margin-left: auto; font-size: 0.8rem; color: var(--muted); }
+
+        .hero {
+            background: linear-gradient(135deg, #0f0f1a 0%, #080810 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 24px 50px;
+            text-align: center;
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: #fff; margin-bottom: 12px; }
+        .hero h1 span { color: var(--or); }
+        .hero p { color: var(--muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
+        .badge {
+            display: inline-block;
+            background: var(--or-dim);
+            color: var(--or);
+            border: 1px solid rgba(249,115,22,0.3);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 60px 24px 80px; }
+
+        .section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+        .section:hover { border-color: rgba(249,115,22,0.2); }
+
+        /* ── DISCLAIMER highlight ── */
+        .disclaimer-section {
+            background: rgba(249,115,22,0.05);
+            border: 1px solid rgba(249,115,22,0.25);
+            border-left: 4px solid var(--or);
+        }
+        .disclaimer-section h2 { color: var(--or); }
+
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--or-dim);
+            color: var(--or);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        h2 { display: flex; align-items: center; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 16px; }
+
+        p, li { color: var(--muted); font-size: 0.93rem; margin-bottom: 12px; }
+        ul { padding-left: 20px; margin-bottom: 12px; }
+        li { margin-bottom: 6px; }
+
+        .highlight-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-top: 12px;
+        }
+
+        .page-footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 28px 24px;
+        }
+        .page-footer p { color: var(--muted); font-size: 0.82rem; margin-bottom: 0; }
+        .page-footer a { color: var(--or); text-decoration: none; }
+
+        a { color: var(--or); }
+        strong { color: var(--text); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="./" class="back-link">← Back to Home</a>
-        <h1>Terms of Service</h1>
-        <p>Last updated: May 10, 2026</p>
-        
-        <h2>1. Acceptance of Terms</h2>
-        <p>By enrolling in the AIBootcamp, you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
 
-        <h2>2. Enrollment and Fees</h2>
-        <p>Enrollment in the bootcamp is subject to payment of the specified fees. All fees are non-refundable unless otherwise stated in our refund policy.</p>
+    <header class="page-header">
+        <a href="./">← Back to Home</a>
+        <span class="brand">AIBootcamp PK</span>
+    </header>
 
-        <h2>3. Intellectual Property</h2>
-        <p>All content provided in the bootcamp, including videos, scripts, and documents, is the property of AIBootcamp and is protected by intellectual property laws. You may not distribute or resell our content.</p>
-
-        <h2>4. Conduct</h2>
-        <p>We expect all students to maintain a professional and respectful conduct within our community and support channels.</p>
-
-        <h2>5. Limitation of Liability</h2>
-        <p>AIBootcamp is not liable for any direct, indirect, or incidental damages arising out of your participation in the bootcamp or your use of the tools taught.</p>
-
-        <h2>6. Contact Us</h2>
-        <p>If you have any questions about these Terms, please contact us via WhatsApp at +92 318 0298090.</p>
+    <div class="hero">
+        <div class="badge">Legal</div>
+        <h1>Terms of <span>Service</span></h1>
+        <p>Last updated: May 13, 2026 — Please read carefully before enrolling.</p>
     </div>
+
+    <div class="container">
+
+        <!-- 1. Acceptance -->
+        <div class="section">
+            <h2><span class="section-num">1</span> Acceptance of Terms</h2>
+            <p>By accessing our website, enrolling in AIBootcamp PK, or making a payment, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services. These terms apply to all visitors, students, and customers of AIBootcamp PK.</p>
+        </div>
+
+        <!-- 2. EARNINGS DISCLAIMER — critical for Google Ads -->
+        <div class="section disclaimer-section">
+            <h2><span class="section-num">2</span> ⚠️ Earnings &amp; Results Disclaimer</h2>
+            <p><strong>IMPORTANT: Please read this section carefully before enrolling.</strong></p>
+            <p>AIBootcamp PK provides educational content about Artificial Intelligence, freelancing, and digital marketing. We make no guarantees about income, earnings, or financial results from applying the skills taught in this program.</p>
+            <ul>
+                <li>Any income figures or success stories mentioned in our ads or website are examples of individual results and <strong>are not typical or guaranteed</strong></li>
+                <li>Individual results will vary based on work ethic, skills, market conditions, experience, and other factors outside our control</li>
+                <li>This is an <strong>educational program</strong>, not a "get-rich-quick" scheme. Success requires consistent effort, learning, and application</li>
+                <li>Past results of any student or instructor do not guarantee future results for any individual</li>
+                <li>We do not guarantee employment, freelance contracts, or any specific financial outcome</li>
+            </ul>
+            <div class="highlight-box">
+                <p style="color: var(--text); font-size: 0.88rem;"><strong>Testimonials Disclosure:</strong> Any testimonials, case studies, or success stories displayed on our website or in our advertisements represent exceptional individual results. These individuals may have received early access, provided feedback, or had specific circumstances that contributed to their outcomes. These results are not typical and should not be interpreted as a guarantee of your results.</p>
+            </div>
+        </div>
+
+        <!-- 3. Program Description -->
+        <div class="section">
+            <h2><span class="section-num">3</span> Program Description</h2>
+            <p>AIBootcamp PK is an online educational bootcamp that teaches:</p>
+            <ul>
+                <li>Practical use of AI tools (ChatGPT, Midjourney, automation tools, etc.)</li>
+                <li>Freelancing strategies for the Pakistani market and international platforms</li>
+                <li>Video creation, content marketing, and digital advertising basics</li>
+                <li>Business and client acquisition skills</li>
+            </ul>
+            <p>Course content is delivered via recorded videos, live sessions, and a private community (Skool platform). Access details are provided after enrollment confirmation.</p>
+        </div>
+
+        <!-- 4. Enrollment & Payment -->
+        <div class="section">
+            <h2><span class="section-num">4</span> Enrollment &amp; Payment</h2>
+            <ul>
+                <li>Enrollment is complete only after <strong>payment is confirmed</strong> and access is manually granted</li>
+                <li>Accepted payment methods: JazzCash, EasyPaisa, and bank transfer (Meezan/HBL/UBL)</li>
+                <li>We reserve the right to refuse enrollment at our discretion</li>
+                <li>Prices are listed in Pakistani Rupees (PKR) and are subject to change without prior notice</li>
+                <li>All sales are final unless the refund policy below applies</li>
+            </ul>
+        </div>
+
+        <!-- 5. Refund Policy -->
+        <div class="section">
+            <h2><span class="section-num">5</span> Refund Policy</h2>
+            <p>Due to the digital nature of this product and the immediate access granted upon enrollment:</p>
+            <ul>
+                <li><strong>No refunds</strong> are offered once course access has been granted, except in the following cases:</li>
+                <li>Technical failure on our end that prevents you from accessing the content for more than 7 days</li>
+                <li>Duplicate payment due to a processing error</li>
+            </ul>
+            <p>To request a refund for an eligible case, contact us via WhatsApp within <strong>48 hours</strong> of payment with your transaction reference. Refunds, if approved, will be processed within 7–14 business days to your original payment method.</p>
+        </div>
+
+        <!-- 6. Intellectual Property -->
+        <div class="section">
+            <h2><span class="section-num">6</span> Intellectual Property</h2>
+            <p>All course content, including but not limited to videos, scripts, worksheets, templates, and written materials, is the exclusive property of AIBootcamp PK and is protected under applicable copyright and intellectual property laws.</p>
+            <ul>
+                <li>You are granted a <strong>personal, non-transferable license</strong> to access and use the content for your own learning purposes only</li>
+                <li>You may <strong>not</strong> share, copy, redistribute, resell, or create derivative works from our content</li>
+                <li>Recording live sessions without explicit written permission is prohibited</li>
+                <li>Violation of this section may result in immediate termination of access without refund</li>
+            </ul>
+        </div>
+
+        <!-- 7. Community Conduct -->
+        <div class="section">
+            <h2><span class="section-num">7</span> Community Conduct</h2>
+            <p>Access to our private community (Skool or equivalent platform) is a privilege, not a right. We reserve the right to remove any student from the community for:</p>
+            <ul>
+                <li>Disrespectful, abusive, or harassing behavior toward instructors or other students</li>
+                <li>Sharing unauthorized content or spam</li>
+                <li>Attempting to sell competing products or services within the community</li>
+                <li>Any conduct deemed harmful to the community environment</li>
+            </ul>
+            <p>Removal from the community does not entitle you to a refund.</p>
+        </div>
+
+        <!-- 8. Limitation of Liability -->
+        <div class="section">
+            <h2><span class="section-num">8</span> Limitation of Liability</h2>
+            <p>To the maximum extent permitted by applicable law, AIBootcamp PK and its operators shall not be liable for any:</p>
+            <ul>
+                <li>Loss of income, profits, or business opportunities</li>
+                <li>Indirect, incidental, or consequential damages arising from use of our content or tools</li>
+                <li>Decisions made based on information provided in the bootcamp</li>
+                <li>Third-party platform outages (Skool, YouTube, WhatsApp, etc.)</li>
+            </ul>
+            <p>Our total liability in any circumstance is limited to the amount you paid for the bootcamp enrollment.</p>
+        </div>
+
+        <!-- 9. Advertising Disclosure -->
+        <div class="section">
+            <h2><span class="section-num">9</span> Advertising Disclosure</h2>
+            <p>AIBootcamp PK runs paid advertisements on <strong>Google Ads</strong> and <strong>Meta (Facebook/Instagram)</strong>. Our ads may include:</p>
+            <ul>
+                <li>Income or results claims that are examples of individual outcomes and are not typical</li>
+                <li>Testimonials from real students who represent exceptional, not average, results</li>
+                <li>Promotional pricing that may be time-limited</li>
+            </ul>
+            <p>All advertising is conducted in compliance with Google Ads policies, Meta Advertising Standards, and applicable consumer protection laws. If you believe any of our advertising is misleading, please contact us immediately.</p>
+        </div>
+
+        <!-- 10. Third-Party Platforms -->
+        <div class="section">
+            <h2><span class="section-num">10</span> Third-Party Platforms &amp; Tools</h2>
+            <p>The bootcamp teaches the use of third-party AI tools and platforms (e.g., ChatGPT, Midjourney, Canva, Fiverr, Upwork). We have no affiliation with these platforms unless stated, and we are not responsible for:</p>
+            <ul>
+                <li>Changes to their pricing, terms, or availability</li>
+                <li>Any account bans or suspensions on those platforms</li>
+                <li>Results obtained from using those tools independently</li>
+            </ul>
+        </div>
+
+        <!-- 11. Modifications -->
+        <div class="section">
+            <h2><span class="section-num">11</span> Modifications to Terms</h2>
+            <p>We reserve the right to update these Terms of Service at any time. The "Last updated" date at the top reflects the most recent revision. Continued use of our services after changes constitutes acceptance of the updated terms.</p>
+        </div>
+
+        <!-- 12. Governing Law -->
+        <div class="section">
+            <h2><span class="section-num">12</span> Governing Law</h2>
+            <p>These Terms are governed by the laws of Pakistan. Any disputes shall be resolved through good-faith negotiation first, and if unresolved, through the appropriate courts of Pakistan.</p>
+        </div>
+
+        <!-- 13. Contact -->
+        <div class="section">
+            <h2><span class="section-num">13</span> Contact Us</h2>
+            <p>For any questions about these Terms of Service, refund requests, or legal matters:</p>
+            <ul>
+                <li><strong>WhatsApp:</strong> <a href="https://wa.me/923180298090" target="_blank" rel="noopener">+92 318 0298090</a></li>
+                <li><strong>Business:</strong> AIBootcamp PK, Pakistan</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer class="page-footer">
+        <p>© 2026 AIBootcamp PK. All rights reserved. &nbsp;|&nbsp; <a href="./privacy.html">Privacy Policy</a></p>
+    </footer>
+
 </body>
 </html>

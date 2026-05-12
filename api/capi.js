@@ -21,8 +21,8 @@ module.exports = async (req, res) => {
     const { event_name, event_id, event_source_url, user_data = {}, custom_data = {}, test_event_code } = req.body;
     const PIXEL_ID = '993205486461512';
     const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
-    // REVERTED to original verified webhook
-    const SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbz50jY_uuDyAhBxEZFsYZ-RWoBOupBs_b4-Ekf3gkFZisQ1TBmTIhaxQVhBMe_Y5qYF/exec';
+    // Use environment variable if available, fallback to the hardcoded one
+    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbwmY1zGMXN7YPosYVstVWApKJ30jbayJlNhGKmV7RWTGpCGfISSm5gVQs8zSNaggnI-/exec';
     
     // Use request test code if provided, otherwise fallback to default
     const FINAL_TEST_CODE = test_event_code || 'TEST72689';
@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
             const cityForSheets = city || 'N/A';
             const url = event_source_url;
             const traffic = custom_data.traffic_type || 'organic';
-            const gclid = req.body.gclid || ''; // Extract gclid from top level
+            const gclid = req.body.gclid || custom_data.gclid || ''; // Extract gclid with fallback
 
             // Add both casing styles to be 100% safe
             const dataToSubmit = {

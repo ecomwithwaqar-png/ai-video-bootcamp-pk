@@ -41,10 +41,14 @@ function handleRequest(e) {
 
     // ── Google Ads: Hash Phone Number (SHA256) for Column L ──
     const cleanPhone = phone.replace(/\+/g, '').replace(/\s+/g, '').replace(/-/g, '');
-    const hashedPhone = (cleanPhone && cleanPhone !== 'N/A') 
-      ? Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, cleanPhone.toLowerCase())
-          .map(b => (b < 0 ? b + 256 : b).toString(16).padStart(2, '0')).join('')
-      : '';
+    let hashedPhone = '';
+    if (cleanPhone && cleanPhone !== 'N/A') {
+      const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, cleanPhone.toLowerCase());
+      for (let i = 0; i < digest.length; i++) {
+        const byte = digest[i] & 0xFF;
+        hashedPhone += ('0' + byte.toString(16)).slice(-2);
+      }
+    }
 
     // ── Write the row ──
     sheet.appendRow([
