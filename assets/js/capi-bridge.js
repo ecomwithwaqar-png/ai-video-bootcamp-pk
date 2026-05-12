@@ -1,16 +1,16 @@
 // Global error tracker to catch hidden issues
-window.addEventListener('error', function(e) {
+window.addEventListener('error', function (e) {
     console.error('❌ [CAPIBridge] Global Error:', e.message, 'at', e.filename, 'line', e.lineno);
 });
 
 function onReady(fn) {
     console.log('[CAPIBridge] onReady check. State:', document.readyState);
-    if (document.readyState !== 'loading') { 
+    if (document.readyState !== 'loading') {
         console.log('[CAPIBridge] onReady executing immediately');
-        fn(); 
-    } else { 
+        fn();
+    } else {
         console.log('[CAPIBridge] onReady waiting for DOMContentLoaded');
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('[CAPIBridge] onReady DOMContentLoaded fired');
             fn();
         });
@@ -51,20 +51,35 @@ window.CAPIBridge = (function () {
     }
     // ─────────────────────────────────────────────────────────────────────────
 
+    // ─── GCLID ATTRIBUTION ────────────────────────────────────────────────────
+    // Reads gclid from URL and stores it. Used for Google Ads Enhanced Conversions.
+    function captureGclid() {
+        const params = new URLSearchParams(window.location.search);
+        const gclid = params.get('gclid');
+        if (gclid) {
+            localStorage.setItem('google_click_id', gclid);
+            console.log('[CAPIBridge] ✅ gclid captured and stored:', gclid);
+            return gclid;
+        }
+        return localStorage.getItem('google_click_id') || null;
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
-        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium');
-        
+        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium') || params.has('gclid');
+
         if (hasParams) {
-            sessionStorage.setItem('is_paid_traffic', 'true');
+            localStorage.setItem('is_paid_traffic', 'true');
             return true;
         }
-        
-        return sessionStorage.getItem('is_paid_traffic') === 'true';
+
+        return localStorage.getItem('is_paid_traffic') === 'true';
     }
 
-    // Run fbc capture immediately on script load (catches fbclid on landing page)
+    // Run attribution captures immediately on script load
     captureFbc();
+    captureGclid();
 
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         // Event ID Locking: Reuse the same ID for the same event type in a session
@@ -72,7 +87,7 @@ window.CAPIBridge = (function () {
         const sessionKey = `meta_eid_${eventName.toLowerCase()}`;
         let eventId = sessionStorage.getItem(sessionKey);
         let isNewEvent = false;
-        
+
         if (!eventId) {
             eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             sessionStorage.setItem(sessionKey, eventId);
@@ -102,12 +117,15 @@ window.CAPIBridge = (function () {
         if (userData.email) mappedUserData.em = userData.email.toLowerCase().trim();
         if (userData.external_id) mappedUserData.external_id = userData.external_id;
         if (userData.fn) mappedUserData.fn = userData.fn.toLowerCase().trim();
-        
-        // Attach fbc and fbp for campaign attribution
+
+        // Attach fbc and fbp for Meta attribution
         const fbc = captureFbc();
         const fbp = getFbp();
         if (fbc) mappedUserData.fbc = fbc;
         if (fbp) mappedUserData.fbp = fbp;
+
+        // Attach gclid for Google Ads attribution
+        const gclid = captureGclid();
 
         const payload = {
             event_name: eventName,
@@ -119,6 +137,7 @@ window.CAPIBridge = (function () {
                 ...customParams,
                 traffic_type: trafficType
             },
+            gclid: gclid || '',
             test_event_code: TEST_EVENT_CODE
         };
 
@@ -128,17 +147,17 @@ window.CAPIBridge = (function () {
             keepalive: true,
             body: JSON.stringify(payload)
         })
-        .then(async r => {
-            const data = await r.json();
-            if (r.ok) {
-                console.log(`[CAPIBridge] ✅ ${eventName} tracked successfully:`, data);
-            } else {
-                console.error(`[CAPIBridge] ❌ ${eventName} server error:`, data);
-            }
-        })
-        .catch(err => {
-            console.error(`[CAPIBridge] ❌ ${eventName} network error:`, err);
-        });
+            .then(async r => {
+                const data = await r.json();
+                if (r.ok) {
+                    console.log(`[CAPIBridge] ✅ ${eventName} tracked successfully:`, data);
+                } else {
+                    console.error(`[CAPIBridge] ❌ ${eventName} server error:`, data);
+                }
+            })
+            .catch(err => {
+                console.error(`[CAPIBridge] ❌ ${eventName} network error:`, err);
+            });
     }
 
     return {

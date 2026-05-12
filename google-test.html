@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Ads Tracking Test — AIBootcamp</title>
+    
+    <!-- 1. Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18059473078"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configuration with Enhanced Conversions enabled
+        gtag('config', 'AW-18059473078', { 'allow_enhanced_conversions': true });
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .test-card { background: #111; padding: 40px; border-radius: 20px; border: 1px solid #333; width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        h1 { font-size: 24px; margin-bottom: 10px; color: #4C8CE4; }
+        p { color: #888; font-size: 14px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #555; margin-bottom: 8px; }
+        input { width: 100%; background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; color: white; box-sizing: border-box; }
+        button { width: 100%; background: #4C8CE4; color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background: #357ABD; transform: translateY(-2px); }
+        .status { margin-top: 20px; font-size: 12px; text-align: center; color: #4CAF50; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="test-card">
+        <h1>Google Ads Test</h1>
+        <p>Verify GCLID and Enhanced Conversions</p>
+
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="test_name" placeholder="Ahmed Khan">
+        </div>
+
+        <div class="input-group">
+            <label>Phone Number (E.164)</label>
+            <input type="text" id="test_phone" placeholder="+923001234567">
+        </div>
+
+        <div class="input-group">
+            <label>City</label>
+            <input type="text" id="test_city" placeholder="Karachi">
+        </div>
+
+        <button onclick="runBrutalTest()">Submit Test Lead →</button>
+        <div id="status" class="status">✓ Lead Fired! Check Tag Assistant.</div>
+    </div>
+
+    <script>
+        // 2. Capture GCLID from URL and save to LocalStorage
+        function captureGCLID() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gclid = urlParams.get('gclid');
+            if (gclid) {
+                localStorage.setItem('google_click_id', gclid);
+                console.log('GCLID Captured:', gclid);
+            }
+        }
+        captureGCLID();
+
+        // 3. SHA256 Hashing Function (for Enhanced Conversions)
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message.trim().toLowerCase());
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // 4. The "Brutal" Test Function
+        async function runBrutalTest() {
+            const name = document.getElementById('test_name').value;
+            const phone = document.getElementById('test_phone').value;
+            const city = document.getElementById('test_city').value;
+            const gclid = localStorage.getItem('google_click_id') || 'no_gclid';
+
+            console.log('Sending Test Lead...', { name, phone, city, gclid });
+
+            // A. Trigger Google Ads Event (Frontend)
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18059473078/Lead_Submission',
+                'value': 1.0,
+                'currency': 'PKR',
+                'user_data': {
+                    'sha256_phone_number': await sha256(phone),
+                    'address': {
+                        'first_name': await sha256(name.split(' ')[0] || ''),
+                        'city': await sha256(city)
+                    }
+                }
+            });
+
+            // B. Send to Google Sheet Webhook (For Manual Verification)
+            const webhookUrl = 'https://script.google.com/macros/s/AKfycbzel9J5ZY8C2ZIhYCt23TlMhkxQ_FgiLU7qvXHZLGApSFKExgqRjuhO5z5m-qoyQtaVbA/exec';
+            
+            fetch(webhookUrl, {
+                method: 'POST',
+                mode: 'no-cors', // Apps Script requires no-cors for simple redirects
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, city, gclid })
+            });
+
+            document.getElementById('status').style.display = 'block';
+            alert('Lead event fired and sent to Sheet! GCLID: ' + gclid);
+        }
+    </script>
+
+</body>
+</html>

@@ -4,55 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to the Tribe! | AI Video Bootcamp</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta property="og:image" content="assets/img/og-image.png">
+    
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/success.css">
     
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '993205486461512');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '993205486461512');
     </script>
-    <script src="assets/js/capi-bridge.js"></script>
-    <script>
-    onReady(function() {
-        if (window.CAPIBridge) {
-            CAPIBridge.pageView();
-            CAPIBridge.purchase('success_page');
-        }
-    });
-    </script>
+    <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=993205486461512&ev=PageView&noscript=1"
-    /></noscript>
+            src="https://www.facebook.com/tr?id=993205486461512&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { 
-            max-width: 100%; 
-            overflow-x: hidden !important; 
-            width: 100%; 
-            position: relative;
-            margin: 0;
-            padding: 0;
-        }
-        .success-page { text-align: center; padding: 6rem 0; }
-        .success-icon { font-size: 5rem; color: #10b981; margin-bottom: 2rem; }
-        .bonus-box { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); padding: 3rem; border-radius: 1rem; margin: 3rem auto; max-width: 600px; }
-        
-        @media (max-width: 768px) {
-            .success-page { padding: 4rem 1.25rem; }
-            .success-icon { font-size: 4rem; }
-            .success-page h1 { font-size: 2rem !important; }
-            .bonus-box { padding: 2rem 1.5rem; margin: 2rem auto; }
-        }
-    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.CAPIBridge) {
+                CAPIBridge.pageView();
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container success-page">
@@ -71,5 +55,21 @@
             <a href="https://wa.me/923180298090" class="btn-outline">Contact Support</a>
         </div>
     </div>
+    <footer class="main-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <a href="./" style="text-decoration:none; color:white; font-weight:800; font-size:1.5rem;"><span style="color:#10b981;">AI</span>Bootcamp</a>
+                <p class="footer-tagline">Welcome to the Tribe. Your journey starts here.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AIBootcamp. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /success.html
+Disallow: /success
+
+Sitemap: https://aivideobootcamp.online/sitemap.xml
