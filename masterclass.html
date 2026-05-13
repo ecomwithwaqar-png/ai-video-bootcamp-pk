@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Masterclass — Professional AI Video Production &amp; Creative Workflows</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags (Sanitized) -->
+    <meta name="description" content="Advanced AI Creative Training. Master the industry-standard tools for professional video production and digital design.">
+    <meta property="og:title" content="AI Creative Masterclass">
+    <meta property="og:description" content="Professional training for the modern AI creative.">
+    <!-- Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18059473078"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18059473078', { 'allow_enhanced_conversions': true });
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '993205486461512');
+    </script>
+    <!-- TikTok Pixel Code -->
+    <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+      ttq.load('D825I1JC77U9B8E8SBI0');
+      ttq.page();
+    }(window, document, 'ttq');
+    </script>
+    <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=993205486461512&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* ── Minimalist VSL Styles ── */
+        :root {
+            --or: #F97316;
+            --bg: #080810;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #e8eaf6;
+            overflow-x: hidden;
+        }
+
+        .masterclass-hero {
+            padding: 60px 24px;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .h-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .h-orb {
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%);
+            top: 10%; left: 50%; transform: translateX(-50%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .m-title {
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            background: linear-gradient(to bottom, #fff 40%, rgba(255,255,255,0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 900px;
+        }
+
+        .m-sub {
+            font-size: 1.05rem;
+            color: #8890b8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.5;
+        }
+
+        /* VSL Frame Styling */
+        .vsl-outer {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto 32px;
+            position: relative;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #000;
+        }
+
+        .vsl-aspect {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 */
+        }
+
+        .vsl-aspect iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* CTA */
+        .m-cta {
+            background: var(--or);
+            color: #fff;
+            padding: 18px 48px;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 30px rgba(249,115,22,0.3);
+        }
+
+        .m-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(249,115,22,0.4);
+        }
+
+        /* Floating WhatsApp Button (Fixed for Mobile) */
+        .wa-float {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+            z-index: 9999;
+            transition: transform 0.2s;
+        }
+
+        /* Sticky Mobile Footer */
+        .m-sticky-footer {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: rgba(8, 8, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            z-index: 9998;
+            box-sizing: border-box;
+            justify-content: center;
+        }
+
+        .m-disclaimer {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: #5a6080;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .masterclass-hero { padding: 40px 16px; }
+            .m-title { font-size: 1.85rem; margin-bottom: 10px; }
+            .m-sub { font-size: 0.95rem; margin-bottom: 20px; }
+            .vsl-outer { margin-bottom: 20px; }
+            .m-cta { width: 100%; box-sizing: border-box; padding: 15px; font-size: 1rem; }
+            .m-sticky-footer { display: flex; }
+            .wa-float { bottom: 85px; right: 20px; width: 50px; height: 50px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="h-grid"></div>
+    <div class="h-orb"></div>
+
+    <section class="masterclass-hero">
+        
+        <!-- Header -->
+        <div style="margin-bottom: 24px; opacity: 0.8;">
+            <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); padding:6px 12px; border-radius:100px; border:1px solid rgba(255,255,255,0.1); font-size:0.75rem; font-weight:600; color:var(--or)">
+                <span style="width:6px; height:6px; background:var(--or); border-radius:50%; animation: pulse 2s infinite;"></span>
+                PROFESSIONAL TRAINING
+            </div>
+        </div>
+
+        <h1 class="m-title">Master Professional AI Video Production &amp; Creative Workflows.</h1>
+        <p class="m-sub">Master the industry-standard tools and technical frameworks used by top AI creators to build a high-end creative portfolio.</p>
+
+        <!-- VSL -->
+        <div class="vsl-outer">
+            <div class="vsl-aspect">
+                <iframe src="https://www.loom.com/embed/2a286d67fa504d98abe19cd65772acd3" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <a href="checkout.html" class="btn-p" style="padding: 18px 60px; font-size: 1.3rem;">Join the AI Video Bootcamp →</a>
+        <p style="margin-top:20px; font-size:0.95rem; color:#8890b8"><strong>Intro Price:</strong> Rs. 1,499 (One-Time Payment)</p>
+
+        <!-- Curriculum Grid (The "Answer" to your question) -->
+        <div style="margin-top: 80px; width: 100%; max-width: 900px; text-align: left;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 32px; text-align: center; background: linear-gradient(to right, #fff, rgba(255,255,255,0.5)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">What You Will Master</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <!-- Module 1 -->
+                <div style="background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="color: var(--or); font-weight: 800; margin-bottom: 8px;">01. AI Studio Setup</div>
+                    <p style="font-size: 0.85rem; color: #8890b8; line-height: 1.5;">Configuring professional creative environments and mastering the 2-tool workflow used by industry leaders.</p>
+                </div>
+                <!-- Module 2 -->
+                <div style="background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="color: var(--or); font-weight: 800; margin-bottom: 8px;">02. Advanced Prompt Engineering</div>
+                    <p style="font-size: 0.85rem; color: #8890b8; line-height: 1.5;">Mastering the 7-pillar formula for generating hyper-realistic visuals that look 100% human.</p>
+                </div>
+                <!-- Module 3 -->
+                <div style="background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="color: var(--or); font-weight: 800; margin-bottom: 8px;">03. Character Consistency</div>
+                    <p style="font-size: 0.85rem; color: #8890b8; line-height: 1.5;">Creating unique AI personas that maintain the exact same face and features across different scenes and outfits.</p>
+                </div>
+                <!-- Module 4 -->
+                <div style="background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="color: var(--or); font-weight: 800; margin-bottom: 8px;">04. Cinematic AI Animation</div>
+                    <p style="font-size: 0.85rem; color: #8890b8; line-height: 1.5;">Mastering camera push, pan, and zoom techniques to transform still images into high-end brand videos.</p>
+                </div>
+                <!-- Module 5 -->
+                <div style="background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="color: var(--or); font-weight: 800; margin-bottom: 8px;">05. Talking UGC Creation</div>
+                    <p style="font-size: 0.85rem; color: #8890b8; line-height: 1.5;">Integrating AI voiceovers and perfect lip-sync technology to create talking character ads for global brands.</p>
+                </div>
+                <!-- Module 6 -->
+                <div style="background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="color: var(--or); font-weight: 800; margin-bottom: 8px;">06. Technical Workflows</div>
+                    <p style="font-size: 0.85rem; color: #8890b8; line-height: 1.5;">Understanding the complete backend process of managing a creative AI production house.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="checkout.html" style="color: var(--or); font-weight: 700; text-decoration: underline;">+ 4 More Modules & Client Ebook Included →</a>
+            </div>
+        </div>
+
+        <div class="m-disclaimer" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 30px; margin-top: 60px; color: #5a6080; font-size: 0.72rem;">
+            <p><strong>Professional Notice:</strong> AIBootcamp provides technical education and software training. We do not offer business opportunities, "get rich quick" schemes, or guaranteed financial outcomes. Your success in the creative industry depends on your personal effort, portfolio quality, and market demand.</p>
+            <p style="margin-top: 10px;"><strong>Contact Support:</strong> For enrollment help or technical questions, contact us at <strong>aivideoboootcamp@gmail.com</strong></p>
+            <p style="margin-top: 15px;">
+                <a href="privacy.html" style="color: #8890b8; text-decoration: underline;">Privacy Policy</a> | 
+                <a href="terms.html" style="color: #8890b8; text-decoration: underline;">Terms of Service</a>
+            </p>
+            <p style="margin-top: 20px; opacity: 0.5;">© 2026 AIBootcamp. All rights reserved. Google is a trademark of Google LLC. This site is not affiliated with Google Inc.</p>
+        </div>
+
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923180298090?text=Hi, I have a question about the AI Video Bootcamp" class="wa-float" target="_blank">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.133 1.415 4.75 1.416 5.348 0 9.7-4.354 9.702-9.701 0-2.592-1.008-5.029-2.84-6.862-1.83-1.833-4.27-2.84-6.861-2.84-5.348 0-9.701 4.353-9.703 9.7.001 1.711.455 3.384 1.316 4.85l-.903 3.3 3.383-.887zm11.332-5.477c-.313-.156-1.853-.914-2.139-1.018-.286-.104-.495-.156-.704.157-.209.312-.808 1.017-1.017 1.25-.21.234-.418.26-.732.104-.312-.156-1.318-.485-2.511-1.549-.928-.827-1.554-1.849-1.736-2.162-.182-.312-.019-.481.137-.636.14-.139.313-.365.47-.547.156-.182.209-.312.313-.52.104-.21.052-.39-.026-.547-.078-.156-.704-1.693-.964-2.318-.253-.61-.51-.527-.704-.537-.183-.009-.391-.011-.599-.011-.209 0-.547.078-.834.391-.287.313-1.095 1.069-1.095 2.607s1.121 3.024 1.277 3.232c.156.209 2.206 3.368 5.343 4.723.746.322 1.328.514 1.782.658.749.238 1.431.205 1.97.124.6-.09 1.853-.756 2.114-1.485.26-.729.26-1.355.182-1.485-.077-.13-.285-.208-.598-.364z"/></svg>
+    </a>
+
+    <!-- Sticky Mobile Footer -->
+    <div class="m-sticky-footer">
+        <a href="checkout.html" class="m-cta" style="margin: 0; box-shadow: none;">Join the Bootcamp →</a>
+    </div>
+
+    <!-- Meta Pixel / CAPI Bridge -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.CAPIBridge) {
+                CAPIBridge.pageView();
+            }
+        });
+    </script>
+
+</body>
+</html>

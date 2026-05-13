@@ -65,9 +65,23 @@ window.CAPIBridge = (function () {
     }
     // ─────────────────────────────────────────────────────────────────────────
 
+    // ─── TTCLID ATTRIBUTION (TikTok) ──────────────────────────────────────────
+    // Reads ttclid from URL and stores it. Used for TikTok Events API.
+    function captureTtclid() {
+        const params = new URLSearchParams(window.location.search);
+        const ttclid = params.get('ttclid');
+        if (ttclid) {
+            localStorage.setItem('tiktok_click_id', ttclid);
+            console.log('[CAPIBridge] ✅ ttclid captured and stored:', ttclid);
+            return ttclid;
+        }
+        return localStorage.getItem('tiktok_click_id') || null;
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
-        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium') || params.has('gclid');
+        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium') || params.has('gclid') || params.has('ttclid');
 
         if (hasParams) {
             localStorage.setItem('is_paid_traffic', 'true');
@@ -80,6 +94,7 @@ window.CAPIBridge = (function () {
     // Run attribution captures immediately on script load
     captureFbc();
     captureGclid();
+    captureTtclid();
 
     function track(eventName, standardParams = {}, customParams = {}, userData = {}) {
         // Event ID Locking: Reuse the same ID for the same event type in a session
@@ -110,6 +125,22 @@ window.CAPIBridge = (function () {
             console.warn('[CAPIBridge] Meta Pixel (fbq) not found');
         }
 
+        // 1.1 TikTok Browser Pixel
+        if (window.ttq && isNewEvent) {
+            const ttEventMap = {
+                'Purchase': 'CompletePayment',
+                'Lead': 'SubmitForm',
+                'InitiateCheckout': 'InitiateCheckout',
+                'PageView': 'PageView'
+            };
+            const ttEventName = ttEventMap[eventName] || eventName;
+            ttq.track(ttEventName, {
+                ...standardParams,
+                ...customParams
+            }, { event_id: eventId });
+            console.log(`[CAPIBridge] TikTok Browser Pixel: ${ttEventName}`);
+        }
+
         // 2. Server CAPI (Rich Data)
         // Map user data to Meta standard keys
         const mappedUserData = {};
@@ -126,12 +157,17 @@ window.CAPIBridge = (function () {
 
         // Attach gclid for Google Ads attribution
         const gclid = captureGclid();
+        // Attach ttclid for TikTok attribution
+        const ttclid = captureTtclid();
 
         const payload = {
             event_name: eventName,
             event_id: eventId,
             event_source_url: window.location.href,
-            user_data: mappedUserData,
+            user_data: {
+                ...mappedUserData,
+                ttclid: ttclid
+            },
             custom_data: {
                 ...standardParams,
                 ...customParams,

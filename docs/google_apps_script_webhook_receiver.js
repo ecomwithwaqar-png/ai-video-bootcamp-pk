@@ -15,7 +15,7 @@ function doGet(e) {
 
 function handleRequest(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Leads");
 
     // Parse both JSON body and URL params
     let data = {};
