@@ -1,163 +1,195 @@
-// CONFIGURATION
-const META_PIXEL_ID = '993205486461512'; 
-const META_ACCESS_TOKEN = 'EAARXc2Dz9wIBRb8bqV59EFhl7sllEZCNG454oJWJYL0ZCZBPFgTt25gWKXm9sYDe7lyQJsXGGZAEFgye78uqJl43UEGt7MgTbwcq2XPu3h2shvZASZBuemOmzO8yAZB4VwZB295KacQUP2ZA3Fc3q3ZASHkYcCU5EtK7c3jk17h1bZB0TmVP4IJzzKeDfEXnJBsrAZDZD';
-
-const TIKTOK_PIXEL_ID = 'D825I1JC77U9B8E8SBI0';
-const TIKTOK_ACCESS_TOKEN = '327195e4af09873436e1ea59242ae28c1ae4bcec';
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+var META_PIXEL_ID    = '1622955485439618';
+var META_ACCESS_TOKEN = 'EAAVEgSnZBQVcBRoSoiLR0qzwZBkPHn4cfkgzHRT0TnhFZBfwpiSV7oGVBSm2I9mXCNKOYwVHUHD72eSukvWL7ZCtBUS97Tuw2d2duakEGKUsddzlzB5FNRkENF9vjtBbjZBwe1NXhlnP5rjLPE45ywo2vpUwZB8spZCClVU3opYqMkGNpuqLcWqt2hkiE2ZABgZDZD';
+// ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Automatically fires Meta or TikTok CAPI when you tick a checkbox.
+ * CAPI TRIGGER — GOD LEVEL FINAL VERSION
+ * code.gs — Fires Meta Purchase CAPI when "Payment Verified" checkbox is ticked.
+ * Features: deduplication lock, full response logging, clean payload, E.164 phone.
  */
 function onEditTrigger(e) {
   if (!e) return;
+
   const sheet = e.source.getActiveSheet();
-  const range = e.range;
+  if (sheet.getName() !== "Leads") return;
+
+  const range    = e.range;
   const colIndex = range.getColumn();
   const rowIndex = range.getRow();
-  
-  // Ignore header row
+
+  // Skip header row
   if (rowIndex === 1) return;
-  
-  // Get all headers to find columns by name
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  
-  // 1. MAP COLUMNS
-  const metaBoxIdx = headers.indexOf('Payment Verified') + 1;
-  const tiktokBoxIdx = headers.indexOf('TikTok Verified') + 1;
-  const nameColIdx = headers.indexOf('Name') + 1;
-  const phoneColIdx = headers.indexOf('Phone') + 1;
-  const ttclidColIdx = headers.indexOf('ttclid') + 1;
-  const statusColIdx = headers.indexOf('CAPI Status') + 1;
 
-  // 2. GET USER DATA
-  const name = nameColIdx > 0 ? sheet.getRange(rowIndex, nameColIdx).getValue().toString() : '';
-  const phone = phoneColIdx > 0 ? sheet.getRange(rowIndex, phoneColIdx).getValue().toString() : '';
+  // Map columns from headers
+  const headers     = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const metaBoxIdx  = headers.indexOf('Payment Verified') + 1;
+  let   statusColIdx = headers.indexOf('Pixel Status') + 1;
+  if (statusColIdx === 0) statusColIdx = headers.indexOf('CAPI Status') + 1;
 
-  // 3. META TRIGGER (Payment Verified)
-  if (colIndex === metaBoxIdx && range.getValue() === true) {
-    if (name && phone) {
-      sendPurchaseToMeta(name, phone);
-      range.setValue(false); // Uncheck automatically
-      if (statusColIdx > 0) sheet.getRange(rowIndex, statusColIdx).setValue("Meta CAPI Sent ✅");
+  // Only fire when the Payment Verified checkbox is ticked TRUE
+  if (colIndex !== metaBoxIdx || range.getValue() !== true) return;
+
+  // ── DEDUPLICATION LOCK ──────────────────────────────────────────────────────
+  // Prevent double-firing if checkbox is ticked multiple times rapidly
+  if (statusColIdx > 0) {
+    const currentStatus = sheet.getRange(rowIndex, statusColIdx).getValue().toString();
+    if (currentStatus.indexOf('Meta Sent ✅') !== -1) {
+      Logger.log('Row ' + rowIndex + ' already sent to Meta. Skipping.');
+      range.setValue(false);
+      return;
     }
+    // Mark as "Processing" immediately to prevent race condition
+    sheet.getRange(rowIndex, statusColIdx).setValue('Processing...');
+  }
+  // ────────────────────────────────────────────────────────────────────────────
+
+  Logger.log('🚀 Processing row: ' + rowIndex);
+
+  // Extract data from row
+  const u = {
+    name:    getVal(sheet, rowIndex, headers, 'Name'),
+    phone:   getVal(sheet, rowIndex, headers, 'Phone'),
+    eventId: getVal(sheet, rowIndex, headers, 'Event ID'),
+    fbc:     getVal(sheet, rowIndex, headers, 'fbc'),
+    fbp:     getVal(sheet, rowIndex, headers, 'fbp'),
+    ip:      getVal(sheet, rowIndex, headers, 'IP'),
+    ua:      getVal(sheet, rowIndex, headers, 'UA'),
+    city:    getVal(sheet, rowIndex, headers, 'City'),
+    url:     getVal(sheet, rowIndex, headers, 'URL'),
+    value:   getVal(sheet, rowIndex, headers, 'Value')
+  };
+
+  Logger.log('Data: ' + JSON.stringify(u));
+
+  // Validate required fields
+  if (!u.name || !u.phone) {
+    if (statusColIdx > 0) sheet.getRange(rowIndex, statusColIdx).setValue('Error: Missing Name/Phone');
+    range.setValue(false);
+    return;
   }
 
-  // 4. TIKTOK TRIGGER (TikTok Verified)
-  if (colIndex === tiktokBoxIdx && range.getValue() === true) {
-    if (name && phone) {
-      const ttclid = ttclidColIdx > 0 ? sheet.getRange(rowIndex, ttclidColIdx).getValue().toString() : '';
-      const response = sendPurchaseToTikTok(phone, ttclid);
-      range.setValue(false); // Uncheck automatically
-      if (statusColIdx > 0) {
-        if (response.getResponseCode() === 200) {
-          const now = new Date().toLocaleTimeString();
-          sheet.getRange(rowIndex, statusColIdx).setValue("TikTok CAPI Sent ✅ (" + now + ")");
-        } else {
-          sheet.getRange(rowIndex, statusColIdx).setValue("TikTok Error: " + response.getContentText().substring(0, 50));
-        }
+  try {
+    const response  = sendPurchaseToMeta(u);
+    const respCode  = response.getResponseCode();
+    const respBody  = response.getContentText();
+    const result    = JSON.parse(respBody);
+
+    Logger.log('Meta HTTP Code: ' + respCode);
+    Logger.log('Meta Response:  ' + respBody);
+
+    // Uncheck the box after processing
+    range.setValue(false);
+
+    if (statusColIdx > 0) {
+      if (respCode === 200 && !result.error) {
+        const received = result.events_received || 0;
+        sheet.getRange(rowIndex, statusColIdx).setValue(
+          'Meta Sent ✅ events_received:' + received + ' (' + new Date().toLocaleTimeString() + ')'
+        );
+      } else {
+        const msg = result.error ? result.error.message : 'Unknown Meta Error';
+        Logger.log('Meta Error: ' + msg);
+        sheet.getRange(rowIndex, statusColIdx).setValue('Meta Error: ' + msg.substring(0, 120));
       }
     }
+
+  } catch (err) {
+    Logger.log('Script Error: ' + err.toString());
+    if (statusColIdx > 0) {
+      sheet.getRange(rowIndex, statusColIdx).setValue('Script Error: ' + err.toString().substring(0, 120));
+    }
+    range.setValue(false);
   }
 }
 
-/**
- * Sends a Purchase event to Meta CAPI
- */
-function sendPurchaseToMeta(name, phone) {
-  const hashedPhone = hashSHA256(phone.replace(/\D/g, ''));
-  const firstName = name.split(' ')[0].toLowerCase();
-  const hashedFirstName = hashSHA256(firstName);
+// ─────────────────────────────────────────────────────────────────────────────
+
+function sendPurchaseToMeta(u) {
+  // Normalize phone to Pakistan E.164 format
+  let phone = u.phone.replace(/\D/g, '');
+  if (phone.startsWith('0'))      phone = '92' + phone.substring(1);
+  else if (phone.length === 10)   phone = '92' + phone;
+  // If already has country code (e.g. 923001234567), keep it as is
+
+  const hashedPhone = hashSHA256(phone);
+  const hashedName  = hashSHA256(u.name.split(' ')[0]);
+  const hashedCity  = hashSHA256(u.city);
+
+  // Build user_data — Meta v19 expects arrays for ph, fn, ct
+  const userData = {};
+  if (hashedPhone) userData.ph           = [hashedPhone];
+  if (hashedName)  userData.fn           = [hashedName];
+  if (hashedCity)  userData.ct           = [hashedCity];
+  if (u.fbc)       userData.fbc          = u.fbc;
+  if (u.fbp)       userData.fbp          = u.fbp;
+  if (u.ip  && u.ip  !== 'N/A') userData.client_ip_address  = u.ip;
+  if (u.ua  && u.ua  !== 'N/A') userData.client_user_agent  = u.ua;
+  if (hashedPhone) userData.external_id  = hashedPhone;
 
   const payload = {
-    "data": [{
-      "event_name": "Purchase",
-      "event_time": Math.floor(Date.now() / 1000),
-      "action_source": "system_generated",
-      "user_data": {
-        "ph": [hashedPhone],
-        "fn": [hashedFirstName]
-      },
-      "custom_data": {
-        "currency": "PKR",
-        "value": 1499
+    data: [{
+      event_name:        'Purchase',
+      event_time:        Math.floor(Date.now() / 1000),
+      event_id:          u.eventId || ('man_' + Date.now()),
+      event_source_url:  u.url || 'https://aivideobootcamp.online/checkout',
+      action_source:     'website',
+      user_data:         userData,
+      custom_data: {
+        currency:     'PKR',
+        value:        Number(u.value) || 1999,
+        content_name: Number(u.value) > 1999 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Masterclass',
+        content_ids:  ['avb_001'],
+        content_type: 'product'
       }
     }]
   };
 
-  const url = "https://graph.facebook.com/v17.0/" + META_PIXEL_ID + "/events?access_token=" + META_ACCESS_TOKEN;
-  UrlFetchApp.fetch(url, {
-    "method": "post",
-    "contentType": "application/json",
-    "payload": JSON.stringify(payload),
-    "muteHttpExceptions": true
+  const endpoint = 'https://graph.facebook.com/v19.0/' + META_PIXEL_ID +
+                   '/events?access_token=' + META_ACCESS_TOKEN;
+
+  return UrlFetchApp.fetch(endpoint, {
+    method:           'post',
+    contentType:      'application/json',
+    payload:          JSON.stringify(payload),
+    muteHttpExceptions: true
   });
 }
 
-/**
- * Sends a CompletePayment event to TikTok Events API
- */
-function sendPurchaseToTikTok(phone, ttclid) {
-  let cleanPhone = phone.replace(/\D/g, '');
-  if (cleanPhone.startsWith('0')) { cleanPhone = '92' + cleanPhone.substring(1); }
-  // TikTok requires the + prefix for E.164 format before hashing
-  const hashedPhone = hashSHA256('+' + cleanPhone);
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
 
-  const payload = {
-    "event_source": "web",
-    "event_source_id": TIKTOK_PIXEL_ID,
-    "data": [{
-      "event": "CompletePayment",
-      "event_id": "tt_" + Math.floor(Date.now() / 1000) + "_" + Math.floor(Math.random() * 1000),
-      "event_time": Math.floor(Date.now() / 1000),
-      "user": {
-        "phone_number": hashedPhone,
-        "email": hashSHA256("test@example.com"),
-        "external_id": hashedPhone,
-        "ip_address": "1.1.1.1",
-        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-      },
-      "properties": {
-        "currency": "PKR",
-        "value": 1499,
-        "content_id": "aibootcamp_course",
-        "contents": [{
-          "content_id": "aibootcamp_course",
-          "content_name": "AI Video Bootcamp",
-          "content_type": "product",
-          "quantity": 1,
-          "price": 1499
-        }]
-      }
-    }]
-  };
-
-  // Only add ttclid if it exists
-  if (ttclid && ttclid.trim() !== "") {
-    payload.data[0].user.ttclid = ttclid.trim();
-  }
-
-  const url = "https://business-api.tiktok.com/open_api/v1.3/event/track/";
-  return UrlFetchApp.fetch(url, {
-    "method": "post",
-    "contentType": "application/json",
-    "headers": { "Access-Token": TIKTOK_ACCESS_TOKEN },
-    "payload": JSON.stringify(payload),
-    "muteHttpExceptions": true
-  });
+function getVal(sheet, row, headers, name) {
+  const idx = headers.indexOf(name);
+  if (idx === -1) return '';
+  const val = sheet.getRange(row, idx + 1).getValue().toString().trim();
+  return (val === 'N/A' || val === 'undefined' || val === '0') ? '' : val;
 }
 
-/**
- * Helper: SHA256 Hashing
- */
 function hashSHA256(input) {
-  if (!input) return "";
-  const rawHash = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, input.toString().trim().toLowerCase());
-  let txtHash = "";
-  for (let i = 0; i < rawHash.length; i++) {
-    let hashVal = rawHash[i];
-    if (hashVal < 0) hashVal += 256;
-    if (hashVal.toString(16).length == 1) txtHash += "0";
-    txtHash += hashVal.toString(16);
-  }
-  return txtHash;
+  if (!input || input === 'N/A') return '';
+  const raw = Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_256,
+    input.toString().toLowerCase().trim()
+  );
+  return raw.map(function(b) {
+    const hex = (b < 0 ? b + 256 : b).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }).join('');
+}
+
+// ─── TEST FUNCTION ───────────────────────────────────────────────────────────
+// Run this manually to verify Meta connection is working
+function testMeta() {
+  const result = sendPurchaseToMeta({
+    name:    'Test User Ahmed',
+    phone:   '03180000000',
+    eventId: 'test_man_' + Date.now(),
+    city:    'Lahore',
+    fbc:     'fb.1.12345.67890',
+    fbp:     'fb.1.98765.43210',
+    ip:      '1.2.3.4',
+    ua:      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0',
+    url:     'https://aivideobootcamp.online/checkout'
+  });
+  Logger.log('Test Result: ' + result.getContentText());
 }

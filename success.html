@@ -16,16 +16,6 @@
       gtag('config', 'AW-18059473078');
     </script>
 
-    <!-- Google Ads Conversion Tracking (Purchase) -->
-    <script>
-      gtag('event', 'conversion', {
-          'send_to': 'AW-18059473078/V_n0CO6-mKYaELblsqk-',
-          'value': 1499.00,
-          'currency': 'PKR',
-          'transaction_id': ''
-      });
-    </script>
-    
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/success.css">
     
@@ -42,7 +32,7 @@
             s.parentNode.insertBefore(t, s)
         }(window, document, 'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '993205486461512');
+        fbq('init', '1622955485439618');
     </script>
     <!-- TikTok Pixel Code -->
     <script>
@@ -56,31 +46,29 @@
     </script>
     <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
     <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=993205486461512&ev=PageView&noscript=1" /></noscript>
+            src="https://www.facebook.com/tr?id=1622955485439618&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Generate a unique transaction ID for Google Ads to fix "Misconfigured" error
+            const transactionId = 'pur_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+
+            // 1. CAPI Bridge (Handles Meta & TikTok Browser + Server)
             if (window.CAPIBridge) {
                 CAPIBridge.pageView();
+                // Purchase DISABLED here — Google Sheet onEditTrigger is the
+                // single source of truth for Purchase events to avoid duplicates.
+                // See: docs/google_apps_script_capi.js
             }
 
-            // TikTok CompletePayment (Browser)
-            if (window.ttq) {
-                ttq.track('CompletePayment', {
-                    content_type: 'product',
-                    quantity: 1,
-                    price: 1499,
-                    value: 1499,
-                    currency: 'PKR'
-                });
-            }
-
-            // Meta Purchase (Browser)
-            if (window.fbq) {
-                fbq('track', 'Purchase', {
-                    value: 1499,
-                    currency: 'PKR'
+            // 2. Google Ads Conversion (Browser)
+            if (window.gtag) {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-18059473078/V_n0CO6-mKYaELblsqk-',
+                    'value': 1999.00,
+                    'currency': 'PKR',
+                    'transaction_id': transactionId
                 });
             }
         });
@@ -112,8 +100,8 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 AIBootcamp. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
                 </div>
             </div>
         </div>

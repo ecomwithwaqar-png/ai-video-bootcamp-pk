@@ -57,7 +57,7 @@ Modify `checkout-v2.html` to include the Pixel base code and the bridge script i
         s.parentNode.insertBefore(t, s)
     }(window, document, 'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '993205486461512');
+    fbq('init', '1622955485439618');
 </script>
 <script src="assets/js/capi-bridge.js"></script>
 <!-- End Meta Pixel Code -->

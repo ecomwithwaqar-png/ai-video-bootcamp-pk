@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- SEO Meta Tags -->
     <meta name="description"
@@ -41,7 +42,7 @@
             t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
         }(window,
             document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '993205486461512');
+        fbq('init', '1622955485439618');
     </script>
     <!-- TikTok Pixel Code -->
     <script>
@@ -59,7 +60,7 @@
     </script>
     <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
     <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=993205486461512&ev=PageView&noscript=1" /></noscript>
+            src="https://www.facebook.com/tr?id=1622955485439618&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 
     <script>
@@ -70,7 +71,7 @@
             }
         });
     </script>
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=1.0.7">
     <style>
         /* ── Google Ads Compliance Styles ── */
         .hero-disclaimer {
@@ -119,6 +120,652 @@
         .footer-disclaimer a:hover {
             text-decoration: underline;
         }
+
+        /* ── Sticky CTA Bar for Mobile ── */
+        .sticky-cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(8, 8, 16, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 24px;
+            z-index: 9999;
+            transform: translateY(0);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .sticky-cta-bar.hidden {
+            transform: translateY(100%);
+        }
+
+        @media (max-width: 768px) {
+            .sticky-cta-bar {
+                display: block;
+            }
+            /* Adjust floating WhatsApp button bottom padding to avoid covering the sticky bar */
+            .wa-float {
+                bottom: 84px !important;
+                right: 16px !important;
+            }
+            /* Align social proof notification to sit side-by-side with WhatsApp float and avoid overlapping */
+            .sp-notify {
+                bottom: 84px !important;
+                left: 16px !important;
+                right: 84px !important;
+                max-width: calc(100% - 100px) !important;
+                transform: translateY(200%) !important;
+            }
+            .sp-notify.active {
+                transform: translateY(0) !important;
+            }
+        }
+
+        .sticky-cta-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: 0 auto;
+            gap: 16px;
+        }
+
+        .sticky-cta-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sticky-cta-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #F97316;
+        }
+
+        .sticky-cta-label {
+            font-size: 0.7rem;
+            color: #8890b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sticky-cta-btn {
+            flex-grow: 1;
+            text-align: center;
+            background: #F97316;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.25);
+            white-space: nowrap;
+        }
+
+        .sticky-cta-btn:active {
+            transform: scale(0.97);
+            background: #e05e00;
+        }
+
+        /* ── Above the Fold CRO Optimizations ── */
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #8890b8;
+            max-width: 720px;
+            margin: 1rem auto 1.75rem;
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        .hero-accent {
+            color: #F97316;
+        }
+
+        .hero-urdu {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: clamp(16px, 3vw, 28px);
+            font-weight: 700;
+            color: #F97316;
+            direction: rtl;
+            text-align: center;
+            margin: 0.75rem auto 1.25rem;
+            line-height: 1.9;
+            text-shadow: 0 0 30px rgba(249, 115, 22, 0.3);
+            max-width: 700px;
+        }
+
+        .hero-trust-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 1.25rem;
+        }
+
+        .hero-avatars {
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid #05050a;
+            margin-left: -10px;
+            background: #111;
+            object-fit: cover;
+        }
+
+        .hero-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .hero-trust-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            text-align: left;
+        }
+
+        .hero-trust-rating {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #e8eaf6;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-trust-stars {
+            color: #F97316;
+            letter-spacing: -0.5px;
+            font-size: 0.78rem;
+        }
+
+        .hero-trust-count {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #8890b8;
+            line-height: 1.2;
+        }
+        
+        .hero-trust-count span {
+            color: #34d399;
+            font-weight: 700;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 55px 14px 15px !important;
+            }
+            .title-wrap {
+                margin-top: 0.25rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            .hero h1 {
+                font-size: 26px !important;
+                line-height: 1.2 !important;
+                letter-spacing: -0.8px !important;
+            }
+            .hero-sub {
+                font-size: 0.85rem !important;
+                margin: 0.4rem auto 0.6rem !important;
+                padding: 0 6px;
+                line-height: 1.45 !important;
+            }
+            .hero-urdu {
+                font-size: 15px !important;
+                margin: 0.4rem auto 0.5rem !important;
+                line-height: 1.6 !important;
+            }
+            .hero-trust-row {
+                margin-top: 0.5rem !important;
+                margin-bottom: 0.2rem !important;
+            }
+
+            .sp-notify {
+                font-size: 0.72rem !important;
+                padding: 10px 14px !important;
+            }
+        }
+
+        /* ── Student Work Showcase ── */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+            text-align: left;
+        }
+
+        @media (min-width: 1024px) {
+            .work-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .work-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .work-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .work-card-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .work-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: #fff;
+        }
+
+        .work-user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .work-user-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #e8eaf6;
+        }
+
+        .work-post-time {
+            font-size: 0.65rem;
+            color: #8890b8;
+        }
+
+        .work-category {
+            color: #F97316;
+            font-weight: 600;
+        }
+
+        .work-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .work-post-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+        }
+
+        .work-post-text {
+            font-size: 0.76rem;
+            color: #a4abbd;
+            line-height: 1.4;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .work-image-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #111;
+            margin-top: 4px;
+        }
+
+        .work-post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .work-card:hover .work-post-image {
+            transform: scale(1.05);
+        }
+
+        .work-tag-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(8, 8, 16, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #34d399;
+            font-size: 0.62rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .work-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+            margin-top: auto;
+        }
+
+        .work-meta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .work-meta-item {
+            font-size: 0.68rem;
+            color: #8890b8;
+        }
+
+        .work-verified {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #34d399;
+        }
+
+        .work-footer {
+            text-align: center;
+            margin-top: 36px;
+        }
+
+        .work-footer p {
+            font-size: 0.85rem;
+            color: #8890b8;
+            margin-bottom: 16px;
+        }
+
+        /* ── Before vs After Section ── */
+        .tf-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        @media (min-width: 768px) {
+            .tf-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+        .tf-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+        .tf-card.before {
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            background: linear-gradient(180deg, rgba(239, 68, 68, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+        }
+        .tf-card.after {
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            background: linear-gradient(180deg, rgba(52, 211, 153, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 0 25px rgba(52, 211, 153, 0.05);
+        }
+        .tf-card-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 4px 0;
+        }
+        .tf-card.before .tf-card-title {
+            color: #fca5a5;
+        }
+        .tf-card.after .tf-card-title {
+            color: #34d399;
+        }
+        .tf-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .tf-item {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #d1d5db;
+        }
+        .tf-icon {
+            font-size: 1.05rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            margin-top: 1px;
+            line-height: 1;
+        }
+        .tf-card.before .tf-icon {
+            color: #ef4444;
+        }
+        .tf-card.after .tf-icon {
+            color: #34d399;
+        }
+
+        /* ── Testimonial Wall (Masonry) ── */
+        .tw-section {
+            padding: 80px 28px;
+            background: var(--bg);
+        }
+        .tw-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tw-label {
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: var(--or);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tw-label::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            background: var(--or);
+            display: inline-block;
+        }
+        .tw-heading {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 48px;
+            letter-spacing: -0.5px;
+        }
+        .tw-heading em {
+            font-style: italic;
+            color: var(--or);
+            position: relative;
+        }
+        .tw-heading em::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--or);
+            border-radius: 2px;
+            opacity: 0.4;
+        }
+
+        /* Masonry Grid */
+        .tw-masonry {
+            columns: 3;
+            column-gap: 20px;
+        }
+        @media (max-width: 1024px) {
+            .tw-masonry { columns: 2; }
+        }
+        @media (max-width: 640px) {
+            .tw-masonry { columns: 1; }
+            .tw-section { padding: 48px 16px; }
+            .tw-heading { margin-bottom: 32px; }
+        }
+
+        /* Individual Testimonial Card */
+        .tw-card {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .tw-card:hover {
+            border-color: rgba(249, 115, 22, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Card with screenshot image */
+        .tw-card-img {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* Card with text content (no image) */
+        .tw-card-body {
+            padding: 20px;
+        }
+        .tw-card-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .tw-card-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.82rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .tw-card-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .tw-card-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #e8eaf6;
+            line-height: 1.2;
+        }
+        .tw-card-handle {
+            font-size: 0.65rem;
+            color: var(--muted);
+        }
+        .tw-card-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .tw-card-text {
+            font-size: 0.78rem;
+            color: #a4abbd;
+            line-height: 1.55;
+            margin: 0;
+        }
+        .tw-card-text strong {
+            color: #e8eaf6;
+        }
+        .tw-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .tw-card-meta {
+            font-size: 0.68rem;
+            color: var(--muted);
+        }
+        .tw-card-emoji {
+            font-size: 1.1rem;
+        }
+        .tw-card-tag {
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--or);
+            letter-spacing: 0.5px;
+        }
+        .tw-card-highlight {
+            border-color: rgba(249, 115, 22, 0.2);
+            background: rgba(249, 115, 22, 0.03);
+        }
+        .tw-card-highlight:hover {
+            border-color: rgba(249, 115, 22, 0.4);
+        }
     </style>
 </head>
 
@@ -129,12 +776,12 @@
     <nav>
         <a href="./" class="nav-logo"><span>AI</span>Bootcamp</a>
         <div class="nav-r">
-            <div class="nav-spots">🔥 <em>33</em>&nbsp;spots left&nbsp;
+            <div class="nav-spots">🔥 <em>3</em>&nbsp;spots left&nbsp;
                 <div class="spots-bar">
                     <div class="spots-fill"></div>
                 </div>
             </div>
-            <button class="btn-nav" onclick="window.location.href='checkout.html'">Enroll Now →</button>
+            <button class="btn-nav" onclick="window.location.href='/checkout'">Enroll Now →</button>
         </div>
     </nav>
 
@@ -152,65 +799,171 @@
                 <div class="bdot"></div><span class="badge-t">🇵🇰 Pakistan's #1 AI Creative Course</span>
             </div>
 
-            <!-- Title — clean typography, no box -->
-            <div class="title-wrap">
-                <h1 class="vsl-pre">Master AI Skills &amp; Build a Creative Business From Pakistan in 90 Days.</h1>
+            <!-- Student Trust Bubble -->
+            <div class="hero-trust-row">
+                <div class="hero-avatars">
+                    <img class="hero-avatar" src="assets/img/avatar-1.png" alt="Student Avatar 1">
+                    <img class="hero-avatar" src="assets/img/avatar-2.png" alt="Student Avatar 2">
+                    <img class="hero-avatar" src="assets/img/avatar-3.png" alt="Student Avatar 3">
+                </div>
+                <div class="hero-trust-info">
+                    <div class="hero-trust-rating">
+                        <span class="hero-trust-stars">⭐⭐⭐⭐⭐</span>
+                        <span>4.9/5 Student Rating</span>
+                    </div>
+                    <div class="hero-trust-count">Joined by <span>297 Pakistanis</span></div>
+                </div>
             </div>
 
-            <!-- Earnings Disclaimer - Required for Google Ads -->
-            <div class="hero-disclaimer">
-                ⚠️ <strong>Earnings Disclaimer:</strong> Income figures shown (e.g. $1K–$15K/month) are examples of
-                individual student outcomes and are <strong>not typical or guaranteed</strong>. Most students earn
-                significantly less or nothing. Results depend on effort, skills, and market conditions. <a
-                    href="terms.html">Read full disclaimer →</a>
+            <!-- Title — Punchy Rule of Three -->
+            <div class="title-wrap">
+                <h1 class="vsl-pre">Start Tonight. <span class="hero-accent">One AI Skill.</span> Earn in Dollars.</h1>
             </div>
+
+            <!-- Urdu Pattern Interrupt -->
+            <p class="hero-urdu">موبائل اسکرولنگ بند کریں — وہ اسکل سیکھیں جو آپ کو ڈالرز کمانا سکھائے</p>
+
+            <p class="hero-sub">297 Pakistanis — students, freelancers, and homemakers — are already creating AI content from their phones and getting paid in Dollars. No camera. No tech skills needed.</p>
+
+
+            <!-- Primary CTA — fast lane for warm traffic -->
+            <div class="hero-cta" style="margin-top:1.25rem;margin-bottom:0.5rem;">
+                <a href="/checkout" class="btn-p">Enroll Now — Secure Your Spot →</a>
+            </div>
+
+            <!-- Testimonial directly below CTA — 59% CVR lift (Hubstaff data) -->
+            <div style="max-width:480px;margin:0.75rem auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+                <div style="min-width:36px;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F97316,#ea580c);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;color:#fff;">A</div>
+                <div style="flex:1;">
+                    <div style="font-size:0.78rem;color:#e8eaf6;line-height:1.4;"><strong>Ahmed K.</strong> from Lahore earned <strong style="color:#F97316;">£1,200</strong> from a UK brand deal in week 9.*</div>
+                    <div style="font-size:0.65rem;color:#8890b8;margin-top:2px;">Verified student · Results vary</div>
+                </div>
+            </div>
+
+            <p style="font-size:0.82rem;color:#8890b8;text-align:center;margin:0 0 1.5rem;">or browse our best student creations below</p>
 
             <!-- Subtle divider -->
-            <div class="vsl-watch-prompt">Watch the 2-min video below</div>
+            <div class="vsl-watch-prompt">See What You Will Learn to Create</div>
 
-            <!-- VSL -->
-            <div class="vsl-outer">
-                <div class="vsl-glow-ring"></div>
-                <div class="vsl-wrap">
-                    <div class="vsl-top-bar">
-                        <div class="vsl-bar-dots"><span></span><span></span><span></span></div>
-                        <div class="vsl-bar-label">AIBootcamp</div>
-                        <div class="vsl-bar-live"><span></span> WATCH NOW</div>
-                    </div>
-                    <div class="vsl-frame">
-                        <iframe src="https://www.loom.com/embed/adef904f296b460a8e0a406ad46f45e4" frameborder="0"
-                            webkitallowfullscreen mozallowfullscreen allowfullscreen
-                            style="position:absolute;top:0;left:0;width:100%;height:100%">
-                        </iframe>
+            <!-- Slider Header Row -->
+            <div class="slider-header-row">
+                <div class="slider-header-left">
+                    <span class="vsl-note-dot" style="background:#22C55E;box-shadow:0 0 8px #22C55E;"></span>
+                    <span style="font-size:0.75rem;font-weight:700;color:#e8eaf6;text-transform:uppercase;letter-spacing:1px;">Live Showcase · Muted for autoplay</span>
+                </div>
+                <div class="slider-nav-btns">
+                    <button class="slider-nav-btn prev-btn" id="slidePrev" aria-label="Previous Slide">
+                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                    </button>
+                    <button class="slider-nav-btn next-btn" id="slideNext" aria-label="Next Slide">
+                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slider Container -->
+            <div class="slider-outer-glow">
+                <div class="slider-viewport">
+                    <div class="slider-track" id="sliderTrack">
+                        
+                        <!-- Card 1: Car Commercial -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" src="assets/img/showcase/clip-car.mp4" data-src="assets/img/showcase/clip-car.mp4" autoplay preload="auto" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">Cinematic Car Ad</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Skincare Campaign -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" data-src="assets/img/showcase/clip-skincare.mp4" preload="none" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">Skincare Product Campaign</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: AI Secret Reveal -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" data-src="assets/img/showcase/clip-ai-secret.mp4" preload="none" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">Faceless AI Influencer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: WhatsApp Automation -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" data-src="assets/img/showcase/clip-whatsapp.mp4" preload="none" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">WhatsApp System Demo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Studio Speaker -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" data-src="assets/img/showcase/clip-studio-man.mp4" preload="none" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">AI Avatar Host</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: AI Marketing Services -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" data-src="assets/img/showcase/clip-ai-services.mp4" preload="none" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">AI Agency Ad</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 7: Home Vlogger -->
+                        <div class="slider-card">
+                            <div class="slider-media-wrap">
+                                <video class="slider-video" data-src="assets/img/showcase/clip-vlogging.mp4" preload="none" muted loop playsinline></video>
+                                <div class="slider-card-overlay">
+                                    <span class="slider-card-badge">Social Media Vlog</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
-            <!-- Below video -->
-            <div class="vsl-bottom">
-                <div class="vsl-note"><span class="vsl-note-dot"></span> Real skills. Real income potential. See exactly
-                    how in 2 minutes. <em style="font-size:0.78em;opacity:0.7">(results vary)</em></div>
+            <!-- Below Slider Disclaimer -->
+            <div class="slider-caption-row">
+                <span class="slider-caption-label">💡 All videos shown are generated 100% using tools taught inside the bootcamp.</span>
             </div>
 
             <!-- CTA -->
             <div class="hero-cta">
-                <a href="checkout.html" class="btn-p">I Want This Skill →</a>
+                <a href="/checkout" class="btn-p">I Want This Skill →</a>
                 <a href="#modules" class="btn-s">See Modules ↓</a>
             </div>
 
             <!-- Trust pills -->
             <div class="hero-vps">
                 <div class="hvp">✓ Student example: £1,200 UK brand deal*</div>
-                <div class="hvp">✓ 33 spots at launch price</div>
+                <div class="hvp">✓ Only 3 spots left at launch price</div>
                 <div class="hvp">✓ No experience needed</div>
             </div>
 
             <!-- Stats -->
             <div class="hstats">
                 <div class="hs"><span class="hs-n">$15K</span><span class="hs-l">Top Example*</span></div>
-                <div class="hs"><span class="hs-n">10</span><span class="hs-l">Modules</span></div>
-                <div class="hs"><span class="hs-n">90</span><span class="hs-l">Days</span></div>
-                <div class="hs"><span class="hs-n">Rs. 1,499</span><span class="hs-l">Today Only</span></div>
+                <div class="hs"><span class="hs-n">9</span><span class="hs-l">Modules</span></div>
+                <div class="hs"><span class="hs-n">2 Hrs</span><span class="hs-l">First Result</span></div>
+                <div class="hs"><span class="hs-n">Rs. 1,999</span><span class="hs-l">Today Only</span></div>
             </div>
 
         </div>
@@ -218,45 +971,147 @@
 
     <div class="urg">
         <div class="urg-ticker" id="urgTicker">
-            <div class="urg-item">⚡ Intro Price: <strong>Rs. 1,499 Only</strong></div>
-            <div class="urg-item"><span>|</span>🔥 <strong>33 of 50 Spots Remaining</strong></div>
-            <div class="urg-item"><span>|</span>📈 Price goes up <strong>after 50 students</strong></div>
+            <div class="urg-item">⚡ Intro Price: <strong>Rs. 1,999 Only</strong></div>
+            <div class="urg-item"><span>|</span>🔥 <strong>Only 3 of 300 Launch Spots Left</strong></div>
+            <div class="urg-item"><span>|</span>📈 Price goes up <strong>after 300 students</strong></div>
             <div class="urg-item"><span>|</span>🎁 <strong>Free Client Ebook Included</strong></div>
-            <div class="urg-item"><span>|</span>⚡ Intro Price: <strong>Rs. 1,499 Only</strong></div>
-            <div class="urg-item"><span>|</span>🔥 <strong>33 of 50 Spots Remaining</strong></div>
-            <div class="urg-item"><span>|</span>📈 Price goes up <strong>after 50 students</strong></div>
+            <div class="urg-item"><span>|</span>⚡ Intro Price: <strong>Rs. 1,999 Only</strong></div>
+            <div class="urg-item"><span>|</span>🔥 <strong>Only 3 of 300 Launch Spots Left</strong></div>
+            <div class="urg-item"><span>|</span>📈 Price goes up <strong>after 300 students</strong></div>
             <div class="urg-item"><span>|</span>🎁 <strong>Free Client Ebook Included</strong></div>
         </div>
     </div>
 
-    <section class="sec" style="padding:52px 28px;background:var(--bg2)">
-        <div class="si">
-            <div class="proof-bar rv">
-                <div class="pi">
-                    <div class="pi-n">$15K</div>
-                    <div class="pi-l">Monthly Potential</div>
+    <!-- Student Work Showcase (Moved Up) -->
+    <section class="sec">
+        <div class="si ctr">
+            <span class="slabel rv">Student Work Showcase</span>
+            <h2 class="stitle rv">See What Our Students Are Creating Inside</h2>
+            <p class="ssub rv">Real posts and actual designs generated by Pakistani students inside our private Skool community using these exact AI tools.</p>
+            
+            <div class="work-grid">
+                <!-- Card 1 -->
+                <div class="work-card rv">
+                    <div class="work-card-header">
+                        <div class="work-card-user">
+                            <div class="work-user-avatar" style="background: #ea580c;">A</div>
+                            <div class="work-user-info">
+                                <span class="work-user-name">Asif Khan</span>
+                                <span class="work-post-time">17h ago · <span class="work-category">#ShowYourWork</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-card-body">
+                        <h4 class="work-post-title">#MyCampaign</h4>
+                        <p class="work-post-text">new Campaign generated please rate my work</p>
+                        <div class="work-image-wrap">
+                            <img class="work-post-image" src="assets/img/work-dove.png" alt="AI Dove Soap Campaign by Asif Khan">
+                            <span class="work-tag-badge">AI Product Shoot</span>
+                        </div>
+                    </div>
+                    <div class="work-card-footer">
+                        <div class="work-meta">
+                            <span class="work-meta-item">👍 3</span>
+                            <span class="work-meta-item">💬 8 comments</span>
+                        </div>
+                        <span class="work-verified">✓ Earning Verified</span>
+                    </div>
                 </div>
-                <div class="pi">
-                    <div class="pi-n">10</div>
-                    <div class="pi-l">Modules</div>
+
+                <!-- Card 2 -->
+                <div class="work-card rv">
+                    <div class="work-card-header">
+                        <div class="work-card-user">
+                            <div class="work-user-avatar" style="background: #2563eb;">H</div>
+                            <div class="work-user-info">
+                                <span class="work-user-name">Hasnain Mukhtiar</span>
+                                <span class="work-post-time">6h ago · <span class="work-category">#ShowYourWork</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-card-body">
+                        <h4 class="work-post-title">My Character #mycharacter</h4>
+                        <p class="work-post-text">Consistent portrait generated with Google flow / 7-Pillar prompt formula.</p>
+                        <div class="work-image-wrap">
+                            <img class="work-post-image" src="assets/img/work-suit.png" alt="Consistent AI Character by Hasnain Mukhtiar">
+                            <span class="work-tag-badge">Ultra-Realistic Character</span>
+                        </div>
+                    </div>
+                    <div class="work-card-footer">
+                        <div class="work-meta">
+                            <span class="work-meta-item">👍 1</span>
+                            <span class="work-meta-item">💬 1 comment</span>
+                        </div>
+                        <span class="work-verified">✓ Character Match</span>
+                    </div>
                 </div>
-                <div class="pi">
-                    <div class="pi-n">14</div>
-                    <div class="pi-l">Income Streams</div>
+
+                <!-- Card 3 -->
+                <div class="work-card rv">
+                    <div class="work-card-header">
+                        <div class="work-card-user">
+                            <div class="work-user-avatar" style="background: #16a34a;">W</div>
+                            <div class="work-user-info">
+                                <span class="work-user-name">Wajiha Osama</span>
+                                <span class="work-post-time">1d ago · <span class="work-category">#ShowYourWork</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-card-body">
+                        <h4 class="work-post-title">First project module 2</h4>
+                        <p class="work-post-text">#Prompt Like a Pro - Consistent character in cafe lighting setup.</p>
+                        <div class="work-image-wrap">
+                            <img class="work-post-image" src="assets/img/work-cafe.png" alt="AI Cafe Character by Wajiha Osama">
+                            <span class="work-tag-badge">Studio Lighting</span>
+                        </div>
+                    </div>
+                    <div class="work-card-footer">
+                        <div class="work-meta">
+                            <span class="work-meta-item">👍 1</span>
+                            <span class="work-meta-item">💬 2 comments</span>
+                        </div>
+                        <span class="work-verified">✓ Prompt Mastery</span>
+                    </div>
                 </div>
-                <div class="pi">
-                    <div class="pi-n">1499 PKR</div>
-                    <div class="pi-l">Launch Price</div>
+
+                <!-- Card 4 -->
+                <div class="work-card rv">
+                    <div class="work-card-header">
+                        <div class="work-card-user">
+                            <div class="work-user-avatar" style="background: #7c3aed;">A</div>
+                            <div class="work-user-info">
+                                <span class="work-user-name">Asif Khan</span>
+                                <span class="work-post-time">2d ago · <span class="work-category">#ShowYourWork</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-card-body">
+                        <h4 class="work-post-title">#MyCampaign</h4>
+                        <p class="work-post-text">campaign for a beauty cream - product photography</p>
+                        <div class="work-image-wrap">
+                            <img class="work-post-image" src="assets/img/work-cream.png" alt="AI Skincare Campaign by Asif Khan">
+                            <span class="work-tag-badge">Product Placement</span>
+                        </div>
+                    </div>
+                    <div class="work-card-footer">
+                        <div class="work-meta">
+                            <span class="work-meta-item">👍 1</span>
+                            <span class="work-meta-item">💬 1 comment</span>
+                        </div>
+                        <span class="work-verified">✓ Earning Verified</span>
+                    </div>
                 </div>
-                <div class="pi">
-                    <div class="pi-n">24h</div>
-                    <div class="pi-l">Access After Pay</div>
-                </div>
+            </div>
+            
+            <div class="work-footer rv">
+                <p>Join the private community and start creating high-ticket visual campaigns tonight.</p>
+                <a href="/checkout" class="btn-big">I Want to Learn This →</a>
             </div>
         </div>
     </section>
 
-    <section class="sec">
+    <!-- Income Potential -->
+    <section class="sec" style="background:var(--bg2)">
         <div class="si ctr">
             <span class="slabel rv">Income Potential</span>
             <h2 class="stitle rv">What Students Can Earn With These Skills*</h2>
@@ -319,7 +1174,7 @@
                 </div>
             </div>
             <div class="roadmap rv">
-                <div class="rm-title">Your 90-Day Income Roadmap</div>
+                <div class="rm-title">Your Action-Based Income Roadmap</div>
                 <div class="rm-track">
                     <div class="rm-step">
                         <div class="rm-marker rm-or">W1 to 2</div>
@@ -343,22 +1198,246 @@
                         <div class="rm-earn" style="color:#8B5CF6">Target: $2,000 to $5,000</div>
                     </div>
                     <div class="rm-step">
-                        <div class="rm-marker rm-gn">Day 90</div>
+                        <div class="rm-marker rm-gn">Month 1+</div>
                         <div class="rm-head">Full Income Stack</div>
                         <div class="rm-body">Multiple streams running. Retainer clients. Growing influencer page.</div>
                         <div class="rm-earn" style="color:var(--gn)">Target: $5,000 to $15,000/mo</div>
                     </div>
                 </div>
             </div>
-            <div class="icta rv"><a href="checkout.html" class="btn-big">Enroll Now →</a></div>
+            <div class="icta rv"><a href="/checkout" class="btn-big">Enroll Now →</a></div>
+        </div>
+    </section>
+
+    <!-- Testimonial Wall: What Members Are Saying -->
+    <section class="tw-section" id="testimonials">
+        <div class="tw-inner">
+            <div class="tw-label rv">What Members Are Saying</div>
+            <h2 class="tw-heading rv">Don't take our <em>word</em> for it</h2>
+
+            <div class="tw-masonry">
+
+                <!-- Screenshot: Tahir Zulfiqar – Perfume Ad Campaign -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-tahir-perfume.jpeg" alt="Tahir Zulfiqar – The Five Perfume Ad Campaign Scenes" loading="lazy">
+                </div>
+
+                <!-- Screenshot: Farrukh Noman – #myCharacter T-shirt Brand -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-farrukh.jpeg" alt="Farrukh Noman – AI Character for T-shirt Brand" loading="lazy">
+                </div>
+
+                <!-- Text: $800/mo Win -->
+                <div class="tw-card tw-card-highlight rv">
+                    <div class="tw-card-body">
+                        <div class="tw-card-user">
+                            <div class="tw-card-avatar" style="background:#f59e0b;">L</div>
+                            <div>
+                                <div class="tw-card-name">Luca Miranda</div>
+                                <div class="tw-card-handle">Member · AI Bootcamp</div>
+                            </div>
+                        </div>
+                        <div class="tw-card-title">✨ First Win — $800/month with AI Content 🎉</div>
+                        <p class="tw-card-text">A few months ago, I started creating AI-powered videos with one goal: turn creativity into real results.<br><br>Today, I'm working with a client on a <strong>$800/month retainer</strong> for AI video + content creation.</p>
+                        <div class="tw-card-footer">
+                            <span class="tw-card-meta">👍 22</span>
+                            <span class="tw-card-meta">💬 31 comments</span>
+                            <span class="tw-card-tag">$800/mo Win</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshot: Zainab Mustafa – #MyCampaign Skincare -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-zainab.jpeg" alt="Zainab Mustafa – Skincare Product Campaign" loading="lazy">
+                </div>
+
+                <!-- Screenshot: Rana Tahir – Same Character 3 Locations -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-rana.jpeg" alt="Rana Tahir – Same Character at 3 Different Locations" loading="lazy">
+                </div>
+
+                <!-- Text: Going Viral -->
+                <div class="tw-card tw-card-highlight rv">
+                    <div class="tw-card-body">
+                        <div class="tw-card-user">
+                            <div class="tw-card-avatar" style="background:#7c3aed;">M</div>
+                            <div>
+                                <div class="tw-card-name">Mr Shadow</div>
+                                <div class="tw-card-handle">Member · AI Bootcamp</div>
+                            </div>
+                        </div>
+                        <div class="tw-card-title">🎉 MY IG REEL IS GOING VIRAL (24 HRS)</div>
+                        <p class="tw-card-text">✅ My latest Instagram reel just took off in under 24 hours!<br>📊 12,000+ views<br>📊 60+ new followers<br>📊 20+ new accounts reached</p>
+                        <div class="tw-card-footer">
+                            <span class="tw-card-meta">👍 8</span>
+                            <span class="tw-card-meta">💬 14 comments</span>
+                            <span class="tw-card-tag">Going Viral</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshot: Shahid Rasheed – My Animation -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-shahid.jpeg" alt="Shahid Rasheed – AI Animation Video" loading="lazy">
+                </div>
+
+                <!-- Screenshot: Jamsher Khan – Jewelry Ad Commercial -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-jamsher.jpeg" alt="Jamsher Khan – Luxury Jewelry Ad Cinematic AI Commercial" loading="lazy">
+                </div>
+
+                <!-- Text: Best Community -->
+                <div class="tw-card rv">
+                    <div class="tw-card-body">
+                        <div class="tw-card-user">
+                            <div class="tw-card-avatar" style="background:#8b5cf6;">G</div>
+                            <div>
+                                <div class="tw-card-name">Gabriel Pomerino</div>
+                                <div class="tw-card-handle">Member · AI Bootcamp</div>
+                            </div>
+                        </div>
+                        <div class="tw-card-title">Best community to this date</div>
+                        <p class="tw-card-text">Over the years I have been part of many groups, forums, and online communities and this place is in the top 3 places I love to hang, interact and participate in.</p>
+                        <div class="tw-card-footer">
+                            <span class="tw-card-meta">👍 11</span>
+                            <span class="tw-card-meta">💬 9 comments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshot: Muhammad Ajmal – #Shadi hub.pk -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-ajmal.jpeg" alt="Muhammad Ajmal – Shadi hub.pk AI Campaign" loading="lazy">
+                </div>
+
+                <!-- Screenshot: Tahir Zulfiqar – Tribal Woman (7-Pillars Prompt) -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-tahir-tribal.jpeg" alt="Tahir Zulfiqar – 7-Pillars Prompt Demonstration" loading="lazy">
+                </div>
+
+                <!-- Text: 3.7M Views -->
+                <div class="tw-card tw-card-highlight rv">
+                    <div class="tw-card-body">
+                        <div class="tw-card-user">
+                            <div class="tw-card-avatar" style="background:#f97316;">M</div>
+                            <div>
+                                <div class="tw-card-name">Miklas Axelsy</div>
+                                <div class="tw-card-handle">Member · AI Bootcamp</div>
+                            </div>
+                        </div>
+                        <div class="tw-card-title">🎯 3rd Account Hits 3.7M Views!</div>
+                        <p class="tw-card-text">Hope this brings a smile to all of you 🥳 my 3rd account just went viral 🎬 This is a short win, but I'm so proud for all of you who have supported me.</p>
+                        <div class="tw-card-footer">
+                            <span class="tw-card-meta">👍 19</span>
+                            <span class="tw-card-meta">💬 27 comments</span>
+                            <span class="tw-card-tag">3.7M Views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshot: Shadi hub.pk Storyboard Grid -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-shadihub.jpeg" alt="Shadi hub.pk – 9-Scene AI Storyboard" loading="lazy">
+                </div>
+
+                <!-- Text: Learning Progress -->
+                <div class="tw-card rv">
+                    <div class="tw-card-body">
+                        <div class="tw-card-user">
+                            <div class="tw-card-avatar" style="background:#14b8a6;">A</div>
+                            <div>
+                                <div class="tw-card-name">Andrea Dolci</div>
+                                <div class="tw-card-handle">Member · AI Bootcamp</div>
+                            </div>
+                        </div>
+                        <p class="tw-card-text">The amount of things I'm learning is incredible! Every time I open the app I find myself knowing new stuff 🎯 I'm so grateful for this! Thank you guys @team 🙏</p>
+                        <div class="tw-card-footer">
+                            <span class="tw-card-meta">👍 6</span>
+                            <span class="tw-card-meta">💬 8 comments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshot: Community Overview (Dark Grid) -->
+                <div class="tw-card rv">
+                    <img class="tw-card-img" src="assets/img/community/ss-overview.jpeg" alt="AI Bootcamp Community – Student Work Showcase" loading="lazy">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Before vs After Section -->
+    <section class="sec" style="background:var(--bg2)">
+        <div class="si ctr">
+            <span class="slabel rv">The Transformation</span>
+            <h2 class="stitle rv">Stop Watching AI Videos Go Viral.<br>Start Making Them.</h2>
+            <p class="ssub rv">Here is the exact shift you will experience when you join the bootcamp and apply these skills.</p>
+            
+            <div class="tf-grid">
+                <!-- Before Card -->
+                <div class="tf-card before rv">
+                    <h3 class="tf-card-title"><span>✗</span> Before Joining</h3>
+                    <ul class="tf-list">
+                        <li class="tf-item">
+                            <span class="tf-icon">✗</span>
+                            <span>Overwhelmed by dozens of AI tools with no idea which ones are actually worth using.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✗</span>
+                            <span>Your AI-generated characters look obviously fake, deformed, or plastic-like.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✗</span>
+                            <span>Wasting hours writing long, complicated prompts only to get mediocre results.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✗</span>
+                            <span>Trying to learn alone from random, outdated YouTube videos with no feedback.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✗</span>
+                            <span>No clue how to find or close high-paying international clients who pay in Dollars.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- After Card -->
+                <div class="tf-card after rv">
+                    <h3 class="tf-card-title"><span>✓</span> After Joining</h3>
+                    <ul class="tf-list">
+                        <li class="tf-item">
+                            <span class="tf-icon">✓</span>
+                            <span>You know the exact 2-tool workflow that professionals use to save time and money.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✓</span>
+                            <span>Creating hyper-realistic AI characters that look 100% human and fool everyone.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✓</span>
+                            <span>Using the 7-Pillar Prompt Formula to generate masterpiece images in seconds.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✓</span>
+                            <span>Getting daily feedback and answers in minutes from our private Skool community.</span>
+                        </li>
+                        <li class="tf-item">
+                            <span class="tf-icon">✓</span>
+                            <span>Step-by-step guidance to land your first paying brand retainer in 24 hours.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="sec" id="modules">
         <div class="si">
             <span class="slabel rv">The Curriculum</span>
-            <h2 class="stitle rv">10 Modules. Zero Fluff.<br>Everything You Need.</h2>
-            <p class="ssub rv">One character. One campaign. One complete AI business, built step by step across 10
+            <h2 class="stitle rv">9 Modules. Zero Fluff.<br>Everything You Need.</h2>
+            <p class="ssub rv">One character. One campaign. One complete AI business, built step by step across 9
                 modules.</p>
             <div class="mod-wrap rv">
 
@@ -391,8 +1470,6 @@
                         <div class="mod-bullets">
                             <div class="mod-bullet">The 7-pillar prompt formula. Break it down, use it forever.</div>
                             <div class="mod-bullet">Type "a woman" vs type this formula. See the difference live.</div>
-                            <div class="mod-bullet">50 copy-paste prompts included. Use them today, charge tomorrow.
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -533,25 +1610,6 @@
                     </div>
                 </div>
 
-                <div class="mod-item mod-live">
-                    <div class="mod-num-col">
-                        <div class="mod-num">10</div>
-                    </div>
-                    <div class="mod-body">
-                        <div class="mod-title">Live Challenge: $0 to $15,000/Month Built Live. Nothing Hidden.</div>
-                        <div class="mod-hook">Not a replay. A real AI business built from zero, live, inside this
-                            module. Every decision, every client message, every result documented in real time. Follow
-                            the exact path yourself.</div>
-                        <div class="mod-bullets">
-                            <div class="mod-bullet">Real account, real content, real outreach, built from absolute zero.
-                            </div>
-                            <div class="mod-bullet">Every mistake and every win shown as they happen</div>
-                            <div class="mod-bullet">Follow the same steps. The complete blueprint is yours to keep.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="mod-bonus">
                     <span class="mod-bonus-badge">🎁 FREE BONUS</span>
                     <div class="mod-bonus-text">
@@ -563,7 +1621,7 @@
                 </div>
 
             </div>
-            <div class="icta rv"><a href="checkout.html" class="btn-big">Enroll Now →</a></div>
+            <div class="icta rv"><a href="/checkout" class="btn-big">Enroll Now →</a></div>
         </div>
     </section>
 
@@ -641,7 +1699,7 @@
                 <div class="ip">✓ Free Client Acquisition Ebook</div>
                 <div class="ip">✓ WhatsApp Support Group</div>
             </div>
-            <div class="icta rv"><a href="checkout.html" class="btn-big">Enroll Now →</a></div>
+            <div class="icta rv"><a href="/checkout" class="btn-big">Enroll Now →</a></div>
             <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:10px">Courses like this sell for
                 $1,000+ abroad. You earn it back on your first project.</p>
         </div>
@@ -714,7 +1772,7 @@
                 public accounts are estimates based on follower count, engagement rate, and typical brand deal rates.
                 These are not verified figures and are not typical results for students of this course. Individual
                 results vary significantly. Most students earn significantly less or nothing.</p>
-            <div class="icta rv" style="margin-top:32px"><a href="checkout.html" class="btn-big">Enroll Now →</a></div>
+            <div class="icta rv" style="margin-top:32px"><a href="/checkout" class="btn-big">Enroll Now →</a></div>
         </div>
     </section>
 
@@ -1093,8 +2151,7 @@
                 <button class="tp-btn" id="tpNext" onclick="changeTp(1)">→</button>
             </div>
             <div style="text-align:center;margin-top:8px"><span class="tp-label" id="tpLabel">Page 1 of 6</span></div>
-            <div class="icta rv" style="margin-top:36px"><a href="https://wa.me/923180298090" class="btn-big">Enroll Now
-                    →</a></div>
+            <div class="icta rv" style="margin-top:36px"><a href="/checkout" class="btn-big">Enroll Now →</a></div>
             <p
                 style="font-size:11px;color:var(--muted);text-align:center;margin-top:16px;max-width:640px;margin-left:auto;margin-right:auto;">
                 *Testimonials represent individual experiences. Results are not typical. Names used with permission or
@@ -1145,7 +2202,7 @@
                         AI does the heavy lifting.</div>
                 </div>
             </div>
-            <div class="icta rv"><a href="https://wa.me/923180298090" class="btn-big">Enroll Now →</a></div>
+            <div class="icta rv"><a href="/checkout" class="btn-big">Enroll Now →</a></div>
         </div>
     </section>
 
@@ -1163,7 +2220,7 @@
                             generating your first professional AI image in Module 1, before it even ends.</div>
                     </div>
                 </div>
-                <div class="faq-item"><button class="faq-q">What can I realistically earn in 90 days?<span
+                <div class="faq-item"><button class="faq-q">What can I realistically earn in my first 30 days?<span
                             class="faq-icon">+</span></button>
                     <div class="faq-a">
                         <div class="faq-ai">Realistically, $500 to $2,000 in your first 30 to 60 days if you follow the
@@ -1172,12 +2229,12 @@
                             skill is real and the demand is massive.</div>
                     </div>
                 </div>
-                <div class="faq-item"><button class="faq-q">Why is this only Rs. 1,499?<span
+                <div class="faq-item"><button class="faq-q">Why is this only Rs. 1,999?<span
                             class="faq-icon">+</span></button>
                     <div class="faq-a">
-                        <div class="faq-ai">This is a launch price for the first 50 students only. 17 are already
+                        <div class="faq-ai">This is a launch price for the first 300 students only. 297 are already
                             enrolled. We want early students who will get results, share feedback, and grow with us.
-                            After 50 students, the price goes permanently to $35 (Rs. 9,999). No exceptions, no discount
+                            After 300 students, the price goes permanently to Rs. 14,999. No exceptions, no discount
                             codes after that.</div>
                     </div>
                 </div>
@@ -1217,34 +2274,34 @@
                             receive your login portal link and the invite to the private WhatsApp group.</div>
                     </div>
                 </div>
-                <div class="faq-item"><button class="faq-q">Is the price really going up after 50 students?<span
+                <div class="faq-item"><button class="faq-q">Is the price really going up after 300 students?<span
                             class="faq-icon">+</span></button>
                     <div class="faq-a">
                         <div class="faq-ai">Yes, absolutely. This is not a fake urgency tactic. The launch price is for
-                            the first 50 students only. 17 have already enrolled. Once we hit 50, the price moves to $35
-                            (Rs. 9,999) permanently. If you're reading this, spots are still available. Act now.</div>
+                            the first 300 students only. 297 have already enrolled. Once we hit 300, the price moves to
+                            Rs. 14,999 permanently. If you're reading this, spots are still available. Act now.</div>
                     </div>
                 </div>
             </div>
             <div style="text-align:center;margin-top:28px">
                 <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Chat with us on WhatsApp. We reply fast.
                 </p>
-                <a href="https://wa.me/923180298090" class="btn-big">Enroll Now →</a>
+                <a href="/checkout" class="btn-big">Enroll Now →</a>
             </div>
         </div>
     </section>
-
+ 
     <section class="sec"
         style="padding:40px 28px;background:linear-gradient(135deg,rgba(249,115,22,.06),var(--bg),rgba(76,140,228,.06))">
         <div class="si ctr">
             <div class="still-thinking rv">
                 <div class="st-badge">STILL THINKING ABOUT IT?</div>
                 <h3 class="st-title">Every day you wait is a day someone else takes your client.</h3>
-                <a href="https://wa.me/923180298090" class="btn-big">Enroll Now →</a>
+                <a href="/checkout" class="btn-big">Enroll Now →</a>
             </div>
         </div>
     </section>
-
+ 
     <section class="sec" style="padding:52px 28px;background:var(--bg2);border-top:1px solid var(--border)">
         <div class="si ctr">
             <div class="ig-strip rv">
@@ -1263,30 +2320,18 @@
             </div>
         </div>
     </section>
-
+ 
     <section class="fcta">
         <div class="fcta-bg"></div>
         <div class="fcta-orb"></div>
         <div class="fcta-inner">
-            <h2 class="fcta-title">Start Today.</h2>
-            <p class="fcta-sub">The tools are free. The knowledge is here. The only thing missing is you.</p>
-            <a href="https://wa.me/923180298090" class="btn-big">Enroll Now →</a>
-            <p style="margin-top:14px;font-size:12px;color:var(--muted)">33 spots left at this price · Lifetime access ·
+            <h2 class="fcta-title" style="font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 15px;">This summer,<br>either scroll it<br>or <em style="color: var(--or); font-style: normal;">build</em> it.</h2>
+            <p class="final-urdu" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); margin: 15px 0 25px; line-height: 1.8; color: #fdba74; direction: rtl;">آپ کا فیصلہ — آپ کا مستقبل</p>
+            <a href="/checkout" class="btn-big">Enroll Now →</a>
+            <p style="margin-top:14px;font-size:12px;color:var(--muted)">Only 3 spots left at this price · Lifetime access ·
                 Private community</p>
         </div>
     </section>
-
-    <footer>
-        <div class="fi">
-            <div class="f-brand"><span>AI</span>Bootcamp</div>
-            <div class="f-copy">© 2026 AIBootcamp. All rights reserved.</div>
-            <div class="f-links">
-                <a href="https://www.instagram.com/aivideobootcamppk" target="_blank">Instagram</a>
-                <a href="https://www.facebook.com/Aivideobootcamppk" target="_blank">Facebook</a>
-                <a href="https://wa.me/923180298090" target="_blank">WhatsApp</a>
-            </div>
-        </div>
-    </footer>
 
     <script>
         'use strict';
@@ -1304,6 +2349,20 @@
         const prog = document.getElementById('prog');
         const maxScroll = () => document.body.scrollHeight - window.innerHeight;
         window.addEventListener('scroll', () => { prog.style.width = Math.min(window.scrollY / maxScroll() * 100, 100) + '%'; }, { passive: true });
+
+        // Sticky CTA visibility handler for Mobile
+        const stickyBar = document.getElementById('stickyCtaBar');
+        if (stickyBar) {
+            // Start hidden at top of page
+            stickyBar.classList.add('hidden');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    stickyBar.classList.remove('hidden');
+                } else {
+                    stickyBar.classList.add('hidden');
+                }
+            }, { passive: true });
+        }
 
         // Scroll reveal
         const rvObs = new IntersectionObserver(entries => {
@@ -1335,15 +2394,6 @@
             });
         });
 
-        // Payment tabs
-        function switchTab(tab) {
-            ['jazz', 'easy', 'bank'].forEach(t => {
-                const btn = document.getElementById('tab-' + t);
-                const panel = document.getElementById('panel-' + t);
-                if (btn) btn.classList.toggle('active', t === tab);
-                if (panel) { panel.classList.toggle('active', t === tab); panel.style.display = t === tab ? 'block' : 'none'; }
-            });
-        }
 
         // Testimonial pagination
         let currentTp = 0;
@@ -1373,22 +2423,6 @@
         function changeTp(dir) { goTp(currentTp + dir); }
         buildDots();
 
-        // Bubble grid
-        const bg = document.getElementById('bubbleGrid');
-        if (bg) {
-            const bObs = new IntersectionObserver(entries => {
-                if (!entries[0].isIntersecting) return;
-                const cols = ['#F97316', '#4C8CE4', '#8B5CF6'];
-                for (let i = 0; i < 50; i++) {
-                    const b = document.createElement('div');
-                    b.className = 'bubble ' + (i < 17 ? 'taken' : 'open');
-                    if (i < 17) { b.style.background = cols[i % 3]; b.style.boxShadow = '0 0 8px ' + cols[i % 3] + '80'; b.style.animationDelay = (i * .04) + 's'; }
-                    bg.appendChild(b);
-                }
-                bObs.disconnect();
-            }, { threshold: 0.3 });
-            bObs.observe(bg);
-        }
 
         // Ripple
         document.querySelectorAll('.btn-p,.btn-big,.btn-wa,.btn-nav').forEach(btn => {
@@ -1447,12 +2481,168 @@
         const hsObs = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && !hsDone) {
                 hsDone = true;
-                [{ n: 15, pre: '$', suf: 'K' }, { n: 10, pre: '', suf: '' }, { n: 90, pre: '', suf: '' }, { n: 1499, pre: 'Rs. ', suf: '' }].forEach((d, i) => {
+                [{ n: 15, pre: '$', suf: 'K' }, { n: 9, pre: '', suf: '' }, { n: 2, pre: '', suf: ' Hrs' }, { n: 1999, pre: 'Rs. ', suf: '' }].forEach((d, i) => {
                     if (hstats[i]) setTimeout(() => animateValue(hstats[i], d.n, d.pre, d.suf, 1400), i * 120 + 600);
                 });
             }
         }, { threshold: 0.6 });
         if (hstats.length) hsObs.observe(hstats[0].closest('.hero') || document.body);
+
+        // AI Clips Slider Navigation & Lazy Loading & Auto-Rotation
+        (function() {
+            const track = document.getElementById('sliderTrack');
+            const prevBtn = document.getElementById('slidePrev');
+            const nextBtn = document.getElementById('slideNext');
+            
+            if (!track || !prevBtn || !nextBtn) return;
+            
+            function getScrollAmount() {
+                const firstCard = track.querySelector('.slider-card');
+                if (!firstCard) return 300;
+                return firstCard.offsetWidth + 16;
+            }
+            
+            // Toggle visibility of navigation buttons
+            function toggleButtons() {
+                const maxScrollLeft = track.scrollWidth - track.clientWidth;
+                prevBtn.style.opacity = track.scrollLeft <= 5 ? '0.4' : '1';
+                prevBtn.style.pointerEvents = track.scrollLeft <= 5 ? 'none' : 'auto';
+                
+                nextBtn.style.opacity = track.scrollLeft >= maxScrollLeft - 5 ? '0.4' : '1';
+                nextBtn.style.pointerEvents = track.scrollLeft >= maxScrollLeft - 5 ? 'none' : 'auto';
+            }
+            
+            track.addEventListener('scroll', toggleButtons);
+            setTimeout(toggleButtons, 500);
+            window.addEventListener('resize', toggleButtons);
+
+            // Auto-sliding engine
+            let autoSlideInterval = null;
+            let resumeTimeout = null;
+
+            function startAutoSlide() {
+                if (autoSlideInterval) return;
+                autoSlideInterval = setInterval(() => {
+                    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+                    if (track.scrollLeft >= maxScrollLeft - 5) {
+                        track.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                    }
+                }, 3500);
+            }
+
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = null;
+                }
+                if (resumeTimeout) {
+                    clearTimeout(resumeTimeout);
+                    resumeTimeout = null;
+                }
+            }
+
+            function requestResumeAutoSlide(delay = 4000) {
+                if (resumeTimeout) clearTimeout(resumeTimeout);
+                resumeTimeout = setTimeout(() => {
+                    startAutoSlide();
+                }, delay);
+            }
+
+            // Start auto-rotation on load
+            startAutoSlide();
+
+            // Interactivity: pause on hover (desktop), resume on leave
+            track.addEventListener('mouseenter', stopAutoSlide);
+            track.addEventListener('mouseleave', () => startAutoSlide());
+
+            // Interactivity: pause on touch (mobile), resume after delay when touch ends
+            track.addEventListener('touchstart', stopAutoSlide, { passive: true });
+            track.addEventListener('touchend', () => requestResumeAutoSlide(4000), { passive: true });
+
+            // Button controls
+            prevBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                requestResumeAutoSlide(5000);
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                requestResumeAutoSlide(5000);
+            });
+
+            // Lazy loading & performance optimization using high-reliability hybrid scroll tracker
+            const videos = track.querySelectorAll('.slider-video');
+            track.style.position = 'relative'; // Guarantee offsetParent is the track container
+
+            function updateVideoSources() {
+                const trackLeft = track.scrollLeft;
+                const trackRight = trackLeft + track.clientWidth;
+                const buffer = 150; // 150px look-ahead/look-behind horizontal buffer
+
+                videos.forEach(video => {
+                    const card = video.closest('.slider-card');
+                    if (!card) return;
+
+                    const cardLeft = card.offsetLeft;
+                    const cardRight = cardLeft + card.offsetWidth;
+
+                    // Calculate overlap with visible viewport + buffer
+                    const isHorizontallyVisible = (cardRight >= trackLeft - buffer) && (cardLeft <= trackRight + buffer);
+
+                    if (isHorizontallyVisible) {
+                        if (!video.src || video.src === '') {
+                            const dataSrc = video.getAttribute('data-src');
+                            if (dataSrc) {
+                                video.src = dataSrc;
+                                video.load();
+                            }
+                        }
+                        video.play().catch(err => {
+                            // Autoplay blocked
+                        });
+                    } else {
+                        if (video.src) {
+                            video.pause();
+                            video.removeAttribute('src'); // Unload and release decoder resources
+                            video.load();
+                        }
+                    }
+                });
+            }
+
+            // Vertical IntersectionObserver on parent viewport to suspend slider videos when page is scrolled away
+            const viewportObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        track.addEventListener('scroll', updateVideoSources);
+                        window.addEventListener('resize', updateVideoSources);
+                        updateVideoSources();
+                    } else {
+                        track.removeEventListener('scroll', updateVideoSources);
+                        window.removeEventListener('resize', updateVideoSources);
+                        // Suspension: Pause and unload all videos when offscreen vertically to conserve CPU & Battery
+                        videos.forEach(video => {
+                            if (video.src) {
+                                video.pause();
+                                video.removeAttribute('src');
+                                video.load();
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '200px 0px 200px 0px', // Trigger vertically slightly before slider enters the screen
+                threshold: 0.05
+            });
+
+            // Observe the viewport container
+            const viewportEl = track.closest('.slider-viewport') || track;
+            viewportObserver.observe(viewportEl);
+        })();
     </script>
 
     <!-- Social Proof System -->
@@ -1496,8 +2686,8 @@
                 }, 6000);
             }
 
-            setTimeout(showSP, 4000);
-            setInterval(showSP, 25000);
+            setTimeout(showSP, 15000);
+            setInterval(showSP, 28000);
         })();
     </script>
 
@@ -1510,23 +2700,14 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 AIBootcamp. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="https://www.instagram.com/aivideobootcamppk" target="_blank">Instagram</a>
+                    <a href="https://www.facebook.com/Aivideobootcamppk" target="_blank">Facebook</a>
+                    <a href="https://wa.me/923180298090" target="_blank">WhatsApp</a>
                 </div>
             </div>
-            <!-- Legal Disclaimer Bar - Required for Google Ads Compliance -->
-            <div class="footer-disclaimer">
-                <strong>Earnings Disclaimer:</strong> The income figures and results mentioned on this website are
-                examples of individual student outcomes and are <strong>not typical or guaranteed</strong>. Results vary
-                significantly based on individual effort, skill development, market conditions, and other factors.
-                AIBootcamp PK provides educational content only and makes no guarantee of income, employment, or
-                financial success. Testimonials shown represent exceptional results. Most students earn significantly
-                less or nothing at all. This is an educational program, not a business opportunity or get-rich-quick
-                scheme. Please read our full <a href="terms.html">Terms of Service</a> and <a
-                    href="privacy.html">Privacy Policy</a> before enrolling. This site uses cookies and Google/Meta
-                advertising technologies — see our <a href="privacy.html">Privacy Policy</a> for details and opt-out
-                options.
-            </div>
+
         </div>
     </footer>
 
@@ -1538,6 +2719,17 @@
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
         </svg>
     </a>
+
+    <!-- Sticky CTA Bar for Mobile -->
+    <div class="sticky-cta-bar" id="stickyCtaBar">
+        <div class="sticky-cta-inner">
+            <div class="sticky-cta-text">
+                <span class="sticky-cta-price"><s style="color:#8890b8;font-weight:500;font-size:0.85rem;">Rs. 14,999</s> Rs. 1,999</span>
+                <span class="sticky-cta-label">⚠️ Only 3 Spots Left!</span>
+            </div>
+            <a href="/checkout" class="sticky-cta-btn">Enroll Now →</a>
+        </div>
+    </div>
 
 </body>
 
