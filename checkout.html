@@ -142,15 +142,15 @@
             <div class="card-title">Step 1 of 2 — Your Enrollment Details</div>
             <div class="form-group">
                 <label for="inp-name">Full Name</label>
-                <input type="text" id="inp-name" placeholder="e.g. Muhammad Ali" autocomplete="name">
+                <input type="text" id="inp-name" placeholder="Full Name (e.g. Muhammad Ali)" autocomplete="name">
             </div>
             <div class="form-group">
                 <label for="inp-phone">WhatsApp Number</label>
-                <input type="tel" id="inp-phone" placeholder="03XX XXXXXXX" autocomplete="tel">
+                <input type="tel" id="inp-phone" placeholder="WhatsApp Number (03XX XXXXXXX)" autocomplete="tel">
             </div>
             <div class="form-group">
                 <label for="inp-city">City</label>
-                <input type="text" id="inp-city" placeholder="e.g. Lahore" autocomplete="address-level2">
+                <input type="text" id="inp-city" placeholder="City (e.g. Lahore)" autocomplete="address-level2">
             </div>
 
             <!-- Order Bump -->
@@ -163,6 +163,19 @@
                 <div class="order-bump-desc">
                     Get 50+ hyper-realistic Midjourney prompts, 5 premade HD characters, client outreach scripts, and Fiverr/Upwork gig blueprints. Save 85% today!
                     <span class="order-bump-price">+ Rs. 499 (Only Rs. 2,498 Total)</span>
+                </div>
+            </div>
+
+            <!-- Order Bump 2 (Marketian Course) -->
+            <div class="order-bump" id="marketianBumpContainer" onclick="toggleMarketianBump(event)" style="margin-top: 1rem;">
+                <div class="order-bump-header">
+                    <input type="checkbox" id="marketian-check" class="order-bump-checkbox" onchange="handleBumpChange(event)">
+                    <span class="order-bump-badge" style="background: #8b5cf6;">PREMIUM UPGRADE</span>
+                    <span class="order-bump-title">Add the Marketian: Complete Meta (Facebook) Ads Masterclass</span>
+                </div>
+                <div class="order-bump-desc">
+                    Get the complete step-by-step video course to master Facebook & Instagram Ads. Learn to setup profitable campaigns, write high-converting ad copy, find high-paying clients, and scale your agency. Save 80% today!
+                    <span class="order-bump-price">+ Rs. 999 (Usually Rs. 4,999)</span>
                 </div>
             </div>
 
@@ -206,7 +219,7 @@
                         <span class="verified-chip">✓ VERIFIED</span>
                     </div>
                     <div class="pay-row">
-                        <span class="pay-number" id="jazz-num">0318 0236635</span>
+                        <span class="pay-number" id="jazz-num">01180236635</span>
                         <span class="copy-btn" onclick="copyText('jazz-num', this)">Copy</span>
                     </div>
                     <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">Account: Farman Ali</div>
@@ -314,22 +327,40 @@
     function toggleOrderBump(e) {
         if (e.target.id === 'bump-check') return;
         const checkbox = document.getElementById('bump-check');
-        checkbox.checked = !checkbox.checked;
+        if (checkbox) checkbox.checked = !checkbox.checked;
+        handleBumpChange();
+    }
+
+    function toggleMarketianBump(e) {
+        if (e.target.id === 'marketian-check') return;
+        const checkbox = document.getElementById('marketian-check');
+        if (checkbox) checkbox.checked = !checkbox.checked;
         handleBumpChange();
     }
 
     function handleBumpChange(e) {
-        const checkbox = document.getElementById('bump-check');
-        const container = document.getElementById('orderBumpContainer');
-        const isChecked = checkbox.checked;
+        const bumpCheck = document.getElementById('bump-check');
+        const marketianCheck = document.getElementById('marketian-check');
+        const bumpContainer = document.getElementById('orderBumpContainer');
+        const marketianContainer = document.getElementById('marketianBumpContainer');
         
-        if (isChecked) {
-            container.classList.add('checked');
-        } else {
-            container.classList.remove('checked');
+        const hasBump = bumpCheck ? bumpCheck.checked : false;
+        const hasMarketian = marketianCheck ? marketianCheck.checked : false;
+        
+        if (bumpContainer) {
+            if (hasBump) bumpContainer.classList.add('checked');
+            else bumpContainer.classList.remove('checked');
         }
         
-        const price = isChecked ? 2498 : 1999;
+        if (marketianContainer) {
+            if (hasMarketian) marketianContainer.classList.add('checked');
+            else marketianContainer.classList.remove('checked');
+        }
+        
+        let price = 1999;
+        if (hasBump) price += 499;
+        if (hasMarketian) price += 999;
+        
         const priceStr = "Rs. " + price.toLocaleString();
         
         const priceMain = document.getElementById('price-main');
@@ -377,8 +408,20 @@
         btn.innerHTML = '<span style="display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" style="animation: spin 1s linear infinite;"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg> Processing...</span>';
 
         const hasBump = document.getElementById('bump-check').checked;
-        const totalAmount = hasBump ? 2498 : 1999;
-        const offerName = hasBump ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Bootcamp';
+        const hasMarketian = document.getElementById('marketian-check').checked;
+        
+        let totalAmount = 1999;
+        let offers = ['AI Video Bootcamp'];
+        if (hasBump) {
+            totalAmount += 499;
+            offers.push('AI Creator Vault');
+        }
+        if (hasMarketian) {
+            totalAmount += 999;
+            offers.push('Marketian Course');
+        }
+        
+        const offerName = offers.join(' + ');
 
         // Build WhatsApp link with lead data pre-filled
         const msg = encodeURIComponent(
@@ -426,6 +469,20 @@
             document.getElementById('paymentSection').classList.add('visible');
             startTimer(15 * 60);
             document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Save checkout state so it survives tab kill / page reload
+            try {
+                sessionStorage.setItem('checkout_state', JSON.stringify({
+                    step: 2,
+                    name: name,
+                    phone: phone,
+                    city: city || '',
+                    bump: document.getElementById('bump-check').checked,
+                    marketian: document.getElementById('marketian-check').checked,
+                    waLink: document.getElementById('waLink').href,
+                    savedAt: Date.now()
+                }));
+            } catch(e) {}
         }, 800);
     }
 
@@ -463,6 +520,58 @@
             setTimeout(() => { btn.innerText = orig; btn.style.color = ''; }, 2000);
         });
     }
+
+    // Restore checkout state if user returns after leaving to pay
+    (function restoreCheckoutState() {
+        try {
+            const saved = sessionStorage.getItem('checkout_state');
+            if (!saved) return;
+            const state = JSON.parse(saved);
+            if (state.step !== 2) return;
+
+            // Only restore if saved less than 20 minutes ago
+            if (Date.now() - state.savedAt > 20 * 60 * 1000) {
+                sessionStorage.removeItem('checkout_state');
+                return;
+            }
+
+            // Restore form values (hidden but needed for data)
+            document.getElementById('inp-name').value = state.name || '';
+            document.getElementById('inp-phone').value = state.phone || '';
+            document.getElementById('inp-city').value = state.city || '';
+
+            // Restore bump checkboxes
+            const bumpCheck = document.getElementById('bump-check');
+            if (bumpCheck && state.bump) {
+                bumpCheck.checked = true;
+            }
+            const marketianCheck = document.getElementById('marketian-check');
+            if (marketianCheck && state.marketian) {
+                marketianCheck.checked = true;
+            }
+            handleBumpChange();
+
+            // Restore WhatsApp link
+            if (state.waLink) {
+                document.getElementById('waLink').href = state.waLink;
+            }
+
+            // Show payment section, hide form
+            document.getElementById('formCard').style.display = 'none';
+            const mobReview = document.querySelector('.checkout-review.mobile-only');
+            if (mobReview) mobReview.classList.add('force-hidden');
+            document.getElementById('paymentSection').classList.add('visible');
+
+            // Resume timer with remaining time
+            const elapsed = Math.floor((Date.now() - state.savedAt) / 1000);
+            const remaining = Math.max(0, (15 * 60) - elapsed);
+            if (remaining > 0) {
+                startTimer(remaining);
+            } else {
+                document.getElementById('timer').textContent = '00:00';
+            }
+        } catch(e) {}
+    })();
 
     onReady(function() {
         if (window.CAPIBridge) {

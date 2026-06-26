@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /success.html
 Disallow: /success
+Disallow: /success.html
+Disallow: /google-test
+Disallow: /google-test.html
+Disallow: /finance
+Disallow: /finance.html
 
 Sitemap: https://aivideobootcamp.online/sitemap.xml

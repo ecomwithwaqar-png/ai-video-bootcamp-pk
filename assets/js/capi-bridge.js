@@ -21,7 +21,6 @@ console.log('🚀 [CAPIBridge] Script initialized');
 
 window.CAPIBridge = (function () {
     // Configuration
-    const TEST_EVENT_CODE = 'TEST72689'; // Matches the server-side code
 
     function generateEventId() {
         return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
@@ -173,8 +172,7 @@ window.CAPIBridge = (function () {
                 ...customParams,
                 traffic_type: trafficType
             },
-            gclid: gclid || '',
-            test_event_code: TEST_EVENT_CODE
+            gclid: gclid || ''
         };
 
         fetch('/api/capi', {
@@ -204,7 +202,7 @@ window.CAPIBridge = (function () {
                 content_category: 'Online Course',
                 content_ids: ['avb_001'],
                 content_type: 'product',
-                value: 1499,
+                value: 1999,
                 currency: 'PKR'
             });
         },
@@ -218,7 +216,7 @@ window.CAPIBridge = (function () {
                 content_name: 'AI Video Bootcamp',
                 content_category: 'Online Course',
                 currency: 'PKR',
-                value: 1499
+                value: 1999
             }, customParams, normalizedUserData);
         },
         initiateCheckout: function () {
@@ -227,7 +225,7 @@ window.CAPIBridge = (function () {
                 content_ids: ['avb_001'],
                 content_type: 'product',
                 currency: 'PKR',
-                value: 1499
+                value: 1999
             });
         },
         purchase: function (method = 'whatsapp_click') {
@@ -236,7 +234,7 @@ window.CAPIBridge = (function () {
                 content_ids: ['avb_001'],
                 content_type: 'product',
                 currency: 'PKR',
-                value: 1499
+                value: 1999
             }, {
                 payment_method: method
             });

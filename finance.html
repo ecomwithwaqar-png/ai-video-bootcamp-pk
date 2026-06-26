@@ -129,7 +129,7 @@
                     <h3>Campaign Settings</h3>
                     <div class="input-group">
                         <label>Enrollment Price (PKR)</label>
-                        <input type="number" id="price" value="1499" step="100">
+                        <input type="number" id="price" value="1999" step="100">
                     </div>
                     <div class="input-group">
                         <label>Total Enrolled</label>
@@ -221,7 +221,7 @@
             
             targets.forEach(target => {
                 // Projection logic: if target > 50, use the 9000 PKR price point
-                const unitPrice = target <= 50 ? 1499 : 9000;
+                const unitPrice = target <= 50 ? 1999 : 9000;
                 const gross = target * unitPrice;
                 // Assuming scaling ads becomes slightly more expensive (est. CPA increases slightly)
                 const estCPA = cpa > 0 ? cpa * (1 + (target / 2000)) : 500; 
