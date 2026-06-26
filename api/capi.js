@@ -3,7 +3,11 @@ const crypto = require('crypto');
 module.exports = async (req, res) => {
     // 0. Health Check
     if (req.method === 'GET') {
-        return res.status(200).json({ status: 'online', time: new Date().toISOString() });
+        return res.status(200).json({ 
+            status: 'online', 
+            time: new Date().toISOString(),
+            sheets_webhook: SHEETS_WEBHOOK
+        });
     }
 
     if (req.method !== 'POST') {
