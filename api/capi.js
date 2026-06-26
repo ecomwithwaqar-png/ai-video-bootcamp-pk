@@ -1,6 +1,11 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
+    // Config
+    const META_PIXEL_ID = '1622955485439618';
+    const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbynwAaZLJrmDy2FZnuYf9wWqnQtMMm6CpTQdVDIi69gnP0mSpR0yz9QFGLUyYlwCJF2/exec';
+
     // 0. Health Check
     if (req.method === 'GET') {
         return res.status(200).json({ 
@@ -15,11 +20,6 @@ module.exports = async (req, res) => {
     }
 
     const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = req.body;
-    
-    // Config
-    const META_PIXEL_ID = '1622955485439618';
-    const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
-    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbynwAaZLJrmDy2FZnuYf9wWqnQtMMm6CpTQdVDIi69gnP0mSpR0yz9QFGLUyYlwCJF2/exec';
     
 
 
