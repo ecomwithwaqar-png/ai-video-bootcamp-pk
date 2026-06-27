@@ -207,34 +207,22 @@
 
                 <!-- Payment Method Tabs -->
                 <div class="pay-tabs">
-                    <button class="pay-tab active" data-tab="easy" onclick="switchPayTab('easy')">EasyPaisa</button>
+                    <button class="pay-tab active" data-tab="jazz" onclick="switchPayTab('jazz')">JazzCash</button>
+                    <button class="pay-tab" data-tab="easy" onclick="switchPayTab('easy')">EasyPaisa</button>
                     <button class="pay-tab" data-tab="bank" onclick="switchPayTab('bank')">Bank Transfer</button>
-                    <button class="pay-tab" data-tab="jazz" onclick="switchPayTab('jazz')">JazzCash</button>
                 </div>
 
                 <!-- JazzCash -->
-                <div class="pay-card" id="card-jazz">
+                <div class="pay-card active" id="card-jazz">
                     <div class="pay-card-header">
-                        <span class="pay-method-name jazz">JazzCash / Raast</span>
+                        <span class="pay-method-name jazz">JazzCash</span>
                         <span class="verified-chip">✓ VERIFIED</span>
                     </div>
-                    
-                    <!-- QR Code Banner Image -->
-                    <div class="qr-container" style="text-align: center; margin-bottom: 1rem; background: #ffffff; padding: 12px; border-radius: 12px;">
-                        <img src="assets/img/jazzcash-qr.png" alt="JazzCash QR Code" style="max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+                    <div class="pay-row">
+                        <span class="pay-number" id="jazz-num">03180236635</span>
+                        <span class="copy-btn" onclick="copyText('jazz-num', this)">Copy</span>
                     </div>
-
-                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Or Pay via Till ID / USSD:</div>
-                    <div class="pay-row" style="margin-bottom: 0.5rem;">
-                        <span class="pay-number" id="jazz-num">983295455</span>
-                        <span class="copy-btn" onclick="copyText('jazz-num', this)">Copy Till ID</span>
-                    </div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.4;">
-                        <strong>Method 1:</strong> Scan QR code using JazzCash or any banking app.<br>
-                        <strong>Method 2:</strong> Dial <code>*786*10#</code> and enter Till ID.<br>
-                        <strong>Account Name:</strong> FARMAN Shop
-                    </div>
-                    
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">Account: Farman Ali</div>
                     <div class="amount-chip">
                         <span>Amount to Send</span>
                         <span class="payment-amount-display">Rs. 1,999</span>
@@ -242,7 +230,7 @@
                 </div>
 
                 <!-- EasyPaisa -->
-                <div class="pay-card active" id="card-easy">
+                <div class="pay-card" id="card-easy">
                     <div class="pay-card-header">
                         <span class="pay-method-name easy">EasyPaisa</span>
                         <span class="verified-chip">✓ VERIFIED</span>

@@ -44,10 +44,9 @@ To enroll in the AI Video Bootcamp for Rs. 1,999, please use one of the followin
 - Account Number: 03180298090
 - Name: Farman Ali
 
-2. JazzCash / Raast QR & Till ID:
-- Till ID: 983295455
-- Account Name: FARMAN Shop
-- Instruction: Scan the QR code or dial *786*10# and enter Till ID 983295455
+2. JazzCash:
+- Account Number: 03180236635
+- Account Name: Farman Ali
 
 3. Bank Transfer:
 - Account Number: 03180298090
