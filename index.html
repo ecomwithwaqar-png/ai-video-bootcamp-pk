@@ -2345,7 +2345,7 @@
         'use strict';
 
         // Dynamic automatic scarcity system
-        (function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const epochDays = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
             // Cycle over 4 days: 5 spots -> 4 spots -> 3 spots -> 2 spots
             const cycleDay = epochDays % 4;
@@ -2367,7 +2367,7 @@
                 const fillPercent = ((300 - spotsLeft) / 300) * 100;
                 el.style.width = fillPercent + '%';
             });
-        })();
+        });
 
         function copyText(id, btn) {
             const el = document.getElementById(id);
