@@ -430,6 +430,14 @@ html, body { max-width: 100%; overflow-x: hidden; font-family: 'Outfit', sans-se
 }
 
 
+/* Trust line below CTA */
+.cta-trust {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 0.65rem;
+    letter-spacing: 0.2px;
+}
 
 /* Force-hide override — must be last to beat mobile-only !important */
 .force-hidden { display: none !important; }

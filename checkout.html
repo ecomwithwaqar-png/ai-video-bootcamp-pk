@@ -87,10 +87,10 @@
 
         <div class="spots-bar-wrap">
             <div class="spots-labels">
-                <span class="taken">297 students enrolled</span>
-                <span class="left">ONLY 3 SPOTS LEFT</span>
+                <span class="taken"><span class="dyn-enrolled-count">297</span> students enrolled</span>
+                <span class="left">ONLY <span class="dyn-spots-count">3</span> SPOTS LEFT</span>
             </div>
-            <div class="bar-track"><div class="bar-fill"></div></div>
+            <div class="bar-track"><div class="bar-fill dyn-spots-bar" style="width: 99%;"></div></div>
             <div class="spots-warning"><span class="dot-red"></span> Price jumps to Rs. 14,999 after these spots.</div>
         </div>
 
@@ -133,7 +133,7 @@
                 <span class="price-was">Rs. 14,999</span>
             </div>
             <div class="mobile-summary-spots">
-                <span>🔥</span> ONLY 3 SPOTS LEFT AT THIS PRICE
+                <span>🔥</span> ONLY <span class="dyn-spots-count">3</span> SPOTS LEFT AT THIS PRICE
             </div>
         </div>
 
@@ -153,8 +153,13 @@
                 <input type="text" id="inp-city" placeholder="City (e.g. Lahore)" autocomplete="address-level2">
             </div>
 
+            <button class="btn-reveal" onclick="revealPayment()">
+                🔐 Continue to Secure Payment →
+            </button>
+            <div class="cta-trust">🔒 Secure checkout · JazzCash & EasyPaisa accepted · Instant activation</div>
+
             <!-- Order Bump -->
-            <div class="order-bump" id="orderBumpContainer" onclick="toggleOrderBump(event)">
+            <div class="order-bump" id="orderBumpContainer" onclick="toggleOrderBump(event)" style="margin-top: 1.5rem;">
                 <div class="order-bump-header">
                     <input type="checkbox" id="bump-check" class="order-bump-checkbox" onchange="handleBumpChange(event)">
                     <span class="order-bump-badge">SPECIAL UPGRADE</span>
@@ -178,10 +183,6 @@
                     <span class="order-bump-price">+ Rs. 999 (Usually Rs. 4,999)</span>
                 </div>
             </div>
-
-            <button class="btn-reveal" onclick="revealPayment()">
-                🔐 Reveal Payment Details →
-            </button>
         </div>
 
         <!-- Trust Review Widget (Mobile Only - positioned right below the CTA button) -->
@@ -295,6 +296,31 @@
 </div>
 
 <script>
+    // Dynamic automatic scarcity system
+    (function() {
+        const epochDays = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+        // Cycle over 4 days: 5 spots -> 4 spots -> 3 spots -> 2 spots
+        const cycleDay = epochDays % 4;
+        const spotsLeft = 5 - cycleDay;
+        const enrolledCount = 300 - spotsLeft;
+
+        // Update all spots count displays
+        document.querySelectorAll('.dyn-spots-count').forEach(el => {
+            el.textContent = spotsLeft;
+        });
+
+        // Update enrolled count displays
+        document.querySelectorAll('.dyn-enrolled-count').forEach(el => {
+            el.textContent = enrolledCount;
+        });
+
+        // Update spots fill bar width
+        document.querySelectorAll('.dyn-spots-bar').forEach(el => {
+            const fillPercent = ((300 - spotsLeft) / 300) * 100;
+            el.style.width = fillPercent + '%';
+        });
+    })();
+
     const students = [
         { name: "Ali from Karachi", time: "4 minutes ago" },
         { name: "Zeeshan from Rawalpindi", time: "8 minutes ago" },

@@ -143,18 +143,22 @@
             transform: translateY(100%);
         }
 
+        .hero-scroll-prompt {
+            padding: 0 16px;
+        }
+
         @media (max-width: 768px) {
             .sticky-cta-bar {
                 display: block;
             }
             /* Adjust floating WhatsApp button bottom padding to avoid covering the sticky bar */
             .wa-float {
-                bottom: 84px !important;
+                bottom: 96px !important;
                 right: 16px !important;
             }
             /* Align social proof notification to sit side-by-side with WhatsApp float and avoid overlapping */
             .sp-notify {
-                bottom: 84px !important;
+                bottom: 96px !important;
                 left: 16px !important;
                 right: 84px !important;
                 max-width: calc(100% - 100px) !important;
@@ -162,6 +166,9 @@
             }
             .sp-notify.active {
                 transform: translateY(0) !important;
+            }
+            .hero-scroll-prompt {
+                padding: 0 76px !important;
             }
         }
 
@@ -776,9 +783,9 @@
     <nav>
         <a href="./" class="nav-logo"><span>AI</span>Bootcamp</a>
         <div class="nav-r">
-            <div class="nav-spots">🔥 <em>3</em>&nbsp;spots left&nbsp;
+            <div class="nav-spots">🔥 <em class="dyn-spots-count">3</em>&nbsp;spots left&nbsp;
                 <div class="spots-bar">
-                    <div class="spots-fill"></div>
+                    <div class="spots-fill dyn-spots-bar" style="width: 99%;"></div>
                 </div>
             </div>
             <button class="btn-nav" onclick="window.location.href='/checkout'">Enroll Now →</button>
@@ -840,7 +847,7 @@
                 </div>
             </div>
 
-            <p style="font-size:0.82rem;color:#8890b8;text-align:center;margin:0 0 1.5rem;">or browse our best student creations below</p>
+            <p class="hero-scroll-prompt" style="font-size:0.82rem;color:#8890b8;text-align:center;margin:0 0 1.5rem;">or browse our best student creations below</p>
 
             <!-- Subtle divider -->
             <div class="vsl-watch-prompt">See What You Will Learn to Create</div>
@@ -954,7 +961,7 @@
             <!-- Trust pills -->
             <div class="hero-vps">
                 <div class="hvp">✓ Student example: £1,200 UK brand deal*</div>
-                <div class="hvp">✓ Only 3 spots left at launch price</div>
+                <div class="hvp">✓ Only <span class="dyn-spots-count">3</span> spots left at launch price</div>
                 <div class="hvp">✓ No experience needed</div>
             </div>
 
@@ -972,11 +979,11 @@
     <div class="urg">
         <div class="urg-ticker" id="urgTicker">
             <div class="urg-item">⚡ Intro Price: <strong>Rs. 1,999 Only</strong></div>
-            <div class="urg-item"><span>|</span>🔥 <strong>Only 3 of 300 Launch Spots Left</strong></div>
+            <div class="urg-item"><span>|</span>🔥 <strong>Only <span class="dyn-spots-count">3</span> of 300 Launch Spots Left</strong></div>
             <div class="urg-item"><span>|</span>📈 Price goes up <strong>after 300 students</strong></div>
             <div class="urg-item"><span>|</span>🎁 <strong>Free Client Ebook Included</strong></div>
             <div class="urg-item"><span>|</span>⚡ Intro Price: <strong>Rs. 1,999 Only</strong></div>
-            <div class="urg-item"><span>|</span>🔥 <strong>Only 3 of 300 Launch Spots Left</strong></div>
+            <div class="urg-item"><span>|</span>🔥 <strong>Only <span class="dyn-spots-count">3</span> of 300 Launch Spots Left</strong></div>
             <div class="urg-item"><span>|</span>📈 Price goes up <strong>after 300 students</strong></div>
             <div class="urg-item"><span>|</span>🎁 <strong>Free Client Ebook Included</strong></div>
         </div>
@@ -2278,7 +2285,7 @@
                             class="faq-icon">+</span></button>
                     <div class="faq-a">
                         <div class="faq-ai">Yes, absolutely. This is not a fake urgency tactic. The launch price is for
-                            the first 300 students only. 297 have already enrolled. Once we hit 300, the price moves to
+                            the first 300 students only. <span class="dyn-enrolled-count">297</span> have already enrolled. Once we hit 300, the price moves to
                             Rs. 14,999 permanently. If you're reading this, spots are still available. Act now.</div>
                     </div>
                 </div>
@@ -2328,13 +2335,38 @@
             <h2 class="fcta-title" style="font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 15px;">This summer,<br>either scroll it<br>or <em style="color: var(--or); font-style: normal;">build</em> it.</h2>
             <p class="final-urdu" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); margin: 15px 0 25px; line-height: 1.8; color: #fdba74; direction: rtl;">آپ کا فیصلہ — آپ کا مستقبل</p>
             <a href="/checkout" class="btn-big">Enroll Now →</a>
-            <p style="margin-top:14px;font-size:12px;color:var(--muted)">Only 3 spots left at this price · Lifetime access ·
+            <p style="margin-top:14px;font-size:12px;color:var(--muted)">Only <span class="dyn-spots-count">3</span> spots left at this price · Lifetime access ·
                 Private community</p>
         </div>
     </section>
 
     <script>
         'use strict';
+
+        // Dynamic automatic scarcity system
+        (function() {
+            const epochDays = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+            // Cycle over 4 days: 5 spots -> 4 spots -> 3 spots -> 2 spots
+            const cycleDay = epochDays % 4;
+            const spotsLeft = 5 - cycleDay;
+            const enrolledCount = 300 - spotsLeft;
+
+            // Update all spots count displays
+            document.querySelectorAll('.dyn-spots-count').forEach(el => {
+                el.textContent = spotsLeft;
+            });
+
+            // Update enrolled count displays
+            document.querySelectorAll('.dyn-enrolled-count').forEach(el => {
+                el.textContent = enrolledCount;
+            });
+
+            // Update spots fill bar width
+            document.querySelectorAll('.dyn-spots-bar').forEach(el => {
+                const fillPercent = ((300 - spotsLeft) / 300) * 100;
+                el.style.width = fillPercent + '%';
+            });
+        })();
 
         function copyText(id, btn) {
             const el = document.getElementById(id);
@@ -2725,7 +2757,7 @@
         <div class="sticky-cta-inner">
             <div class="sticky-cta-text">
                 <span class="sticky-cta-price"><s style="color:#8890b8;font-weight:500;font-size:0.85rem;">Rs. 14,999</s> Rs. 1,999</span>
-                <span class="sticky-cta-label">⚠️ Only 3 Spots Left!</span>
+                <span class="sticky-cta-label">⚠️ Only <span class="dyn-spots-count">3</span> Spots Left!</span>
             </div>
             <a href="/checkout" class="sticky-cta-btn">Enroll Now →</a>
         </div>
