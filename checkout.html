@@ -322,6 +322,14 @@
             const fillPercent = ((300 - spotsLeft) / 300) * 100;
             el.style.width = fillPercent + '%';
         });
+
+        // Hourly payment tab rotation: EasyPaisa on even hours, JazzCash on odd hours
+        const currentHour = new Date().getHours();
+        if (currentHour % 2 === 0) {
+            switchPayTab('easy');
+        } else {
+            switchPayTab('jazz');
+        }
     });
 
     const students = [
