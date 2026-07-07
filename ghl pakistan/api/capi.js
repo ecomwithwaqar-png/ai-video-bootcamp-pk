@@ -1,6 +1,6 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     // Config specifically for GHL Pakistan standalone deployment
     const META_PIXEL_ID = '27827343320205049';
     
