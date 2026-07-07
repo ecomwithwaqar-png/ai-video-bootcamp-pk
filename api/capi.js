@@ -21,11 +21,13 @@ module.exports = async (req, res) => {
     // Dynamic Pixel & Token configuration based on the originating page URL
     let META_PIXEL_ID = '1622955485439618'; // Default: AVB Pixel
     let META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+    let targetWebhook = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbynwAaZLJrmDy2FZnuYf9wWqnQtMMm6CpTQdVDIi69gnP0mSpR0yz9QFGLUyYlwCJF2/exec';
 
     const isGhl = event_source_url && (event_source_url.includes('ghl') || event_source_url.includes('GHL'));
     if (isGhl) {
         META_PIXEL_ID = '27827343320205049'; // GHL Pixel
         META_ACCESS_TOKEN = process.env.GHL_META_ACCESS_TOKEN || 'EAAVEgSnZBQVcBRx3zyAiTbZCNVJ5Rt1ZAy2R5PObEH5DPO6XteqZCwZBVgdLZCVIZANPBnSS8DHLpZCnvZAcEru8IHGPZAy2GOC7T1XCbXbcymDjOWcN7kuQv3KZBJZCGC5JciKjaNW6HcPMdYEV8McZAZAnmaKm2ACPmZAOQ7pJZCobHC7v8UPRMyU6HcnN1c2FEvnypgZDZD';
+        targetWebhook = process.env.GHL_LEADS_SHEET_WEBHOOK || '';
     }
     
 
@@ -94,7 +96,7 @@ module.exports = async (req, res) => {
     }
 
     // Task 2: Google Sheets (Log Lead)
-    if (event_name === 'Lead' && SHEETS_WEBHOOK) {
+    if (event_name === 'Lead' && targetWebhook) {
         const dataToSubmit = {
             "Conversion Time": new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
             "Name": user_data.fn || user_data.name || custom_data.name || 'N/A',
@@ -114,7 +116,7 @@ module.exports = async (req, res) => {
         };
         
         tasks.push(
-            fetch(SHEETS_WEBHOOK, {
+            fetch(targetWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dataToSubmit)
