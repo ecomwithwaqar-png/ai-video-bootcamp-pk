@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { CAPIBridge } from './lib/capi-bridge'
 import Hero from './components/Hero'
 import TargetAudience from './components/TargetAudience'
-import InstructorInfo from './components/InstructorInfo'
 import CourseCurriculum from './components/CourseCurriculum'
 import Testimonials from './components/Testimonials'
 import FAQs from './components/FAQs'
@@ -83,7 +82,6 @@ function App() {
           <>
             <Hero onNavigate={() => handleNavigate('checkout')} spotsLeft={spotsLeft} enrolledCount={enrolledCount} />
             <TargetAudience />
-            <InstructorInfo />
             <CourseCurriculum onNavigate={() => handleNavigate('checkout')} />
             <Testimonials />
             <FAQs />

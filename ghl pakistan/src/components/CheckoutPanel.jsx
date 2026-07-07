@@ -6,8 +6,7 @@ function CheckoutPanel({ spotsLeft }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [city, setCity] = useState('')
-  const [bump1, setBump1] = useState(false)
-  const [bump2, setBump2] = useState(false)
+  const [bump, setBump] = useState(false)
   const [activeTab, setActiveTab] = useState('jazz')
   
   // Timer state (15 minutes)
@@ -22,9 +21,8 @@ function CheckoutPanel({ spotsLeft }) {
 
   // Calculate pricing dynamically
   const basePrice = 1999
-  const bump1Price = 499
-  const bump2Price = 999
-  const totalPrice = basePrice + (bump1 ? bump1Price : 0) + (bump2 ? bump2Price : 0)
+  const bumpPrice = 999
+  const totalPrice = basePrice + (bump ? bumpPrice : 0)
 
   // Rotate default payment tab based on the hour (even = EasyPaisa, odd = JazzCash)
   useEffect(() => {
@@ -82,8 +80,7 @@ function CheckoutPanel({ spotsLeft }) {
 
     // Build the WhatsApp redirection link
     let offers = ['GHL Masterclass 2.0']
-    if (bump1) offers.push('AI Creator Vault')
-    if (bump2) offers.push('Marketian Ads Course')
+    if (bump) offers.push('Marketian Ads Course')
     const offerName = offers.join(' + ')
 
     const msg = encodeURIComponent(
@@ -258,45 +255,14 @@ function CheckoutPanel({ spotsLeft }) {
                     />
                   </div>
 
-                  {/* Order Bump 1 */}
+                  {/* Order Bump */}
                   <div 
-                    onClick={() => setBump1(!bump1)}
-                    style={{ 
-                      border: '1px dashed var(--accent)', 
-                      borderRadius: '8px', 
-                      padding: '12px', 
-                      background: bump1 ? 'rgba(255, 201, 0, 0.03)' : 'transparent',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      gap: '10px',
-                      alignItems: 'flex-start',
-                      transition: 'background var(--transition-fast)'
-                    }}
-                  >
-                    <input 
-                      type="checkbox" 
-                      checked={bump1} 
-                      onChange={() => {}} // toggled by outer container click
-                      style={{ marginTop: '3px' }} 
-                    />
-                    <div>
-                      <span style={{ fontSize: '0.7rem', background: 'var(--accent)', color: 'var(--text-dark)', padding: '2px 6px', borderRadius: '4px', fontWeight: 800, marginRight: '6px' }}>SPECIAL UPGRADE</span>
-                      <strong style={{ fontSize: '0.82rem', color: '#fff', display: 'block', margin: '4px 0 2px' }}>Add the AI Creator's Cheat Code Vault</strong>
-                      <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
-                        Get 50+ hyper-realistic Midjourney prompts, 5 pre-made premium character assets, client outreach templates, and Fiverr/Upwork gig outlines. Save 85% today!
-                      </p>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 700, display: 'block', marginTop: '4px' }}>+ Rs. 499 (Add to order)</span>
-                    </div>
-                  </div>
-
-                  {/* Order Bump 2 */}
-                  <div 
-                    onClick={() => setBump2(!bump2)}
+                    onClick={() => setBump(!bump)}
                     style={{ 
                       border: '1px dashed var(--primary)', 
                       borderRadius: '8px', 
                       padding: '12px', 
-                      background: bump2 ? 'rgba(186, 110, 238, 0.03)' : 'transparent',
+                      background: bump ? 'rgba(186, 110, 238, 0.03)' : 'transparent',
                       cursor: 'pointer',
                       display: 'flex',
                       gap: '10px',
@@ -306,7 +272,7 @@ function CheckoutPanel({ spotsLeft }) {
                   >
                     <input 
                       type="checkbox" 
-                      checked={bump2} 
+                      checked={bump} 
                       onChange={() => {}} // toggled by outer container click
                       style={{ marginTop: '3px' }} 
                     />
