@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     // Looks for standard environment variables in the GHL Vercel project dashboard,
     // with a secure fallback to the access token you provided.
     const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || 'EAAVEgSnZBQVcBRx3zyAiTbZCNVJ5Rt1ZAy2R5PObEH5DPO6XteqZCwZBVgdLZCVIZANPBnSS8DHLpZCnvZAcEru8IHGPZAy2GOC7T1XCbXbcymDjOWcN7kuQv3KZBJZCGC5JciKjaNW6HcPMdYEV8McZAZAnmaKm2ACPmZAOQ7pJZCobHC7v8UPRMyU6HcnN1c2FEvnypgZDZD';
-    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || ''; // To be populated in GHL Vercel env
+    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbx3EyvQ1rGOMKSrIIzphK0us13Tbmr73rR_2JXJJBTrMNTeBu9Ut3rMbThdda5xwMT35Q/exec';
 
     // 0. Health Check
     if (req.method === 'GET') {
