@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
         return res.status(200).json({ 
             status: 'online', 
             time: new Date().toISOString(),
-            sheets_webhook: SHEETS_WEBHOOK || 'Not Configured'
+            sheets_webhook: SHEETS_WEBHOOK
         });
     }
 
