@@ -1,17 +1,20 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
-    // Config
-    const META_PIXEL_ID = '1622955485439618';
-    const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
-    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbynwAaZLJrmDy2FZnuYf9wWqnQtMMm6CpTQdVDIi69gnP0mSpR0yz9QFGLUyYlwCJF2/exec';
+    // Config specifically for GHL Pakistan standalone deployment
+    const META_PIXEL_ID = '27827343320205049';
+    
+    // Looks for standard environment variables in the GHL Vercel project dashboard,
+    // with a secure fallback to the access token you provided.
+    const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || 'EAAVEgSnZBQVcBRx3zyAiTbZCNVJ5Rt1ZAy2R5PObEH5DPO6XteqZCwZBVgdLZCVIZANPBnSS8DHLpZCnvZAcEru8IHGPZAy2GOC7T1XCbXbcymDjOWcN7kuQv3KZBJZCGC5JciKjaNW6HcPMdYEV8McZAZAnmaKm2ACPmZAOQ7pJZCobHC7v8UPRMyU6HcnN1c2FEvnypgZDZD';
+    const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || ''; // To be populated in GHL Vercel env
 
     // 0. Health Check
     if (req.method === 'GET') {
         return res.status(200).json({ 
             status: 'online', 
             time: new Date().toISOString(),
-            sheets_webhook: SHEETS_WEBHOOK
+            sheets_webhook: SHEETS_WEBHOOK || 'Not Configured'
         });
     }
 
@@ -19,9 +22,9 @@ module.exports = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = req.body;
-    
-    // Helper: SHA256 hashing
+    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = req.body || {};
+
+    // Helper: SHA256 hashing for Meta CAPI
     const hash = (val) => {
         if (!val) return undefined;
         const clean = val.toString().toLowerCase().trim();
@@ -66,7 +69,7 @@ module.exports = async (req, res) => {
             custom_data: {
                 currency: 'PKR',
                 value: custom_data.value || 1999,
-                content_name: 'AI Video Masterclass'
+                content_name: 'GHL AI Marketing Masterclass'
             }
         }]
     };

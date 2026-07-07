@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/capi",
+      "destination": "/api/capi.js"
+    }
+  ],
+  "cleanUrls": true
+}
