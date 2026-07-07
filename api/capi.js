@@ -1,9 +1,6 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
-    // Config
-    const META_PIXEL_ID = '1622955485439618';
-    const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
     const SHEETS_WEBHOOK = process.env.LEADS_SHEET_WEBHOOK || 'https://script.google.com/macros/s/AKfycbynwAaZLJrmDy2FZnuYf9wWqnQtMMm6CpTQdVDIi69gnP0mSpR0yz9QFGLUyYlwCJF2/exec';
 
     // 0. Health Check
@@ -19,7 +16,17 @@ module.exports = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = req.body;
+    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = req.body || {};
+    
+    // Dynamic Pixel & Token configuration based on the originating page URL
+    let META_PIXEL_ID = '1622955485439618'; // Default: AVB Pixel
+    let META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+
+    const isGhl = event_source_url && (event_source_url.includes('ghl') || event_source_url.includes('GHL'));
+    if (isGhl) {
+        META_PIXEL_ID = '27827343320205049'; // GHL Pixel
+        META_ACCESS_TOKEN = process.env.GHL_META_ACCESS_TOKEN || 'EAAVEgSnZBQVcBRx3zyAiTbZCNVJ5Rt1ZAy2R5PObEH5DPO6XteqZCwZBVgdLZCVIZANPBnSS8DHLpZCnvZAcEru8IHGPZAy2GOC7T1XCbXbcymDjOWcN7kuQv3KZBJZCGC5JciKjaNW6HcPMdYEV8McZAZAnmaKm2ACPmZAOQ7pJZCobHC7v8UPRMyU6HcnN1c2FEvnypgZDZD';
+    }
     
 
 
@@ -68,7 +75,7 @@ module.exports = async (req, res) => {
             custom_data: {
                 currency: 'PKR',
                 value: custom_data.value || 1999,
-                content_name: 'AI Video Masterclass'
+                content_name: custom_data.content_name || (isGhl ? 'GHL AI Marketing Masterclass' : 'AI Video Masterclass')
             }
         }]
     };
