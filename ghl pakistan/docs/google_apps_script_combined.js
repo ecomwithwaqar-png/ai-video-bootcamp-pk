@@ -54,7 +54,7 @@ function doPost(e) {
     const lastCol = sheet.getLastColumn();
     const headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
 
-    // Map incoming lead parameters to sheet columns
+    // Map incoming lead parameters to sheet columns robustly
     const newRow = headers.map(function(header) {
       const h = header.toString().trim().toLowerCase();
       if (h === "payment verified") return false;
@@ -64,30 +64,31 @@ function doPost(e) {
         case "conversion time":
           return data.timestamp ? new Date(data.timestamp).toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }) : new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
         case "order id":
-          return data.orderId || "";
+          return data["Event ID"] || data["Order ID"] || data.orderId || data.eventId || "";
         case "name":
-          return data.name || "";
+          return data.Name || data.name || "";
         case "phone":
-          return data.whatsapp || "";
+          return data.Phone || data.phone || data.whatsapp || "";
         case "city":
-          return data.city || "";
+          return data.City || data.city || "";
         case "order bump":
-          return data.orderBump || "No";
+          return data["Order Bump"] || data["Upsell Selected"] || data.orderBump || "No";
         case "total price":
-          return data.totalPrice || "";
+          return data.Value || data["Total Price"] || data.totalPrice || data.value || "";
         case "fbc":
           return data.fbc || "";
         case "fbp":
           return data.fbp || "";
         case "ip":
-          return data.ip || e.parameter.ip || "";
+          return data.IP || data.ip || e.parameter.ip || "";
         case "ua":
-          return data.ua || "";
+          return data.UA || data.ua || "";
         case "google click id":
-          return data.gclid || "";
+          return data["Google Click ID"] || data.gclid || "";
         case "ttclid":
           return data.ttclid || "";
         default:
+          if (data[header] !== undefined) return data[header];
           const dataKey = Object.keys(data).find(key => key.toLowerCase() === h);
           return dataKey ? data[dataKey] : "";
       }
@@ -124,16 +125,16 @@ function doPost(e) {
     if (META_ACCESS_TOKEN && META_PIXEL_ID) {
       try {
         const leadUser = {
-          name: data.name || "",
-          phone: data.whatsapp || "",
-          eventId: data.orderId || "",
-          city: data.city || "",
-          value: data.totalPrice || 1999,
+          name: data.Name || data.name || "",
+          phone: data.Phone || data.phone || data.whatsapp || "",
+          eventId: data["Event ID"] || data["Order ID"] || data.orderId || data.eventId || "",
+          city: data.City || data.city || "",
+          value: data.Value || data["Total Price"] || data.totalPrice || data.value || 1999,
           fbc: data.fbc || "",
           fbp: data.fbp || "",
-          ip: data.ip || clientIp || "",
-          ua: data.ua || "",
-          url: data.url || "https://ghl-pakistan.vercel.app"
+          ip: data.IP || data.ip || clientIp || "",
+          ua: data.UA || data.ua || "",
+          url: data.URL || data.url || "https://ghl-pakistan.vercel.app"
         };
         Logger.log('Data:');
         Logger.log(JSON.stringify(leadUser));
@@ -286,7 +287,7 @@ function sendEventToMeta(eventName, u) {
   if (u.ua && u.ua !== 'N/A')   userData.client_user_agent = u.ua;
   if (hashedPhone) userData.external_id  = hashedPhone;
 
-  // Custom data logic adjusted specifically for GHL Pakistan pricing and name
+  // Custom data logic adjusted specifically for GHL pricing and name
   const valAmt = Number(u.value) || 1999;
   const contentName = valAmt > 1999 ? 'GHL Masterclass + Facebook Ads Upgrade' : 'GHL AI Marketing Masterclass';
 
