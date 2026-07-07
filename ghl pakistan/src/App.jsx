@@ -1,121 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState, useEffect } from 'react'
+import { CAPIBridge } from './lib/capi-bridge'
+import Hero from './components/Hero'
+import TargetAudience from './components/TargetAudience'
+import InstructorInfo from './components/InstructorInfo'
+import CourseCurriculum from './components/CourseCurriculum'
+import Testimonials from './components/Testimonials'
+import FAQs from './components/FAQs'
+import Footer from './components/Footer'
+import CheckoutPanel from './components/CheckoutPanel'
+import StickyCTA from './components/StickyCTA'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState('landing') // 'landing' or 'checkout'
+  const [spotsLeft, setSpotsLeft] = useState(3)
+  const [enrolledCount, setEnrolledCount] = useState(297)
+
+  // Scarcity simulation matching root logic (cyclical based on date)
+  useEffect(() => {
+    const epochDays = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+    const cycleDay = epochDays % 4; // 0, 1, 2, 3
+    const calculatedSpots = 5 - cycleDay; // 5, 4, 3, 2
+    setSpotsLeft(calculatedSpots);
+    setEnrolledCount(300 - calculatedSpots);
+  }, []);
+
+  // Track PageView and ViewContent on initial load
+  useEffect(() => {
+    CAPIBridge.pageView();
+    // Fire ViewContent 500ms later to avoid events clashing
+    const timer = setTimeout(() => {
+      CAPIBridge.viewContent();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Toggle page state with tracking and scroll reset
+  const handleNavigate = (targetPage) => {
+    setPage(targetPage);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    if (targetPage === 'checkout') {
+      CAPIBridge.initiateCheckout();
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app-layout">
+      {/* Glow Orbs */}
+      <div className="glow-orb" style={{ top: '10%', left: '-10%', width: '400px', height: '400px', background: 'var(--primary-glow)' }}></div>
+      <div className="glow-orb" style={{ top: '45%', right: '-10%', width: '500px', height: '500px', background: 'var(--secondary-glow)' }}></div>
+      <div className="glow-orb" style={{ bottom: '5%', left: '10%', width: '450px', height: '450px', background: 'var(--primary-glow)' }}></div>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      {/* Navbar */}
+      <nav>
+        <div className="container nav-container">
+          <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleNavigate('landing'); }}>
+            <span>GHL</span>Pakistan
+          </a>
+          <div className="nav-actions">
+            <div className="spots-badge desktop-only">
+              <span>🔥 ONLY {spotsLeft} SPOTS LEFT</span>
+              <div className="spots-bar">
+                <div className="spots-fill" style={{ width: `${(enrolledCount / 300) * 100}%` }}></div>
+              </div>
+            </div>
+            {page === 'landing' ? (
+              <button className="btn-nav" onClick={() => handleNavigate('checkout')}>
+                Enroll Now →
+              </button>
+            ) : (
+              <button className="btn-nav" style={{ background: 'transparent', border: '1px solid var(--border-color)', boxShadow: 'none' }} onClick={() => handleNavigate('landing')}>
+                ← Back
+              </button>
+            )}
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </nav>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      {/* Main Content */}
+      <div className="main-content-wrapper" style={{ paddingTop: '72px' }}>
+        {page === 'landing' ? (
+          <>
+            <Hero onNavigate={() => handleNavigate('checkout')} spotsLeft={spotsLeft} enrolledCount={enrolledCount} />
+            <TargetAudience />
+            <InstructorInfo />
+            <CourseCurriculum onNavigate={() => handleNavigate('checkout')} />
+            <Testimonials />
+            <FAQs />
+          </>
+        ) : (
+          <CheckoutPanel spotsLeft={spotsLeft} enrolledCount={enrolledCount} />
+        )}
+      </div>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Mobile Floating Sticky CTA */}
+      {page === 'landing' && (
+        <StickyCTA onNavigate={() => handleNavigate('checkout')} spotsLeft={spotsLeft} />
+      )}
+    </div>
   )
 }
 
