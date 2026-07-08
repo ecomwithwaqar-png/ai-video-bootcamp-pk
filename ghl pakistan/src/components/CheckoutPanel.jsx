@@ -138,7 +138,7 @@ function CheckoutPanel({ spotsLeft }) {
   }
 
   return (
-    <section style={{ background: 'var(--bg-dark)', padding: '40px 0 80px' }}>
+    <section className="checkout-section">
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <div className="checkout-grid-container">
@@ -227,7 +227,7 @@ function CheckoutPanel({ spotsLeft }) {
               <div className="checkout-card active">
                 <div className="card-title">Step 1 of 2 — Your Enrollment Details</div>
                 
-                <form onSubmit={handleRevealPayment} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <form onSubmit={handleRevealPayment} className="checkout-form-steps">
                   
                   {/* Name */}
                   <div className="form-group">
