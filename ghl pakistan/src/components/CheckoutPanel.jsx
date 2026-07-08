@@ -64,9 +64,9 @@ function CheckoutPanel({ spotsLeft }) {
 
     // Pakistani WhatsApp number validation
     const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '') // strip spaces, hyphens, pluses
-    const pkPhoneRegex = /^03\d{9}$|^923\d{9}$/
+    const pkPhoneRegex = /^(03|923|3)\d{9}$/
     if (!pkPhoneRegex.test(cleanPhone)) {
-      alert('Please enter a valid Pakistani WhatsApp number starting with 03 (e.g., 03001234567).')
+      alert('Please enter a valid Pakistani WhatsApp number (e.g., 03001234567).')
       return
     }
 
@@ -76,6 +76,8 @@ function CheckoutPanel({ spotsLeft }) {
       formattedPhone = '+92' + cleanPhone.substring(1)
     } else if (cleanPhone.startsWith('923')) {
       formattedPhone = '+' + cleanPhone
+    } else if (cleanPhone.startsWith('3') && cleanPhone.length === 10) {
+      formattedPhone = '+92' + cleanPhone
     }
 
     // Build the WhatsApp redirection link
