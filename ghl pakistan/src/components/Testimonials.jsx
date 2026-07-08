@@ -2,7 +2,7 @@ import React from 'react'
 
 function Testimonials() {
   const reviews = [
-    { name: 'Hamza', city: 'Faisalabad', quote: "Best Rs. 1,999 I've ever spent. The client outreach scripts alone got me a $150 client on WhatsApp in 3 days!", badge: '✓ Earning Verified' },
+    { name: 'Hamza', city: 'Faisalabad', quote: "Best Rs. 2,499 I've ever spent. The client outreach scripts alone got me a $150 client on WhatsApp in 3 days!", badge: '✓ Earning Verified' },
     { name: 'Zeeshan', city: 'Rawalpindi', quote: "GHL automation is a game changer. I set up an automated lead booking system for a real estate client in Dubai and charged $400 upfront + $100 recurring.", badge: '✓ Active Agency' },
     { name: 'Usman', city: 'Faisalabad', quote: "As a beginner, I was lost. The Facebook Ads Blueprint and outreach templates gave me exact step-by-step guidance. Already closed my first client!", badge: '✓ First Client Closed' },
     { name: 'Bilal', city: 'Lahore', quote: "I work 9-5 and only get 2 hours a day. The pre-recorded video lessons are short and straight to the point. Highly recommended.", badge: '✓ Side Income Built' },

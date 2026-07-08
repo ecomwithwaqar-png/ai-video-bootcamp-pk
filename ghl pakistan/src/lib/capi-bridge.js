@@ -165,7 +165,7 @@ export const CAPIBridge = {
       content_category: 'Online Course',
       content_ids: ['ghl_001'],
       content_type: 'product',
-      value: 1999,
+      value: 2499,
       currency: 'PKR'
     });
   },
@@ -178,10 +178,10 @@ export const CAPIBridge = {
       content_name: 'GHL AI Marketing Masterclass',
       content_category: 'Online Course',
       currency: 'PKR',
-      value: 1999
+      value: 2499
     }, customParams, normalizedUserData);
   },
-  initiateCheckout: function (value = 1999) {
+  initiateCheckout: function (value = 2499) {
     track('InitiateCheckout', {
       content_name: 'GHL AI Marketing Masterclass',
       content_ids: ['ghl_001'],
@@ -190,7 +190,7 @@ export const CAPIBridge = {
       value: value
     });
   },
-  purchase: function (value = 1999, method = 'whatsapp_click') {
+  purchase: function (value = 2499, method = 'whatsapp_click') {
     track('Purchase', {
       content_name: 'GHL AI Marketing Masterclass',
       content_ids: ['ghl_001'],

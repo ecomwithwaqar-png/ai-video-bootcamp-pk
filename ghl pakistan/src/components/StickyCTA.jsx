@@ -50,7 +50,7 @@ function StickyCTA({ onNavigate, spotsLeft }) {
       {/* Price & Scarcity */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <span style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--accent)', lineHeight: 1.2 }}>
-          Rs. 1,999
+          Rs. 2,499
         </span>
         <span style={{ fontSize: '0.62rem', color: '#fca5a5', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           🔥 Only {spotsLeft} spots left!

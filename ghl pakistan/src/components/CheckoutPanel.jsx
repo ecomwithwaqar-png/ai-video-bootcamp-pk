@@ -20,7 +20,7 @@ function CheckoutPanel({ spotsLeft }) {
   const [waHref, setWaHref] = useState('#')
 
   // Calculate pricing dynamically
-  const basePrice = 1999
+  const basePrice = 2499
   const bumpPrice = 999
   const totalPrice = basePrice + (bump ? bumpPrice : 0)
 
@@ -164,7 +164,7 @@ function CheckoutPanel({ spotsLeft }) {
             {/* Value Proposition */}
             <div className="glass-card" style={{ padding: '16px 20px', background: 'rgba(186, 110, 238, 0.02)' }}>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-light)', lineHeight: 1.5 }}>
-                💡 <strong>Return on Investment:</strong> Rs. 1,999 for GoHighLevel automation skillsets that digital agencies charge international clients <strong>$1,000 – $2,500/month</strong> for.
+                💡 <strong>Return on Investment:</strong> Rs. 2,499 for GoHighLevel automation skillsets that digital agencies charge international clients <strong>$1,000 – $2,500/month</strong> for.
               </p>
             </div>
 
@@ -194,7 +194,7 @@ function CheckoutPanel({ spotsLeft }) {
             {/* Testimonial Widget */}
             <div className="glass-card" style={{ borderLeft: '4px solid var(--primary)', background: 'rgba(255, 255, 255, 0.015)' }}>
               <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'var(--text-light)', lineHeight: 1.5 }}>
-                "Best Rs. 1,999 I've ever spent. GHL lead search tools showed me hundreds of client emails in Faisalabad. closed my first dentist client in 4 days!"
+                "Best Rs. 2,499 I've ever spent. GHL lead search tools showed me hundreds of client emails in Faisalabad. closed my first dentist client in 4 days!"
               </p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', fontSize: '0.72rem', fontWeight: 600 }}>
                 <span style={{ color: 'var(--text-muted)' }}>— Hamza from Faisalabad</span>

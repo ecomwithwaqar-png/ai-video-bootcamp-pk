@@ -68,7 +68,7 @@ export default async function handler(req, res) {
             },
             custom_data: {
                 currency: 'PKR',
-                value: custom_data.value || 1999,
+                value: custom_data.value || 2499,
                 content_name: 'GHL AI Marketing Masterclass'
             }
         }]
@@ -103,8 +103,8 @@ export default async function handler(req, res) {
             "Google Click ID": req.body.gclid || custom_data.gclid || '',
             "ttclid": user_data.ttclid || '',
             "Traffic Type": custom_data.traffic_type || 'paid',
-            "Value": custom_data.value || 1999,
-            "Upsell Selected": (custom_data.value && custom_data.value > 1999) ? 'Yes' : 'No'
+            "Value": custom_data.value || 2499,
+            "Upsell Selected": (custom_data.value && custom_data.value > 2499) ? 'Yes' : 'No'
         };
         
         tasks.push(

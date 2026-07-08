@@ -129,7 +129,7 @@ function doPost(e) {
           phone: data.Phone || data.phone || data.whatsapp || "",
           eventId: data["Event ID"] || data["Order ID"] || data.orderId || data.eventId || "",
           city: data.City || data.city || "",
-          value: data.Value || data["Total Price"] || data.totalPrice || data.value || 1999,
+          value: data.Value || data["Total Price"] || data.totalPrice || data.value || 2499,
           fbc: data.fbc || "",
           fbp: data.fbp || "",
           ip: data.IP || data.ip || clientIp || "",
@@ -288,8 +288,8 @@ function sendEventToMeta(eventName, u) {
   if (hashedPhone) userData.external_id  = hashedPhone;
 
   // Custom data logic adjusted specifically for GHL pricing and name
-  const valAmt = Number(u.value) || 1999;
-  const contentName = valAmt > 1999 ? 'GHL Masterclass + Facebook Ads Upgrade' : 'GHL AI Marketing Masterclass';
+  const valAmt = Number(u.value) || 2499;
+  const contentName = valAmt > 2499 ? 'GHL Masterclass + Facebook Ads Upgrade' : 'GHL AI Marketing Masterclass';
 
   const payload = {
     data: [{

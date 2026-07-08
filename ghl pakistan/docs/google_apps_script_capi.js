@@ -119,8 +119,8 @@ function sendPurchaseToMeta(u) {
   if (hashedPhone) userData.external_id  = hashedPhone;
 
   // Custom data logic for GHL pricing
-  const orderTotal = Number(u.value) || 1999;
-  const contentName = orderTotal > 1999 ? 'GHL Masterclass + Facebook Ads Upgrade' : 'GHL AI Marketing Masterclass';
+  const orderTotal = Number(u.value) || 2499;
+  const contentName = orderTotal > 2499 ? 'GHL Masterclass + Facebook Ads Upgrade' : 'GHL AI Marketing Masterclass';
 
   const payload = {
     data: [{
@@ -182,7 +182,7 @@ function testMeta() {
     ip:      '1.1.1.1',
     ua:      'Mozilla/5.0 Chrome/120.0',
     url:     'https://ghl-pakistan.vercel.app',
-    value:   1999
+    value:   2499
   });
   Logger.log('GHL Test Result: ' + result.getContentText());
 }
