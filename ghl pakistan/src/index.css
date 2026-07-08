@@ -46,6 +46,12 @@ html, body {
   overflow-x: hidden;
 }
 
+.app-layout {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -493,26 +499,27 @@ section {
 
   /* Sticky CTA Bar */
   .mobile-sticky-cta {
-    bottom: 12px !important;
-    left: 12px !important;
-    right: 12px !important;
-    padding: 10px 14px !important;
-    border-radius: 12px !important;
-    gap: 8px !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    right: 16px !important;
+    padding: 14px 20px !important; /* Taller, more premium spacing */
+    border-radius: 16px !important;
+    gap: 12px !important;
   }
   
   .mobile-sticky-cta button {
-    padding: 10px 14px !important;
-    font-size: 0.78rem !important;
+    padding: 13px 20px !important; /* Taller button height */
+    font-size: 0.85rem !important;
+    border-radius: 10px !important;
   }
   
   .mobile-sticky-cta span:first-child {
-    font-size: 1.05rem !important;
+    font-size: 1.15rem !important;
   }
   
   .mobile-sticky-cta span:last-child {
-    font-size: 0.55rem !important;
-    letter-spacing: 0.2px !important;
+    font-size: 0.6rem !important;
+    letter-spacing: 0.3px !important;
   }
 
   /* WhatsApp Widget */
