@@ -87,8 +87,8 @@ function CheckoutPanel({ spotsLeft }) {
       `Hi! I want to enroll in the ${offerName}.\n\nName: ${name}\nPhone: ${formattedPhone}\nCity: ${city || 'Not specified'}\n\nI am sending the payment of Rs. ${totalPrice} now. Please confirm my spot.`
     )
     
-    // Support WhatsApp recipient: 923180298090
-    setWaHref(`https://wa.me/923180298090?text=${msg}`)
+    // Support WhatsApp recipient: 923255090258
+    setWaHref(`https://wa.me/923255090258?text=${msg}`)
 
     // Fire CAPI Lead event
     CAPIBridge.lead({
@@ -459,7 +459,7 @@ function CheckoutPanel({ spotsLeft }) {
                 <div style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '4px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Already sent the screenshot? </span>
                   <a 
-                    href="https://wa.me/923180298090?text=Hi,%20I%20have%20already%20sent%20the%20payment%20screenshot.%20Please%20approve%20my%20course%20enrollment." 
+                    href="https://wa.me/923255090258?text=Hi,%20I%20have%20already%20sent%20the%20payment%20screenshot.%20Please%20approve%20my%20course%20enrollment." 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'underline' }}

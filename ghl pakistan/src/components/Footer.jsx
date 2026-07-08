@@ -8,7 +8,7 @@ function Footer() {
         {/* Support Section */}
         <div style={{ marginBottom: '24px' }}>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', fontWeight: 700 }}>
-            Customer Support: <a href="https://wa.me/923000756971" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>0300 0756971</a> (WhatsApp Only!)
+            Customer Support: <a href="https://wa.me/923255090258" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>0325 5090258</a> (WhatsApp Only!)
           </p>
         </div>
 
