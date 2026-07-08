@@ -111,7 +111,7 @@ function App() {
       )}
 
       {/* Floating WhatsApp Help Widget */}
-      <WhatsAppWidget />
+      {page === 'landing' && <WhatsAppWidget />}
     </div>
   )
 }
