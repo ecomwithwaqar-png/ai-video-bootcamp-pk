@@ -2,29 +2,29 @@ import React from 'react'
 
 function Hero({ onNavigate, spotsLeft, enrolledCount }) {
   return (
-    <section className="hero-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 40px' }}>
+    <section className="hero-section">
       <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
         
         {/* Scarcity Banner */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255, 201, 0, 0.05)', border: '1px solid rgba(255, 201, 0, 0.2)', padding: '6px 16px', borderRadius: '99px', marginBottom: '24px' }}>
-          <span style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 800 }}>⚡ DISCOUNT ENDING SOON! ENROLL TODAY!</span>
+        <div className="hero-badge">
+          <span>⚡ DISCOUNT ENDING SOON! ENROLL TODAY!</span>
         </div>
 
         {/* Headlines */}
-        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.15, fontWeight: 900, maxWidth: '960px', margin: '0 auto 16px' }}>
-          Build a Long-Term Career with AI — <span style={{ color: 'var(--primary)' }}>No Investment Required!</span>
+        <h1 className="hero-title">
+          Build a Long-Term Career with AI — <span>No Investment Required!</span>
         </h1>
         
-        <p style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', color: 'var(--text-light)', fontWeight: 600, maxWidth: '800px', margin: '0 auto 20px' }}>
+        <p className="hero-subtitle">
           Master AI Marketing Automation and Start Earning $1,000 - $3,500/Month as a beginner.
         </p>
 
         {/* Urdu Sub-headline */}
-        <p dir="rtl" className="hero-urdu-subtitle" style={{ fontFamily: 'var(--font-urdu)', fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', color: 'var(--primary)', lineHeight: 1.8, margin: '10px auto 24px', maxWidth: '750px', textShadow: '0 0 20px rgba(186, 110, 238, 0.3)' }}>
+        <p dir="rtl" className="hero-urdu-subtitle">
           گھر بیٹھے اپنے موبائل اور لیپ ٹاپ سے AI مارکیٹنگ سیکھیں اور ڈالرز میں کمانا شروع کریں!
         </p>
 
-        <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '680px', margin: '0 auto 32px', lineHeight: 1.6 }}>
+        <p className="hero-desc">
           Even if you’re a complete beginner and have never done this before. We will guide you step-by-step on how to learn and sell automation services to international clients and make $1k – $3K+ by working just 2 – 3 hours a day from your home.
         </p>
 
@@ -32,24 +32,9 @@ function Hero({ onNavigate, spotsLeft, enrolledCount }) {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
           <button 
             onClick={onNavigate}
-            style={{
-              background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-              color: '#fff',
-              fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-              fontWeight: 800,
-              padding: '18px 36px',
-              borderRadius: '12px',
-              border: 'none',
-              cursor: 'pointer',
-              boxShadow: '0 8px 24px rgba(186, 110, 238, 0.25)',
-              transition: 'transform var(--transition-fast), opacity var(--transition-fast)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            className="hero-cta-btn"
           >
-            Enroll at Discounted Price Now
+            Enroll at Discounted Price Now 🚀
           </button>
           
           {/* Trust proof widget */}

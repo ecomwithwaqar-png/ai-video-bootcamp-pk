@@ -8,6 +8,7 @@ import FAQs from './components/FAQs'
 import Footer from './components/Footer'
 import CheckoutPanel from './components/CheckoutPanel'
 import StickyCTA from './components/StickyCTA'
+import WhatsAppWidget from './components/WhatsAppWidget'
 
 function App() {
   const [page, setPage] = useState('landing') // 'landing' or 'checkout'
@@ -57,14 +58,22 @@ function App() {
             <span>GHL</span>Pakistan
           </a>
           <div className="nav-actions">
+            {/* Desktop Spots Badge */}
             <div className="spots-badge desktop-only">
               <span>🔥 ONLY {spotsLeft} SPOTS LEFT</span>
               <div className="spots-bar">
-                <div className="spots-fill" style={{ width: `${(enrolledCount / 300) * 100}%` }}></div>
+                <div className="spots-fill" style={{ width: `${((300 - spotsLeft) / 300) * 100}%` }}></div>
               </div>
             </div>
+
+            {/* Mobile Compact Spots Badge */}
+            <div className="spots-badge mobile-only" style={{ background: 'rgba(255, 201, 0, 0.08)', borderColor: 'rgba(255, 201, 0, 0.35)', padding: '5px 10px', fontSize: '0.72rem', borderRadius: '99px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span className="pulsing-dot" style={{ width: '6px', height: '6px', background: 'var(--accent)', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 8px var(--accent)', animation: 'dotPulse 1.5s infinite' }}></span>
+              <span style={{ fontWeight: 800 }}>{spotsLeft} SPOTS LEFT</span>
+            </div>
+
             {page === 'landing' ? (
-              <button className="btn-nav" onClick={() => handleNavigate('checkout')}>
+              <button className="btn-nav desktop-only" onClick={() => handleNavigate('checkout')}>
                 Enroll Now →
               </button>
             ) : (
@@ -98,6 +107,9 @@ function App() {
       {page === 'landing' && (
         <StickyCTA onNavigate={() => handleNavigate('checkout')} spotsLeft={spotsLeft} />
       )}
+
+      {/* Floating WhatsApp Help Widget */}
+      <WhatsAppWidget />
     </div>
   )
 }

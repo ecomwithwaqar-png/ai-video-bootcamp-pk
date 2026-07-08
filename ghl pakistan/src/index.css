@@ -198,16 +198,16 @@ section {
 
 /* Scroll prompt / Disclaimers */
 .disclaimer-box {
-  background: rgba(255, 201, 0, 0.03);
-  border: 1px solid rgba(255, 201, 0, 0.15);
-  border-radius: 8px;
-  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 14px 20px;
+  border-radius: 12px;
   font-size: 0.78rem;
-  color: var(--text-muted);
-  max-width: 720px;
-  margin: 1.5rem auto 0;
-  text-align: center;
   line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 780px;
+  margin: 40px auto 0;
+  text-align: center;
 }
 
 .disclaimer-box strong {
@@ -270,4 +270,158 @@ section {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
+}
+
+/* ─── HERO SECTION STYLING ────────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 60px;
+  background: radial-gradient(circle at 50% 20%, rgba(186, 110, 238, 0.06) 0%, transparent 60%);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 201, 0, 0.05);
+  border: 1px solid rgba(255, 201, 0, 0.2);
+  padding: 8px 18px;
+  border-radius: 99px;
+  margin-bottom: 24px;
+  animation: pulseBorder 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseBorder {
+  0% { border-color: rgba(255, 201, 0, 0.15); box-shadow: 0 0 4px rgba(255, 201, 0, 0.05); }
+  100% { border-color: rgba(255, 201, 0, 0.45); box-shadow: 0 0 12px rgba(255, 201, 0, 0.15); }
+}
+
+.hero-badge span {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.15;
+  font-weight: 900;
+  max-width: 920px;
+  margin: 0 auto 20px;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-light);
+  font-weight: 600;
+  max-width: 780px;
+  margin: 0 auto 24px;
+  line-height: 1.4;
+}
+
+.hero-urdu-subtitle {
+  font-family: var(--font-urdu);
+  font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+  color: var(--primary);
+  line-height: 1.8;
+  margin: 16px auto 28px;
+  max-width: 750px;
+  text-shadow: 0 0 24px rgba(186, 110, 238, 0.45);
+  font-weight: 500;
+}
+
+.hero-desc {
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto 36px;
+  line-height: 1.65;
+}
+
+.hero-cta-btn {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #fff;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 800;
+  padding: 16px 38px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(186, 110, 238, 0.25);
+  transition: all var(--transition-fast) cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: ctaPulse 2s infinite ease-in-out;
+}
+
+@keyframes ctaPulse {
+  0% { transform: scale(1); box-shadow: 0 8px 24px rgba(186, 110, 238, 0.25); }
+  50% { transform: scale(1.02); box-shadow: 0 12px 36px rgba(186, 110, 238, 0.45); }
+  100% { transform: scale(1); box-shadow: 0 8px 24px rgba(186, 110, 238, 0.25); }
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(186, 110, 238, 0.45);
+}
+
+/* ─── DISPLAY UTILITIES ──────────────────────────────────────────────── */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+/* ─── SLIDE-UP ANIMATIONS ────────────────────────────────────────────── */
+@keyframes slideUp {
+  from {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ─── DOT-PULSE ANIMATIONS ───────────────────────────────────────────── */
+@keyframes dotPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 4px var(--accent);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    box-shadow: 0 0 10px var(--accent);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 4px var(--accent);
+    opacity: 1;
+  }
 }
