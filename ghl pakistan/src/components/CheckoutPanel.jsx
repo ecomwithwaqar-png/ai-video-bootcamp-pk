@@ -141,7 +141,7 @@ function CheckoutPanel({ spotsLeft }) {
     <section style={{ background: 'var(--bg-dark)', padding: '40px 0 80px' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '32px' }} className="checkout-grid-container">
+        <div className="checkout-grid-container">
           
           {/* LEFT PANEL: Offer Information */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

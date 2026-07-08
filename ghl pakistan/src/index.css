@@ -242,6 +242,12 @@ section {
   gap: 32px;
 }
 
+.checkout-grid-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+}
+
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -542,5 +548,11 @@ section {
     width: 270px;
     bottom: 60px;
     right: 0;
+  }
+
+  /* Checkout Grid Override */
+  .checkout-grid-container {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
 }
