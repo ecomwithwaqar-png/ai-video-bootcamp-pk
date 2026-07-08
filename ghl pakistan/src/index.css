@@ -555,4 +555,10 @@ section {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
   }
+  .checkout-info-panel {
+    order: 2 !important;
+  }
+  .checkout-form-panel {
+    order: 1 !important;
+  }
 }

@@ -144,7 +144,7 @@ function CheckoutPanel({ spotsLeft }) {
         <div className="checkout-grid-container">
           
           {/* LEFT PANEL: Offer Information */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div className="checkout-info-panel" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
             {/* Scarcity Banner */}
             <div className="glass-card" style={{ borderLeft: '4px solid var(--accent)', padding: '16px 20px', background: 'rgba(255, 201, 0, 0.02)' }}>
@@ -205,7 +205,7 @@ function CheckoutPanel({ spotsLeft }) {
           </div>
 
           {/* RIGHT PANEL: Checkout Steps */}
-          <div>
+          <div className="checkout-form-panel">
             
             {step === 1 ? (
               /* STEP 1: LEAD FORM */
