@@ -224,101 +224,69 @@ function CheckoutPanel({ spotsLeft }) {
             
             {step === 1 ? (
               /* STEP 1: LEAD FORM */
-              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '20px', background: 'rgba(255, 255, 255, 0.015)', borderColor: 'rgba(186, 110, 238, 0.15)' }}>
-                <div>
-                  <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '4px' }}>Step 1 of 2 — Enrollment Details</h3>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Enter your details to create your student account.</p>
-                </div>
+              <div className="checkout-card active">
+                <div className="card-title">Step 1 of 2 — Your Enrollment Details</div>
                 
                 <form onSubmit={handleRevealPayment} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   
                   {/* Name */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.82rem', color: 'var(--text-light)', fontWeight: 600 }}>Full Name</label>
+                  <div className="form-group">
+                    <label>Full Name</label>
                     <input 
                       type="text" 
-                      placeholder="e.g. Muhammad Ali" 
+                      placeholder="Full Name (e.g. Muhammad Ali)" 
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px', color: '#fff', fontSize: '0.9rem' }}
                       required
                     />
                   </div>
 
                   {/* WhatsApp */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.82rem', color: 'var(--text-light)', fontWeight: 600 }}>WhatsApp Number</label>
+                  <div className="form-group">
+                    <label>WhatsApp Number</label>
                     <input 
                       type="tel" 
                       placeholder="WhatsApp Number (03XX XXXXXXX)" 
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px', color: '#fff', fontSize: '0.9rem' }}
                       required
                     />
                   </div>
 
                   {/* City */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.82rem', color: 'var(--text-light)', fontWeight: 600 }}>City</label>
+                  <div className="form-group">
+                    <label>City</label>
                     <input 
                       type="text" 
-                      placeholder="e.g. Lahore" 
+                      placeholder="City (e.g. Lahore)" 
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px', color: '#fff', fontSize: '0.9rem' }}
                     />
                   </div>
 
                   {/* Order Bump */}
                   <div 
                     onClick={() => setBump(!bump)}
-                    style={{ 
-                      border: '1px dashed var(--primary)', 
-                      borderRadius: '8px', 
-                      padding: '12px', 
-                      background: bump ? 'rgba(186, 110, 238, 0.03)' : 'transparent',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      gap: '10px',
-                      alignItems: 'flex-start',
-                      transition: 'background var(--transition-fast)'
-                    }}
+                    className={`order-bump ${bump ? 'checked' : ''}`}
                   >
-                    <input 
-                      type="checkbox" 
-                      checked={bump} 
-                      onChange={() => {}} // toggled by outer container click
-                      style={{ marginTop: '3px' }} 
-                    />
-                    <div>
-                      <span style={{ fontSize: '0.7rem', background: 'var(--primary)', color: 'white', padding: '2px 6px', borderRadius: '4px', fontWeight: 800, marginRight: '6px' }}>PREMIUM UPGRADE</span>
-                      <strong style={{ fontSize: '0.82rem', color: '#fff', display: 'block', margin: '4px 0 2px' }}>Add Marketian: Complete Facebook Ads Masterclass</strong>
-                      <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
-                        Learn step-by-step how to write ad copy, design creatives, set up campaigns, budget, target local and international business, and scale client ad accounts.
-                      </p>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--primary)', fontWeight: 700, display: 'block', marginTop: '4px' }}>+ Rs. 999 (Save 80% today)</span>
+                    <div className="order-bump-header">
+                      <input 
+                        type="checkbox" 
+                        checked={bump} 
+                        onChange={() => {}} // toggled by outer container click
+                        className="order-bump-checkbox"
+                      />
+                      <span className="order-bump-badge">PREMIUM UPGRADE</span>
+                      <span className="order-bump-title">Add Marketian: Complete Facebook Ads Masterclass</span>
+                    </div>
+                    <div className="order-bump-desc">
+                      Learn step-by-step how to write ad copy, design creatives, set up campaigns, budget, target local and international business, and scale client ad accounts.
+                      <span className="order-bump-price">+ Rs. 999 (Save 80% today)</span>
                     </div>
                   </div>
 
                   {/* Submit Button */}
-                  <button 
-                    type="submit"
-                    style={{
-                      background: 'var(--primary)',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '14px 20px',
-                      fontSize: '1rem',
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      boxShadow: '0 4px 12px var(--primary-glow)',
-                      transition: 'background var(--transition-fast)'
-                    }}
-                    onMouseOver={(e) => e.currentTarget.style.background = '#a95edd'}
-                    onMouseOut={(e) => e.currentTarget.style.background = 'var(--primary)'}
-                  >
+                  <button type="submit" className="btn-reveal">
                     🔐 Continue to Secure Payment →
                   </button>
 
@@ -335,37 +303,24 @@ function CheckoutPanel({ spotsLeft }) {
               </div>
             ) : (
               /* STEP 2: SECURE PAYMENT */
-              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '20px', background: 'rgba(255, 255, 255, 0.015)', borderColor: '#34d399' }}>
+              <div className="checkout-card secure-payment-panel active">
                 
-                <div>
-                  <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '4px' }}>Step 2 of 2 — Send Payment &amp; Confirm</h3>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Send payment to any verified account below and submit your screenshot.</p>
-                </div>
+                <div className="card-title">Step 2 of 2 — Send Payment & Confirm</div>
 
                 {/* Scarcity Timer */}
-                <div style={{ background: 'rgba(239, 68, 68, 0.06)', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.82rem' }}>
-                  <span style={{ color: '#fca5a5', fontWeight: 700 }}>⚠️ Spot Reserved For:</span>
-                  <span style={{ color: '#ef4444', fontFamily: 'monospace', fontWeight: 800, fontSize: '1rem' }}>{formatTime(timeLeft)}</span>
+                <div className="timer-box">
+                  <span className="timer-text">Spot Reserved For:</span>
+                  <span className="timer-clock">{formatTime(timeLeft)}</span>
                 </div>
 
                 {/* Payment Tabs */}
-                <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
+                <div className="pay-tabs">
                   {['jazz', 'easy', 'bank'].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      style={{
-                        flex: 1,
-                        background: activeTab === tab ? 'var(--primary)' : 'rgba(255, 255, 255, 0.03)',
-                        border: 'none',
-                        color: 'white',
-                        padding: '10px 8px',
-                        borderRadius: '6px',
-                        fontSize: '0.78rem',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        transition: 'background var(--transition-fast)'
-                      }}
+                      className={`pay-tab ${activeTab === tab ? 'active' : ''}`}
+                      data-tab={tab}
                     >
                       {tab === 'jazz' ? 'JazzCash' : tab === 'easy' ? 'EasyPaisa' : 'Bank Transfer'}
                     </button>
@@ -373,69 +328,33 @@ function CheckoutPanel({ spotsLeft }) {
                 </div>
 
                 {/* Account Details Box */}
-                <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '16px' }}>
+                <div className="pay-card active">
                   
-                  {activeTab === 'jazz' && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.75rem', background: '#e93d3d', color: 'white', padding: '2px 6px', borderRadius: '4px', fontWeight: 800 }}>JazzCash</span>
-                        <span style={{ fontSize: '0.65rem', color: '#34d399', fontWeight: 700 }}>✓ VERIFIED ACCOUNT</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255, 255, 255, 0.02)', padding: '10px', borderRadius: '6px', marginTop: '6px' }}>
-                        <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'white' }}>03180236635</span>
-                        <button 
-                          onClick={() => handleCopyText('03180236635', 'jazz')}
-                          style={{ background: 'var(--primary)', border: 'none', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.72rem', cursor: 'pointer', fontWeight: 600 }}
-                        >
-                          {copiedField === 'jazz' ? '✓ Copied' : 'Copy'}
-                        </button>
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Account Name: <strong>Farman Ali</strong></div>
-                    </div>
-                  )}
+                  <div className="pay-card-header">
+                    <span className={`pay-method-name ${activeTab}`}>
+                      {activeTab === 'jazz' ? 'JazzCash' : activeTab === 'easy' ? 'EasyPaisa' : 'HBL Bank Transfer'}
+                    </span>
+                    <span className="verified-chip">✓ VERIFIED</span>
+                  </div>
 
-                  {activeTab === 'easy' && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.75rem', background: '#37ca37', color: 'white', padding: '2px 6px', borderRadius: '4px', fontWeight: 800 }}>EasyPaisa</span>
-                        <span style={{ fontSize: '0.65rem', color: '#34d399', fontWeight: 700 }}>✓ VERIFIED ACCOUNT</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255, 255, 255, 0.02)', padding: '10px', borderRadius: '6px', marginTop: '6px' }}>
-                        <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'white' }}>03458996578</span>
-                        <button 
-                          onClick={() => handleCopyText('03458996578', 'easy')}
-                          style={{ background: 'var(--primary)', border: 'none', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.72rem', cursor: 'pointer', fontWeight: 600 }}
-                        >
-                          {copiedField === 'easy' ? '✓ Copied' : 'Copy'}
-                        </button>
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Account Name: <strong>Farman Ali</strong></div>
-                    </div>
-                  )}
-
-                  {activeTab === 'bank' && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.75rem', background: '#188bf6', color: 'white', padding: '2px 6px', borderRadius: '4px', fontWeight: 800 }}>HBL Bank Transfer</span>
-                        <span style={{ fontSize: '0.65rem', color: '#34d399', fontWeight: 700 }}>✓ VERIFIED ACCOUNT</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255, 255, 255, 0.02)', padding: '10px', borderRadius: '6px', marginTop: '6px' }}>
-                        <span style={{ fontSize: '1rem', fontWeight: 800, color: 'white' }}>22567902223303</span>
-                        <button 
-                          onClick={() => handleCopyText('22567902223303', 'bank')}
-                          style={{ background: 'var(--primary)', border: 'none', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.72rem', cursor: 'pointer', fontWeight: 600 }}
-                        >
-                          {copiedField === 'bank' ? '✓ Copied' : 'Copy'}
-                        </button>
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Bank Name: <strong>Habib Bank Limited (HBL)</strong></div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Account Name: <strong>Farman Ali</strong></div>
-                    </div>
-                  )}
-
-                  <div style={{ marginTop: '12px', borderTop: '1px solid var(--border-color)', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Amount to Send:</span>
-                    <strong style={{ color: 'var(--accent)', fontSize: '0.95rem' }}>Rs. {totalPrice.toLocaleString()}</strong>
+                  <div className="pay-row">
+                    <span className="pay-number">
+                      {activeTab === 'jazz' ? '03180236635' : activeTab === 'easy' ? '03458996578' : '22567902223303'}
+                    </span>
+                    <button 
+                      onClick={() => handleCopyText(activeTab === 'jazz' ? '03180236635' : activeTab === 'easy' ? '03458996578' : '22567902223303', activeTab)}
+                      className="copy-btn"
+                    >
+                      {copiedField === activeTab ? '✓ Copied' : 'Copy'}
+                    </button>
+                  </div>
+                  
+                  <div className="pay-name">Account Name: <strong>Farman Ali</strong></div>
+                  {activeTab === 'bank' && <div className="pay-name">Bank Name: <strong>Habib Bank Limited (HBL)</strong></div>}
+                  
+                  <div className="amount-chip">
+                    <span>Amount to Send</span>
+                    <span>Rs. {totalPrice.toLocaleString()}</span>
                   </div>
 
                 </div>
@@ -446,38 +365,21 @@ function CheckoutPanel({ spotsLeft }) {
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={handleWhatsAppPurchase}
-                  style={{
-                    background: '#25d366',
-                    color: 'white',
-                    padding: '14px 20px',
-                    borderRadius: '8px',
-                    textAlign: 'center',
-                    fontWeight: 800,
-                    fontSize: '1rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '10px',
-                    boxShadow: '0 4px 12px rgba(37, 211, 102, 0.25)',
-                    transition: 'background var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.background = '#20ba56'}
-                  onMouseOut={(e) => e.currentTarget.style.background = '#25d366'}
+                  className="wa-cta"
                 >
-                  <svg style={{ width: '20px', height: '20px', fill: 'white' }} viewBox="0 0 24 24">
+                  <svg className="wa-icon" viewBox="0 0 24 24" fill="white">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
                   I've Paid — Send Screenshot on WhatsApp
                 </a>
 
                 {/* Success Claims link */}
-                <div style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '4px' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Already sent the screenshot? </span>
+                <div className="already-paid">
+                  <p>Already sent the screenshot?</p>
                   <a 
                     href="https://wa.me/923255090258?text=Hi,%20I%20have%20already%20sent%20the%20payment%20screenshot.%20Please%20approve%20my%20course%20enrollment." 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'underline' }}
                   >
                     Claim your instant access here →
                   </a>
@@ -486,7 +388,7 @@ function CheckoutPanel({ spotsLeft }) {
               </div>
             )}
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '16px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            <div className="bottom-trust">
               <span>🔒 100% Secure</span>
               <span>⚡ Instant Activation</span>
               <span>🛡️ Content Guarantee</span>
