@@ -147,7 +147,7 @@ function CheckoutPanel({ spotsLeft }) {
           <div className="checkout-info-panel" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
             {/* Scarcity Banner */}
-            <div className="glass-card" style={{ borderLeft: '4px solid var(--accent)', padding: '16px 20px', background: 'rgba(255, 201, 0, 0.02)' }}>
+            <div className="glass-card desktop-only" style={{ borderLeft: '4px solid var(--accent)', padding: '16px 20px', background: 'rgba(255, 201, 0, 0.02)' }}>
               <span style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '4px' }}>
                 🚀 Launch Price — First 300 Students Only
               </span>
@@ -162,14 +162,14 @@ function CheckoutPanel({ spotsLeft }) {
             </div>
 
             {/* Value Proposition */}
-            <div className="glass-card" style={{ padding: '16px 20px', background: 'rgba(186, 110, 238, 0.02)' }}>
+            <div className="glass-card desktop-only" style={{ padding: '16px 20px', background: 'rgba(186, 110, 238, 0.02)' }}>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-light)', lineHeight: 1.5 }}>
                 💡 <strong>Return on Investment:</strong> Rs. 2,499 for GoHighLevel automation skillsets that digital agencies charge international clients <strong>$1,000 – $2,500/month</strong> for.
               </p>
             </div>
 
             {/* Scarcity Progress Bar */}
-            <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div className="glass-card desktop-only" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 700 }}>
                 <span style={{ color: '#fff' }}>{300 - spotsLeft} students enrolled</span>
                 <span style={{ color: 'var(--accent)' }}>ONLY {spotsLeft} SPOTS LEFT</span>
@@ -206,6 +206,21 @@ function CheckoutPanel({ spotsLeft }) {
 
           {/* RIGHT PANEL: Checkout Steps */}
           <div className="checkout-form-panel">
+            
+            {/* Mobile-Only Order Summary */}
+            <div className="mobile-summary mobile-only">
+              <div className="mobile-summary-header">
+                <span className="mobile-summary-title">ORDER SUMMARY</span>
+                <span className="save-badge">Save 83%</span>
+              </div>
+              <div className="mobile-summary-pricing">
+                <span className="price-mobile-val">Rs. {totalPrice.toLocaleString()}</span>
+                <span className="price-was">Rs. 14,999</span>
+              </div>
+              <div className="mobile-summary-spots">
+                <span>🔥</span> ONLY {spotsLeft} SPOTS LEFT AT THIS PRICE
+              </div>
+            </div>
             
             {step === 1 ? (
               /* STEP 1: LEAD FORM */
