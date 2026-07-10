@@ -13,7 +13,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'AW-18059473078');
+      gtag('config', 'AW-18059473078', { 'allow_enhanced_conversions': true });
     </script>
 
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -62,11 +62,31 @@
                 // See: docs/google_apps_script_capi.js
             }
 
-            // 2. Google Ads Conversion (Browser)
+            // 2. Google Ads Conversion (Browser) — Enhanced Conversions + Dynamic Value
             if (window.gtag) {
+                // Read checkout data saved by checkout.html to get phone and actual order value
+                let orderValue = 1999;
+                let phone = '';
+                try {
+                    const saved = sessionStorage.getItem('checkout_state');
+                    if (saved) {
+                        const state = JSON.parse(saved);
+                        if (state.phone) phone = state.phone;
+                        if (state.bump) orderValue += 499;
+                        if (state.marketian) orderValue += 999;
+                    }
+                } catch(e) {}
+
+                // Set user_data for Enhanced Conversions matching
+                if (phone) {
+                    gtag('set', 'user_data', {
+                        'phone_number': phone.startsWith('+') ? phone : '+92' + phone.replace(/^0/, '')
+                    });
+                }
+
                 gtag('event', 'conversion', {
                     'send_to': 'AW-18059473078/V_n0CO6-mKYaELblsqk-',
-                    'value': 1999.00,
+                    'value': parseFloat(orderValue),
                     'currency': 'PKR',
                     'transaction_id': transactionId
                 });
