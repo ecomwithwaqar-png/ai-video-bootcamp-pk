@@ -57,7 +57,8 @@ function onEditTrigger(e) {
     ua:      getVal(sheet, rowIndex, headers, 'UA'),
     city:    getVal(sheet, rowIndex, headers, 'City'),
     url:     getVal(sheet, rowIndex, headers, 'URL'),
-    value:   getVal(sheet, rowIndex, headers, 'Value')
+    value:   getVal(sheet, rowIndex, headers, 'Value'),
+    gclid:   getVal(sheet, rowIndex, headers, 'Google Click ID')
   };
 
   Logger.log('Data: ' + JSON.stringify(u));
@@ -93,6 +94,31 @@ function onEditTrigger(e) {
         sheet.getRange(rowIndex, statusColIdx).setValue('Meta Error: ' + msg.substring(0, 120));
       }
     }
+
+    // ── GOOGLE ADS OFFLINE CONVERSION UPLOAD ───────────────────────────────
+    // Write "Verified Purchase" row to GoogleAds_Upload tab so Google Ads
+    // can import it on its next scheduled scan of this sheet.
+    if (u.gclid) {
+      try {
+        var gadsSheet = e.source.getSheetByName('GoogleAds_Upload');
+        if (gadsSheet) {
+          var now = new Date();
+          var pad = function(n) { return n < 10 ? '0' + n : n; };
+          var convTime = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' +
+                         pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' +0500';
+          var convValue = Number(u.value) || 1999;
+          gadsSheet.appendRow([u.gclid, convTime, 'Verified Purchase', convValue, 'PKR']);
+          Logger.log('Google Ads Upload: Verified Purchase row added for gclid: ' + u.gclid.substring(0, 30) + '...');
+        } else {
+          Logger.log('Google Ads Upload: GoogleAds_Upload sheet not found');
+        }
+      } catch (gadsErr) {
+        Logger.log('Google Ads Upload Error: ' + gadsErr.toString());
+      }
+    } else {
+      Logger.log('Google Ads Upload: No gclid found for row ' + rowIndex + ', skipping.');
+    }
+    // ──────────────────────────────────────────────────────────────────────
 
   } catch (err) {
     Logger.log('Script Error: ' + err.toString());
