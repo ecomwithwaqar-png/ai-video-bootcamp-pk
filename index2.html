@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>AIBootcamp — Learn AI Skills &amp; Build a Creative Business From Pakistan</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master AI-driven content creation with Pakistan's #1 AI Creative Course. Learn practical skills to build a freelance or creative business using AI tools.">
+    <meta property="og:title" content="AIBootcamp — Learn AI Skills &amp; Build a Creative Business From Pakistan">
+    <meta property="og:description"
+        content="Join the AI revolution. Learn how to leverage AI tools to build a creative freelance business. Rs. 1,999 one-time.">
+    <meta property="og:image" content="assets/img/og-image.png">
+    <meta property="og:url" content="https://aivideobootcamp.online/index2">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18059473078"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-18059473078', { 'allow_enhanced_conversions': true });
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            }; if (!f._fbq) f._fbq = n;
+            n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1622955485439618');
+    </script>
+    <!-- TikTok Pixel Code -->
+    <script>
+        !function (w, d, t) {
+            w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+                for (
+                    var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+            }, ttq.load = function (e, n) {
+                var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+                    ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+            };
+            ttq.load('D825I1JC77U9B8E8SBI0');
+            ttq.page();
+        }(window, document, 'ttq');
+    </script>
+    <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1622955485439618&ev=PageView&noscript=1" /></noscript>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.CAPIBridge) {
+                CAPIBridge.pageView();
+                setTimeout(function () { CAPIBridge.viewContent(); }, 500);
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="assets/css/main.css?v=1.0.7">
+    <style>
+        /* ── CUSTOM CONVERSION OPTIMIZED STYLES ── */
+        .opt-hero {
+            padding: 100px 24px 50px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .opt-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(249, 115, 22, 0.08);
+            border: 1px solid rgba(249, 115, 22, 0.25);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--or);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .opt-title {
+            font-size: clamp(30px, 5vw, 50px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .opt-title span {
+            color: var(--or);
+            position: relative;
+            display: inline-block;
+        }
+
+        .opt-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(249, 115, 22, 0.3);
+            border-radius: 2px;
+            z-index: -1;
+        }
+
+        .opt-urdu {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            line-height: 1.8;
+            color: #fdba74;
+            margin: 20px 0;
+            direction: rtl;
+        }
+
+        .opt-sub {
+            font-size: 1.1rem;
+            color: var(--muted);
+            line-height: 1.65;
+            max-width: 650px;
+            margin: 0 auto 30px;
+        }
+
+        .opt-cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #F97316, #ea580c);
+            color: #fff;
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 18px 48px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .opt-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.45);
+        }
+
+        .opt-cta-btn:active {
+            transform: translateY(0);
+        }
+
+        .opt-cta-sub {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .opt-cta-sub span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .opt-cta-sub span::before {
+            content: '✓';
+            color: var(--gn);
+            font-weight: 800;
+        }
+
+        /* ── CREATION GRID SECTION ── */
+        .creation-section {
+            padding: 60px 24px;
+            background: var(--bg2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .creation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .creation-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creation-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .creation-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--or), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .creation-card:hover::after {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .card-target {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gn);
+        }
+
+        /* ── VALUE STACK / GRAND SLAM OFFER ── */
+        .offer-section {
+            padding: 80px 24px;
+            background: var(--bg);
+        }
+
+        .offer-box {
+            background: linear-gradient(180deg, var(--card) 0%, var(--bg2) 100%);
+            border: 2px solid rgba(249, 115, 22, 0.2);
+            border-radius: 16px;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .offer-box::before {
+            content: 'GRAND SLAM OFFER';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--or);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            padding: 6px 18px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .offer-head {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .offer-head h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .offer-head p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .stack-list {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .stack-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .stack-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .stack-check {
+            color: var(--or);
+            font-weight: 900;
+        }
+
+        .stack-value {
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-decoration: line-through;
+        }
+
+        .stack-bonus-badge {
+            background: var(--pu);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 6px;
+            text-transform: uppercase;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 28px;
+            text-align: center;
+        }
+
+        .retail-price {
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        .retail-price span {
+            text-decoration: line-through;
+        }
+
+        .launch-price {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .launch-price span {
+            color: var(--or);
+        }
+
+        .launch-sub {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .offer-action {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        /* ── REALISTIC SOCIAL PROOF ── */
+        .proof-section {
+            padding: 80px 24px;
+            background: var(--bg2);
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .proof-card {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .proof-stars {
+            color: var(--or);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .proof-quote {
+            font-size: 0.92rem;
+            color: #e8eaf6;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .proof-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+
+        .author-av {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--or), var(--bl));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+
+        .author-info {
+            flex-grow: 1;
+        }
+
+        .author-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .author-meta {
+            font-size: 0.72rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .verified-badge {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: var(--gn);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        /* ── RISK REVERSAL GUARANTEE ── */
+        .guarantee-section {
+            padding: 60px 24px;
+            background: var(--bg);
+        }
+
+        .guarantee-card {
+            background: rgba(249, 115, 22, 0.03);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+            border-radius: 16px;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 36px;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .guarantee-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        .guarantee-icon {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .guarantee-content h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .guarantee-content p {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── CONDENSED MODULES SECTION ── */
+        .modules-section {
+            padding: 60px 24px;
+            background: var(--bg);
+        }
+
+        .modules-list {
+            max-width: 740px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .module-row {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .module-row:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .module-num {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--or);
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .module-info {
+            flex-grow: 1;
+        }
+
+        .module-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .module-detail {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .hero-disclaimer-opt {
+            font-size: 0.72rem;
+            color: #5a6080;
+            text-align: center;
+            max-width: 680px;
+            margin: 20px auto 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <a href="./index2" class="nav-logo"><span>AI</span>Bootcamp</a>
+        <div class="nav-r">
+            <div class="nav-spots">
+                <span>🇵🇰 Launch Special Offer</span>
+            </div>
+            <a href="/checkout" class="btn-nav">Enroll Now →</a>
+        </div>
+    </nav>
+
+    <!-- ── HERO SECTION ── -->
+    <header class="opt-hero">
+        <div class="opt-badge">🎓 Practical Skill-Based Bootcamp</div>
+        <h1 class="opt-title">Learn <span>AI Content Creation</span> — Master the Skills to Earn in Dollars from Pakistan</h1>
+        
+        <p class="opt-urdu">موبائل اسکرولنگ بند کریں — وہ اسکل سیکھیں جو آپ کو ڈالرز کمانا سکھائے</p>
+        
+        <p class="opt-sub">A structured 9-module video bootcamp teaching product photography, cinematic video ads, character design, and client outreach. No camera or design skills needed. Complete mobile workflow included.</p>
+
+        <div style="margin-bottom: 8px;">
+            <a href="/checkout" class="opt-cta-btn">Enroll Now — Just Rs. 1,999 →</a>
+        </div>
+
+        <div class="opt-cta-sub">
+            <span>Instant WhatsApp Activation</span>
+            <span>Lifetime Portal Access</span>
+            <span>Private Community Access</span>
+        </div>
+    </header>
+
+    <!-- ── WHAT YOU'LL CREATE SECTION ── -->
+    <section class="creation-section">
+        <div class="section-header">
+            <h2>By the End of This Course,<br>You Will Be Able to Create:</h2>
+            <p>Practical skills that you can sell to international brands immediately after completing the bootcamp.</p>
+        </div>
+
+        <div class="creation-grid">
+            <div class="creation-card">
+                <div class="card-icon">📸</div>
+                <h3 class="card-title">AI Product Photography</h3>
+                <p class="card-desc">Generate professional studio product photos with perfect lighting, reflections, and shadow realism from a basic mobile phone snap.</p>
+                <span class="card-target">Target: $150 - $400/package</span>
+            </div>
+
+            <div class="creation-card">
+                <div class="card-icon">🎬</div>
+                <h3 class="card-title">Cinematic AI Ad Videos</h3>
+                <p class="card-desc">Animate static images into cinematic video reels. Edit camera motion, add lighting adjustments, and export high-converting ad visuals.</p>
+                <span class="card-target">Target: $200 - $600/video</span>
+            </div>
+
+            <div class="creation-card">
+                <div class="card-icon">👤</div>
+                <h3 class="card-title">Consistent AI Characters</h3>
+                <p class="card-desc">Create highly detailed virtual human characters that maintain exact facial identity, styling, and traits across multiple scenes.</p>
+                <span class="card-target">Target: $100 - $300/asset</span>
+            </div>
+
+            <div class="creation-card">
+                <div class="card-icon">🗣️</div>
+                <h3 class="card-title">AI Talking UGC Promos</h3>
+                <p class="card-desc">Produce high-engagement spokespersons and ads. Synthesize voices, overlay scripts, and map mouth movements with absolute sync.</p>
+                <span class="card-target">Target: $150 - $500/campaign</span>
+            </div>
+
+            <div class="creation-card">
+                <div class="card-icon">📺</div>
+                <h3 class="card-title">Faceless Brand Pages</h3>
+                <p class="card-desc">Construct automated channels, Instagram themes, or TikTok spaces that run entirely on AI assets without showing your face.</p>
+                <span class="card-target">Target: $300 - $800/retainer</span>
+            </div>
+
+            <div class="creation-card">
+                <div class="card-icon">💼</div>
+                <h3 class="card-title">High-Ticket Outreach</h3>
+                <p class="card-desc">Leverage our custom client acquisition methods to pitch directly to global brands on Instagram and email — bypassing Upwork and Fiverr.</p>
+                <span class="card-target">Target: $500 - $1,500/month</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONDENSED MODULES OUTLINE ── -->
+    <section class="modules-section">
+        <div class="section-header">
+            <h2>Bootcamp Curriculum Breakdown</h2>
+            <p>9 condensed modules structured to take you from absolute beginner to launching your AI creative services.</p>
+        </div>
+
+        <div class="modules-list">
+            <div class="module-row">
+                <div class="module-num">01</div>
+                <div class="module-info">
+                    <div class="module-title">AI Foundations &amp; Budget Optimization</div>
+                    <div class="module-detail">Setting up your dashboard and access secret method to save $70+/month on paid tools.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">02</div>
+                <div class="module-info">
+                    <div class="module-title">Hyper-Realistic Image Generation</div>
+                    <div class="module-detail">Understanding aspect ratios, style parameters, lighting structures, and upscaling templates.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">03</div>
+                <div class="module-info">
+                    <div class="module-title">AI Product Photography Workflows</div>
+                    <div class="module-detail">Isolating products, generating contextual studio backgrounds, and editing light adjustments.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">04</div>
+                <div class="module-info">
+                    <div class="module-title">Consistent AI Character Creation</div>
+                    <div class="module-detail">Creating custom virtual models and keeping character faces consistent across scenes.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">05</div>
+                <div class="module-info">
+                    <div class="module-title">Cinematic Video Ads &amp; Motion Controls</div>
+                    <div class="module-detail">Animating stills, controlling camera movements, setting keyframes, and matching audio.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">06</div>
+                <div class="module-info">
+                    <div class="module-title">AI Voice Cloning &amp; Lip Sync Syncing</div>
+                    <div class="module-detail">Cloning voice patterns, text-to-speech engine rules, and auto-mapping mouth movements.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">07</div>
+                <div class="module-info">
+                    <div class="module-title">Faceless Content Systems &amp; Page Launches</div>
+                    <div class="module-detail">Configuring scheduling rules and templates for automated faceless growth.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">08</div>
+                <div class="module-info">
+                    <div class="module-title">International Payments &amp; Setup in Pakistan</div>
+                    <div class="module-detail">Setting up and linking Payoneer, Wise, and bank routes to withdraw USD directly.</div>
+                </div>
+            </div>
+            <div class="module-row">
+                <div class="module-num">09</div>
+                <div class="module-info">
+                    <div class="module-title">High-Ticket Client Acquisition Blueprint</div>
+                    <div class="module-detail">Our Instagram outreach scripts, template proposals, and client conversion frameworks.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── THE OFFER (GRAND SLAM VALUE STACK) ── -->
+    <section class="offer-section" id="enroll">
+        <div class="offer-box">
+            <div class="offer-head">
+                <h3>The Grand Slam Value Stack</h3>
+                <p>Everything you get immediately after joining the bootcamp today.</p>
+            </div>
+
+            <div class="stack-list">
+                <div class="stack-item">
+                    <span class="stack-left"><span class="stack-check">✓</span> 9-Module Video Bootcamp Course</span>
+                    <span class="stack-value">Rs. 14,999</span>
+                </div>
+                <div class="stack-item">
+                    <span class="stack-left"><span class="stack-check">✓</span> Private Skool Community &amp; Portal</span>
+                    <span class="stack-value">Rs. 4,999</span>
+                </div>
+                <div class="stack-item">
+                    <span class="stack-left"><span class="stack-check">✓</span> Direct WhatsApp Student Support Group</span>
+                    <span class="stack-value">Rs. 3,000</span>
+                </div>
+                <div class="stack-item">
+                    <span class="stack-left"><span class="stack-check">✓</span> Client Acquisition Ebook Swipe Files <span class="stack-bonus-badge">Free Bonus</span></span>
+                    <span class="stack-value">Rs. 4,999</span>
+                </div>
+            </div>
+
+            <div class="pricing-grid">
+                <div>
+                    <div class="retail-price">Total Value: <span>Rs. 27,997</span></div>
+                    <div class="launch-price">Rs. 1,999</div>
+                    <div class="launch-sub">One-time payment · Lifetime access · Auto-access within 2 minutes</div>
+                </div>
+            </div>
+
+            <div class="offer-action">
+                <a href="/checkout" class="opt-cta-btn" style="display: block; width: 100%; text-align: center; box-sizing: border-box;">Start My AI Training — Rs. 1,999 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── VERIFIABLE STUDENT RESULTS ── -->
+    <section class="proof-section">
+        <div class="section-header">
+            <h2>Real Feedback From Pakistani Students</h2>
+            <p>Examples of results and feedback from students inside our community.</p>
+        </div>
+
+        <div class="proof-grid">
+            <div class="proof-card">
+                <div>
+                    <div class="proof-stars">★★★★★</div>
+                    <p class="proof-quote">"Course was very simple to follow. Module 3 output is amazing. I snaps some perfumes bottles at home, put background using AI, and shared with local cosmetics brand. They paid Rs. 18,000 for 10 product shots. Recommended!"</p>
+                </div>
+                <div class="proof-author">
+                    <div class="author-av" style="background: linear-gradient(135deg, #f97316, #ec4899);">S</div>
+                    <div class="author-info">
+                        <div class="author-name">Sana R.</div>
+                        <div class="author-meta">Karachi <span class="verified-badge">Verified Member</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proof-card">
+                <div>
+                    <div class="proof-stars">★★★★★</div>
+                    <p class="proof-quote">"The prompt hacks in Module 2 alone saved me so much time. I was struggling to keep consistent character details for my page, but the seed guides solved it. I started pitching video ads to overseas brands using DM templates, closed a $200 retainer!"</p>
+                </div>
+                <div class="proof-author">
+                    <div class="author-av" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">A</div>
+                    <div class="author-info">
+                        <div class="author-name">Ahmed K.</div>
+                        <div class="author-meta">Lahore <span class="verified-badge">Verified Member</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proof-card">
+                <div>
+                    <div class="proof-stars">★★★★★</div>
+                    <p class="proof-quote">"Module 8 payment guides helped me set up my Wise account easily from Multan. I got my first client through WhatsApp outreach ebook, they sent $350. Farman's video tutorials are detailed and straight to the point."</p>
+                </div>
+                <div class="proof-author">
+                    <div class="author-av" style="background: linear-gradient(135deg, #10b981, #3b82f6);">B</div>
+                    <div class="author-info">
+                        <div class="author-name">Bilal A.</div>
+                        <div class="author-meta">Rawalpindi <span class="verified-badge">Verified Member</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── RISK REVERSAL SATISFACTION GUARANTEE ── -->
+    <section class="guarantee-section">
+        <div class="guarantee-card">
+            <div class="guarantee-icon">🛡️</div>
+            <div class="guarantee-content">
+                <h3>100% Satisfaction Risk-Free Guarantee</h3>
+                <p>We stand behind the quality of this bootcamp. If you go through the first 3 modules of the course, follow the workflows, and feel you aren't getting value, simply message our team on WhatsApp within 14 days of purchase. We will issue a full, prompt refund of your Rs. 1,999. Your enrollment is completely risk-free.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQs ── -->
+    <section class="creation-section" style="border-top: 1px solid var(--border);">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Clear answers to help you get started tonight.</p>
+        </div>
+
+        <div class="modules-list" style="max-width: 680px;">
+            <div class="module-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="module-title">Do I need a high-end laptop or PC?</div>
+                <div class="module-detail" style="font-size: 0.85rem; line-height: 1.5;">No. 90% of the AI tools we teach can be used directly from a standard Android or iPhone. The video editing and generation modules can be processed completely via mobile apps or cloud dashboards.</div>
+            </div>
+            <div class="module-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="module-title">How do I get access after sending the payment?</div>
+                <div class="module-detail" style="font-size: 0.85rem; line-height: 1.5;">Click "Enroll Now", fill out step 1, select your payment method (JazzCash, EasyPaisa, or Bank Transfer) on step 2, and click the WhatsApp link to submit your screenshot. You will receive your login details and community invite link on WhatsApp within 2 minutes.</div>
+            </div>
+            <div class="module-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="module-title">Are there any hidden costs inside the course?</div>
+                <div class="module-detail" style="font-size: 0.85rem; line-height: 1.5;">We focus on utilizing free AI tools. For advanced tools that require subscriptions, Module 1 covers a specific optimization strategy to save $70+/month on tool configurations.</div>
+            </div>
+            <div class="module-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="module-title">How do I receive payments from foreign clients?</div>
+                <div class="module-detail" style="font-size: 0.85rem; line-height: 1.5;">Module 8 is dedicated to showing you how to set up, verify, and receive international payments (USD/GBP) in Pakistan using Wise, Payoneer, and direct banking integrations.</div>
+            </div>
+            <div class="module-row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="module-title">Is the Rs. 1,999 price permanent?</div>
+                <div class="module-detail" style="font-size: 0.85rem; line-height: 1.5;">No. This launch price is reserved for the initial 300 students. After these spots are filled, the price will permanently increase to Rs. 4,999. If you can see this page, slots are still open.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="main-footer" style="padding: 40px 24px; background: var(--bg2); border-top: 1px solid var(--border);">
+        <div class="footer-inner" style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <div style="margin-bottom: 20px;">
+                <a href="#" class="logo" style="text-decoration:none; color:white; font-weight:900; font-size:1.4rem;"><span>AI</span>Bootcamp</a>
+                <p style="font-size: 0.82rem; color: var(--muted); margin-top: 8px;">Empowering Pakistani content creators and freelancers with practical AI skills.</p>
+            </div>
+            <p style="font-size:0.75rem; color: var(--muted); line-height: 1.7; max-width: 700px; margin: 0 auto 20px;">
+                *Individual results vary. Earnings are not guaranteed and depend on your effort, portfolio quality, and client outreach consistency. Most students earn less or nothing. This training is not associated with Google LLC, Meta Platforms, Inc., or TikTok Inc.
+            </p>
+            <div style="font-size: 0.82rem; color: var(--muted); display: flex; justify-content: center; gap: 16px;">
+                <a href="/privacy" style="color: var(--muted); text-decoration: none;">Privacy Policy</a>
+                <span>·</span>
+                <a href="/terms" style="color: var(--muted); text-decoration: none;">Terms of Service</a>
+            </div>
+            <p style="font-size: 0.72rem; color: #5a6080; margin-top: 16px;">&copy; 2026 AIBootcamp. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA Bar for Mobile -->
+    <div class="sticky-cta-bar" id="stickyCtaBar">
+        <div class="sticky-cta-inner">
+            <div class="sticky-cta-text">
+                <span class="sticky-cta-price"><s style="color:#8890b8;font-weight:500;font-size:0.85rem;">Rs. 14,999</s> Rs. 1,999</span>
+                <span class="sticky-cta-label">Special Launch Price</span>
+            </div>
+            <a href="/checkout" class="sticky-cta-btn">Enroll Now — Rs. 1,999 →</a>
+        </div>
+    </div>
+
+    <script>
+        // Reveal sticky CTA on mobile when scrolling past hero
+        window.addEventListener('scroll', function () {
+            const bar = document.getElementById('stickyCtaBar');
+            if (window.innerWidth <= 768) {
+                if (window.scrollY > 300) {
+                    bar.style.display = 'block';
+                } else {
+                    bar.style.display = 'none';
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
