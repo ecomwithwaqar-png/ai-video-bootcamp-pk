@@ -72,8 +72,18 @@
     <link rel="stylesheet" href="assets/css/main.css?v=1.0.7">
     <style>
         /* ── CUSTOM CONVERSION OPTIMIZED STYLES ── */
+        body {
+            background-color: #080810;
+            background-image: 
+                radial-gradient(circle at 20% 15%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(76, 140, 228, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
         .opt-hero {
-            padding: 100px 24px 50px;
+            padding: 100px 24px 60px;
             text-align: center;
             position: relative;
             z-index: 1;
@@ -126,10 +136,11 @@
 
         .opt-urdu {
             font-family: 'Noto Nastaliq Urdu', serif;
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
             line-height: 1.8;
             color: #fdba74;
-            margin: 20px 0;
+            margin: 15px auto;
+            max-width: 600px;
             direction: rtl;
         }
 
@@ -188,16 +199,17 @@
 
         /* ── CREATION GRID SECTION ── */
         .creation-section {
-            padding: 60px 24px;
+            padding: 80px 24px;
             background: var(--bg2);
             position: relative;
             z-index: 2;
+            border-top: 1px solid var(--border);
         }
 
         .section-header {
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin: 0 auto 48px;
         }
 
         .section-header h2 {
@@ -225,10 +237,13 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            padding: 28px;
             transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .creation-card:hover {
@@ -253,9 +268,24 @@
             opacity: 1;
         }
 
-        .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
+        .card-icon-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .creation-card:hover .card-icon-wrap {
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.2);
         }
 
         .card-title {
@@ -270,6 +300,7 @@
             color: var(--muted);
             line-height: 1.5;
             margin-bottom: 16px;
+            flex-grow: 1;
         }
 
         .card-target {
@@ -289,6 +320,7 @@
         .offer-section {
             padding: 80px 24px;
             background: var(--bg);
+            border-top: 1px solid var(--border);
         }
 
         .offer-box {
@@ -428,6 +460,7 @@
         .proof-section {
             padding: 80px 24px;
             background: var(--bg2);
+            border-top: 1px solid var(--border);
         }
 
         .proof-grid {
@@ -442,10 +475,16 @@
             background: var(--card2);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            padding: 28px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .proof-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .proof-stars {
@@ -459,7 +498,6 @@
             color: #e8eaf6;
             line-height: 1.6;
             margin-bottom: 20px;
-            font-style: italic;
         }
 
         .proof-author {
@@ -513,12 +551,13 @@
 
         /* ── RISK REVERSAL GUARANTEE ── */
         .guarantee-section {
-            padding: 60px 24px;
+            padding: 80px 24px;
             background: var(--bg);
+            border-top: 1px solid var(--border);
         }
 
         .guarantee-card {
-            background: rgba(249, 115, 22, 0.03);
+            background: rgba(249, 115, 22, 0.02);
             border: 1px solid rgba(249, 115, 22, 0.15);
             border-radius: 16px;
             max-width: 780px;
@@ -527,6 +566,7 @@
             display: flex;
             align-items: flex-start;
             gap: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 600px) {
@@ -555,10 +595,11 @@
             line-height: 1.6;
         }
 
-        /* ── CONDENSED MODULES SECTION ── */
+        /* ── CONDENSED MODULES SECTION (ACCORDION STYLE) ── */
         .modules-section {
-            padding: 60px 24px;
+            padding: 80px 24px;
             background: var(--bg);
+            border-top: 1px solid var(--border);
         }
 
         .modules-list {
@@ -573,23 +614,33 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 16px 20px;
+            padding: 18px 22px;
             display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: border-color 0.2s;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            transition: border-color 0.2s, background-color 0.2s;
+            cursor: pointer;
         }
 
         .module-row:hover {
             border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
         }
 
         .module-num {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
             color: var(--or);
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 6px;
             display: flex;
             align-items: center;
@@ -597,6 +648,12 @@
             font-weight: 800;
             font-size: 0.85rem;
             flex-shrink: 0;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .module-row:hover .module-num {
+            border-color: rgba(249, 115, 22, 0.3);
+            background: rgba(249, 115, 22, 0.05);
         }
 
         .module-info {
@@ -613,6 +670,48 @@
             font-size: 0.8rem;
             color: var(--muted);
             margin-top: 2px;
+        }
+
+        .module-toggle-icon {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-left: auto;
+            transition: transform 0.2s, color 0.2s;
+            line-height: 1;
+        }
+
+        .module-row.active .module-toggle-icon {
+            transform: rotate(45deg);
+            color: var(--or);
+        }
+
+        .module-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease-out;
+            opacity: 0;
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .module-row.active .module-body {
+            opacity: 1;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .module-bullet-list {
+            margin-top: 8px;
+            padding-left: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .module-bullet-list li {
+            list-style-type: disc;
         }
 
         .hero-disclaimer-opt {
@@ -668,45 +767,77 @@
 
         <div class="creation-grid">
             <div class="creation-card">
-                <div class="card-icon">📸</div>
+                <div class="card-icon-wrap">📸</div>
                 <h3 class="card-title">AI Product Photography</h3>
                 <p class="card-desc">Generate professional studio product photos with perfect lighting, reflections, and shadow realism from a basic mobile phone snap.</p>
                 <span class="card-target">Target: $150 - $400/package</span>
             </div>
 
             <div class="creation-card">
-                <div class="card-icon">🎬</div>
+                <div class="card-icon-wrap">🎬</div>
                 <h3 class="card-title">Cinematic AI Ad Videos</h3>
                 <p class="card-desc">Animate static images into cinematic video reels. Edit camera motion, add lighting adjustments, and export high-converting ad visuals.</p>
                 <span class="card-target">Target: $200 - $600/video</span>
             </div>
 
             <div class="creation-card">
-                <div class="card-icon">👤</div>
+                <div class="card-icon-wrap">👤</div>
                 <h3 class="card-title">Consistent AI Characters</h3>
                 <p class="card-desc">Create highly detailed virtual human characters that maintain exact facial identity, styling, and traits across multiple scenes.</p>
                 <span class="card-target">Target: $100 - $300/asset</span>
             </div>
 
             <div class="creation-card">
-                <div class="card-icon">🗣️</div>
+                <div class="card-icon-wrap">🗣️</div>
                 <h3 class="card-title">AI Talking UGC Promos</h3>
                 <p class="card-desc">Produce high-engagement spokespersons and ads. Synthesize voices, overlay scripts, and map mouth movements with absolute sync.</p>
                 <span class="card-target">Target: $150 - $500/campaign</span>
             </div>
 
             <div class="creation-card">
-                <div class="card-icon">📺</div>
+                <div class="card-icon-wrap">📺</div>
                 <h3 class="card-title">Faceless Brand Pages</h3>
                 <p class="card-desc">Construct automated channels, Instagram themes, or TikTok spaces that run entirely on AI assets without showing your face.</p>
                 <span class="card-target">Target: $300 - $800/retainer</span>
             </div>
 
             <div class="creation-card">
-                <div class="card-icon">💼</div>
+                <div class="card-icon-wrap">💼</div>
                 <h3 class="card-title">High-Ticket Outreach</h3>
                 <p class="card-desc">Leverage our custom client acquisition methods to pitch directly to global brands on Instagram and email — bypassing Upwork and Fiverr.</p>
                 <span class="card-target">Target: $500 - $1,500/month</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── VISUAL SHOWCASE SECTION ── -->
+    <section class="creation-section" style="border-top: 1px solid var(--border);">
+        <div class="section-header">
+            <span style="color: var(--or); text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Visual Proof</span>
+            <h2>Real Creations Built by Students</h2>
+            <p>These are actual visual assets generated by Farman Ali and students using the exact workflows taught inside the course. No stock placeholders.</p>
+        </div>
+
+        <div class="showcase-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto;">
+            <div class="showcase-card" style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
+                <img src="assets/img/work-cream.png" alt="AI Product Photography Cream" style="width: 100%; border-radius: 8px; display: block; margin-bottom: 12px; aspect-ratio: 1/1; object-fit: cover;">
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px;">📸 Product Studio</div>
+                <div style="font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.45;">Commercial studio lighting background generated from a simple raw product photo.</div>
+            </div>
+            <div class="showcase-card" style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
+                <img src="assets/img/work-cafe.png" alt="AI Product Photography Coffee" style="width: 100%; border-radius: 8px; display: block; margin-bottom: 12px; aspect-ratio: 1/1; object-fit: cover;">
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px;">☕ Ambient Placement</div>
+                <div style="font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.45;">Complex background integration with photorealistic shadow matching.</div>
+            </div>
+            <div class="showcase-card" style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
+                <img src="assets/img/work-dove.png" alt="AI Product Photography Dove" style="width: 100%; border-radius: 8px; display: block; margin-bottom: 12px; aspect-ratio: 1/1; object-fit: cover;">
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px;">🧼 Water Ripple Ads</div>
+                <div style="font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.45;">Generating liquid textures, water splashes, and studio shadow profiles for cosmetics.</div>
+            </div>
+            <div class="showcase-card" style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
+                <img src="assets/img/work-suit.png" alt="AI Character Portrait Suit" style="width: 100%; border-radius: 8px; display: block; margin-bottom: 12px; aspect-ratio: 1/1; object-fit: cover;">
+                <div style="font-size: 0.9rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px;">👤 Character Design</div>
+                <div style="font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.45;">A fully synthetic human character keeping facial parameters locked across scenes.</div>
             </div>
         </div>
     </section>
@@ -720,66 +851,156 @@
 
         <div class="modules-list">
             <div class="module-row">
-                <div class="module-num">01</div>
-                <div class="module-info">
-                    <div class="module-title">AI Foundations &amp; Budget Optimization</div>
-                    <div class="module-detail">Setting up your dashboard and access secret method to save $70+/month on paid tools.</div>
+                <div class="module-header">
+                    <div class="module-num">01</div>
+                    <div class="module-info">
+                        <div class="module-title">AI Foundations &amp; Budget Optimization</div>
+                        <div class="module-detail">Setting up your dashboard and access secret method to save $70+/month on paid tools.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Secret cost hack to get paid AI tool features at near-zero costs</li>
+                        <li>Configuring Discord servers and bots for private generation pipeline</li>
+                        <li>Optimizing workspace settings for mobile-first generation speeds</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">02</div>
-                <div class="module-info">
-                    <div class="module-title">Hyper-Realistic Image Generation</div>
-                    <div class="module-detail">Understanding aspect ratios, style parameters, lighting structures, and upscaling templates.</div>
+                <div class="module-header">
+                    <div class="module-num">02</div>
+                    <div class="module-info">
+                        <div class="module-title">Hyper-Realistic Image Generation</div>
+                        <div class="module-detail">Understanding aspect ratios, style parameters, lighting structures, and upscaling templates.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Understanding prompting structure (Subject, Style, Camera, Lighting, Parameters)</li>
+                        <li>Upscaling templates to export high-definition 4K images</li>
+                        <li>50+ ready-to-use hyper-realistic prompt cheatsheets</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">03</div>
-                <div class="module-info">
-                    <div class="module-title">AI Product Photography Workflows</div>
-                    <div class="module-detail">Isolating products, generating contextual studio backgrounds, and editing light adjustments.</div>
+                <div class="module-header">
+                    <div class="module-num">03</div>
+                    <div class="module-info">
+                        <div class="module-title">AI Product Photography Workflows</div>
+                        <div class="module-detail">Isolating products, generating contextual studio backgrounds, and editing light adjustments.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Product isolation rules for shadows, refractions, and reflections</li>
+                        <li>Generating photorealistic studio backgrounds on-demand</li>
+                        <li>Correcting lighting mismatches and blending overlays</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">04</div>
-                <div class="module-info">
-                    <div class="module-title">Consistent AI Character Creation</div>
-                    <div class="module-detail">Creating custom virtual models and keeping character faces consistent across scenes.</div>
+                <div class="module-header">
+                    <div class="module-num">04</div>
+                    <div class="module-info">
+                        <div class="module-title">Consistent AI Character Creation</div>
+                        <div class="module-detail">Creating custom virtual models and keeping character faces consistent across scenes.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Generating photorealistic custom virtual characters</li>
+                        <li>Locking facial identities and traits across scenes and outfits</li>
+                        <li>Creating consistent characters for branding catalogs and storytelling</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">05</div>
-                <div class="module-info">
-                    <div class="module-title">Cinematic Video Ads &amp; Motion Controls</div>
-                    <div class="module-detail">Animating stills, controlling camera movements, setting keyframes, and matching audio.</div>
+                <div class="module-header">
+                    <div class="module-num">05</div>
+                    <div class="module-info">
+                        <div class="module-title">Cinematic Video Ads &amp; Motion Controls</div>
+                        <div class="module-detail">Animating stills, controlling camera movements, setting keyframes, and matching audio.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Animating static images into cinematic video reels</li>
+                        <li>Controlling camera pans, zooms, tilts, and motion weights</li>
+                        <li>Overlaying background audio and syncing key visual moments</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">06</div>
-                <div class="module-info">
-                    <div class="module-title">AI Voice Cloning &amp; Lip Sync Syncing</div>
-                    <div class="module-detail">Cloning voice patterns, text-to-speech engine rules, and auto-mapping mouth movements.</div>
+                <div class="module-header">
+                    <div class="module-num">06</div>
+                    <div class="module-info">
+                        <div class="module-title">AI Voice Cloning &amp; Lip Sync Syncing</div>
+                        <div class="module-detail">Cloning voice patterns, text-to-speech engine rules, and auto-mapping mouth movements.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Cloning real human voices with text-to-speech models</li>
+                        <li>Synchronizing voiceovers with video character mouth movements</li>
+                        <li>Advanced audio editing workflow for studio-grade clarity</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">07</div>
-                <div class="module-info">
-                    <div class="module-title">Faceless Content Systems &amp; Page Launches</div>
-                    <div class="module-detail">Configuring scheduling rules and templates for automated faceless growth.</div>
+                <div class="module-header">
+                    <div class="module-num">07</div>
+                    <div class="module-info">
+                        <div class="module-title">Faceless Content Systems &amp; Page Launches</div>
+                        <div class="module-detail">Configuring scheduling rules and templates for automated faceless growth.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Setting up automated channels on TikTok, Instagram, and YouTube</li>
+                        <li>Automating content calendars and scheduling pipelines</li>
+                        <li>Growing a faceless page to capture brand sponsorships</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">08</div>
-                <div class="module-info">
-                    <div class="module-title">International Payments &amp; Setup in Pakistan</div>
-                    <div class="module-detail">Setting up and linking Payoneer, Wise, and bank routes to withdraw USD directly.</div>
+                <div class="module-header">
+                    <div class="module-num">08</div>
+                    <div class="module-info">
+                        <div class="module-title">International Payments &amp; Setup in Pakistan</div>
+                        <div class="module-detail">Setting up and linking Payoneer, Wise, and bank routes to withdraw USD directly.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Creating and verifying international Wise & Payoneer accounts</li>
+                        <li>Linking digital wallets with local banks in Pakistan</li>
+                        <li>How to legally receive, invoice, and withdraw USD/GBP earnings</li>
+                    </ul>
                 </div>
             </div>
             <div class="module-row">
-                <div class="module-num">09</div>
-                <div class="module-info">
-                    <div class="module-title">High-Ticket Client Acquisition Blueprint</div>
-                    <div class="module-detail">Our Instagram outreach scripts, template proposals, and client conversion frameworks.</div>
+                <div class="module-header">
+                    <div class="module-num">09</div>
+                    <div class="module-info">
+                        <div class="module-title">High-Ticket Client Acquisition Blueprint</div>
+                        <div class="module-detail">Our Instagram outreach scripts, template proposals, and client conversion frameworks.</div>
+                    </div>
+                    <div class="module-toggle-icon">+</div>
+                </div>
+                <div class="module-body">
+                    <ul class="module-bullet-list">
+                        <li>Finding decision-makers at global e-commerce brands</li>
+                        <li>Direct Instagram DM scripts that get high response rates</li>
+                        <li>Pitching, pricing, and locking monthly retainer contracts</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -961,6 +1182,31 @@
                     bar.style.display = 'none';
                 }
             }
+        });
+
+        // Module Accordion Expand/Collapse Functionality
+        document.querySelectorAll('.modules-section .module-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const isActive = row.classList.contains('active');
+                
+                // Collapse all other active rows
+                document.querySelectorAll('.modules-section .module-row').forEach(otherRow => {
+                    otherRow.classList.remove('active');
+                    const otherBody = otherRow.querySelector('.module-body');
+                    if (otherBody) {
+                        otherBody.style.maxHeight = null;
+                    }
+                });
+
+                // Toggle selected row
+                if (!isActive) {
+                    row.classList.add('active');
+                    const body = row.querySelector('.module-body');
+                    if (body) {
+                        body.style.maxHeight = body.scrollHeight + "px";
+                    }
+                }
+            });
         });
     </script>
 
