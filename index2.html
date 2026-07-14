@@ -73,13 +73,205 @@
     <style>
         /* ── CUSTOM CONVERSION OPTIMIZED STYLES ── */
         body {
-            background-color: #080810;
-            background-image: 
-                radial-gradient(circle at 20% 15%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 60%, rgba(76, 140, 228, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            background-color: var(--bg);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+            background-size: 24px 24px;
             background-attachment: fixed;
-            background-size: cover;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ── FLOATING GLOWING COLOR BLURS (MESH SPHERES) ── */
+        .mesh-glow-orange {
+            position: absolute;
+            top: 15%;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+            animation: floatGlow1 25s infinite alternate ease-in-out;
+        }
+        .mesh-glow-purple {
+            position: absolute;
+            top: 45%;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+            animation: floatGlow2 30s infinite alternate ease-in-out;
+        }
+        @keyframes floatGlow1 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(100px) scale(1.2); }
+        }
+        @keyframes floatGlow2 {
+            0% { transform: translateY(0) scale(1.1); }
+            100% { transform: translateY(-120px) scale(0.9); }
+        }
+
+        /* ── GLOWING VIDEO PLAYER COMPONENT ── */
+        .video-player-wrap {
+            max-width: 680px;
+            margin: 32px auto 0;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .video-player-wrap:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 30px 60px rgba(249, 115, 22, 0.1), 0 0 40px rgba(249, 115, 22, 0.05);
+        }
+        .video-player-wrap video {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .video-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(8, 8, 16, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+            z-index: 2;
+        }
+        .video-player-wrap.playing .video-play-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .play-btn-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(249, 115, 22, 0.95);
+            border: 1px solid rgba(255,255,255,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.6rem;
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+            transition: transform 0.2s;
+            padding-left: 4px; /* Align play triangle */
+        }
+        .video-player-wrap:hover .play-btn-circle {
+            transform: scale(1.1);
+        }
+
+        /* ── INTERACTIVE BEFORE/AFTER SLIDER ── */
+        .before-after-slider {
+            max-width: 900px;
+            margin: 40px auto 0;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        }
+        .slider-img-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            position: relative;
+            display: block;
+        }
+        @media (max-width: 640px) {
+            .slider-img-container {
+                aspect-ratio: 4/3;
+            }
+        }
+        .slider-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slider-img.img-before {
+            filter: grayscale(100%) brightness(50%) contrast(90%);
+        }
+        .slider-img-after-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            z-index: 2;
+        }
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: #fff;
+            z-index: 10;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transform: translateX(-50%);
+        }
+        .slider-handle-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            background: var(--or);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+            pointer-events: none;
+        }
+        .slider-label {
+            position: absolute;
+            bottom: 16px;
+            padding: 6px 12px;
+            background: rgba(8, 8, 16, 0.85);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fff;
+            z-index: 5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .slider-label.label-before {
+            left: 16px;
+        }
+        .slider-label.label-after {
+            right: 16px;
         }
 
         .opt-hero {
@@ -972,6 +1164,10 @@
 
 <body>
 
+    <!-- Mesh Gradient Blobs for Background Depth -->
+    <div class="mesh-glow-orange"></div>
+    <div class="mesh-glow-purple"></div>
+
     <!-- ── TOP ANNOUNCEMENT BAR ── -->
     <div class="top-announcement">
         ⚡ Price rises to Rs. 4,999 once the next 3 slots are filled. (Current spots open: 3/300)
@@ -997,7 +1193,15 @@
         
         <p class="opt-sub">A structured 9-module video bootcamp teaching product photography, cinematic video ads, character design, and client outreach. No camera or design skills needed. Complete mobile workflow included.</p>
 
-        <div style="margin-bottom: 8px;">
+        <!-- Premium Floating Video Player -->
+        <div class="video-player-wrap" id="videoPlayer">
+            <video id="heroVideo" src="AI content is taking over the world. Most of the influencers you see now 100% AI generated. Wake.mp4" loop playsinline></video>
+            <div class="video-play-overlay">
+                <div class="play-btn-circle">▶</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 24px; margin-bottom: 8px;">
             <a href="/checkout" class="opt-cta-btn">Enroll Now — Just Rs. 1,999 →</a>
         </div>
 
@@ -1101,6 +1305,26 @@
         <div class="section-header">
             <h2>By the End of This Course,<br>You Will Be Able to Create:</h2>
             <p>Practical skills that you can sell to international brands immediately. Real student assets shown below.</p>
+        </div>
+
+        <!-- Interactive Before/After Product Slider -->
+        <div class="before-after-slider" id="productSlider" style="max-width: 800px; margin: 0 auto 48px;">
+            <div class="slider-img-container">
+                <!-- Before Image (Desaturated & Grayscale filter via CSS style rules) -->
+                <img src="assets/img/work-cream.png" class="slider-img img-before" alt="Before AI Studio Generation">
+                <span class="slider-label label-before">📸 Raw Mobile Photo</span>
+
+                <!-- After Image (Fully rendered colored version inside clipping layer) -->
+                <div class="slider-img-after-wrap" id="sliderAfterWrap">
+                    <img src="assets/img/work-cream.png" class="slider-img" alt="After AI Studio Generation">
+                    <span class="slider-label label-after">✨ Final AI Studio Ad</span>
+                </div>
+
+                <!-- Slider drag handler bar -->
+                <div class="slider-handle" id="sliderHandle">
+                    <div class="slider-handle-button">↔</div>
+                </div>
+            </div>
         </div>
 
         <div class="creation-grid">
@@ -1322,8 +1546,8 @@
 
         <div class="tab-container">
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('classroom')">📚 Classroom Dashboard</button>
-                <button class="tab-btn" onclick="switchTab('community')">💬 Active Student Feed (878+ Members)</button>
+                <button class="tab-btn active" onclick="switchTab(event, 'classroom')">📚 Classroom Dashboard</button>
+                <button class="tab-btn" onclick="switchTab(event, 'community')">💬 Active Student Feed (878+ Members)</button>
             </div>
 
             <!-- Classroom Tab Content -->
@@ -1535,12 +1759,80 @@
         });
 
         // Tab switcher logic
-        window.switchTab = function(tabId) {
+        window.switchTab = function(e, tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            event.currentTarget.classList.add('active');
+            e.currentTarget.classList.add('active');
             document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        // Video Player play/pause click handler
+        const videoPlayer = document.getElementById('videoPlayer');
+        const heroVideo = document.getElementById('heroVideo');
+        if (videoPlayer && heroVideo) {
+            videoPlayer.addEventListener('click', () => {
+                if (heroVideo.paused) {
+                    heroVideo.play();
+                    videoPlayer.classList.add('playing');
+                } else {
+                    heroVideo.pause();
+                    videoPlayer.classList.remove('playing');
+                }
+            });
+        }
+
+        // Before/After Slider drag logic
+        const productSlider = document.getElementById('productSlider');
+        const sliderAfterWrap = document.getElementById('sliderAfterWrap');
+        const sliderHandle = document.getElementById('sliderHandle');
+
+        if (productSlider && sliderAfterWrap && sliderHandle) {
+            let isDragging = false;
+
+            const updateSlider = (clientX) => {
+                const rect = productSlider.getBoundingClientRect();
+                const x = clientX - rect.left;
+                let percentage = (x / rect.width) * 100;
+
+                // Restrict percentage between 0% and 100%
+                if (percentage < 0) percentage = 0;
+                if (percentage > 100) percentage = 100;
+
+                // Update styling
+                sliderAfterWrap.style.clipPath = `polygon(${percentage}% 0, 100% 0, 100% 100%, ${percentage}% 100%)`;
+                sliderHandle.style.left = `${percentage}%`;
+            };
+
+            const onStart = () => {
+                isDragging = true;
+            };
+
+            const onEnd = () => {
+                isDragging = false;
+            };
+
+            const onMove = (e) => {
+                if (!isDragging) return;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                updateSlider(clientX);
+            };
+
+            // Event Listeners for drag
+            sliderHandle.addEventListener('mousedown', onStart);
+            window.addEventListener('mouseup', onEnd);
+            window.addEventListener('mousemove', onMove);
+
+            // Touch events for mobile
+            sliderHandle.addEventListener('touchstart', onStart);
+            window.addEventListener('touchend', onEnd);
+            window.addEventListener('touchmove', onMove);
+
+            // Double click to reset to 50%
+            productSlider.addEventListener('dblclick', () => {
+                sliderAfterWrap.style.clipPath = `polygon(50% 0, 100% 0, 100% 100%, 50% 100%)`;
+                sliderHandle.style.left = '50%';
+            });
         }
 
         // Module Accordion Expand/Collapse Functionality
