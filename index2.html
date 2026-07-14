@@ -825,10 +825,157 @@
             white-space: nowrap;
             transition: transform 0.1s active;
         }
+
+        /* ── TOP ANNOUNCEMENT BAR ── */
+        .top-announcement {
+            background: linear-gradient(90deg, #b91c1c, #ea580c);
+            color: #fff;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 10;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── HERO AVATARS & SOCIAL PROOF ── */
+        .hero-social-proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .avatar-stack {
+            display: flex;
+            align-items: center;
+        }
+        .avatar-stack img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--bg);
+            margin-left: -8px;
+        }
+        .avatar-stack img:first-child {
+            margin-left: 0;
+        }
+        .proof-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 0.82rem;
+            line-height: 1.3;
+            text-align: left;
+        }
+        .proof-text .stars {
+            color: #fbbf24;
+            font-weight: 900;
+        }
+        .proof-text .text {
+            color: var(--muted);
+        }
+
+        /* ── HERO PAYMENT METHOD BADGES ── */
+        .hero-payment-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            flex-wrap: wrap;
+        }
+        .badge-jc, .badge-ep, .badge-bt {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.78rem;
+        }
+        .badge-jc { color: #f59e0b; border-color: rgba(245, 158, 11, 0.2); }
+        .badge-ep { color: #10b981; border-color: rgba(16, 185, 129, 0.2); }
+        .badge-bt { color: #3b82f6; border-color: rgba(59, 130, 246, 0.2); }
+
+        /* ── CONTRAST SECTION (IS THIS YOU?) ── */
+        .contrast-section {
+            padding: 80px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .contrast-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .contrast-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+        .contrast-col {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+        .contrast-col.negative {
+            border-color: rgba(239, 68, 68, 0.15);
+            background: rgba(239, 68, 68, 0.01);
+        }
+        .contrast-col.positive {
+            border-color: rgba(16, 185, 129, 0.15);
+            background: rgba(16, 185, 129, 0.01);
+        }
+        .contrast-col h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .contrast-col.negative h3 { color: #f87171; }
+        .contrast-col.positive h3 { color: #34d399; }
+        .contrast-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .contrast-list li {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .contrast-list li span {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+        .contrast-list li .text-muted {
+            color: var(--muted);
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- ── TOP ANNOUNCEMENT BAR ── -->
+    <div class="top-announcement">
+        ⚡ Price rises to Rs. 4,999 once the next 3 slots are filled. (Current spots open: 3/300)
+    </div>
 
     <!-- ── NAVIGATION ── -->
     <nav>
@@ -842,9 +989,9 @@
     </nav>
 
     <!-- ── HERO SECTION ── -->
-    <header class="opt-hero">
+    <header class="opt-hero" style="padding-top: 60px;">
         <div class="opt-badge">🎓 Practical Skill-Based Bootcamp</div>
-        <h1 class="opt-title">Learn <span>AI Content Creation</span> — Master the Skills to Earn in Dollars from Pakistan</h1>
+        <h1 class="opt-title">Stop Scrolling. Start Earning.<br>Master the <span>AI Video Workflows</span> Brands Pay Rs. 30,000+ For.</h1>
         
         <p class="opt-urdu">موبائل اسکرولنگ بند کریں — وہ اسکل سیکھیں جو آپ کو ڈالرز کمانا سکھائے</p>
         
@@ -859,7 +1006,95 @@
             <span>Lifetime Portal Access</span>
             <span>Private Community Access</span>
         </div>
+
+        <!-- Localized Payment Badges -->
+        <div class="hero-payment-badges">
+            <span>Pay securely via:</span>
+            <span class="badge-ep">🟢 EasyPaisa</span>
+            <span class="badge-jc">🟡 JazzCash</span>
+            <span class="badge-bt">🔵 Local Bank Transfer</span>
+        </div>
+
+        <!-- Hero Social Proof Avatars -->
+        <div class="hero-social-proof">
+            <div class="avatar-stack">
+                <img src="assets/img/avatar-1.png" alt="Student">
+                <img src="assets/img/avatar-2.png" alt="Student">
+                <img src="assets/img/avatar-3.png" alt="Student">
+            </div>
+            <div class="proof-text">
+                <span class="stars">★★★★★</span>
+                <span class="text">Joined by 878+ active creators inside the community</span>
+            </div>
+        </div>
     </header>
+
+    <!-- ── CONTRAST SECTION (IS THIS YOU?) ── -->
+    <section class="contrast-section">
+        <div class="section-header" style="margin-bottom: 0;">
+            <span style="color: var(--or); text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Is This You?</span>
+            <h2>Stop Wasting Time on Recycled Courses</h2>
+            <p>Traditional freelance paths are crowded and getting automated by AI. Here is the shift you need to make:</p>
+        </div>
+
+        <div class="contrast-grid">
+            <!-- Negative State -->
+            <div class="contrast-col negative">
+                <h3>❌ The Old, Hard Way</h3>
+                <ul class="contrast-list">
+                    <li>
+                        <span>🔴</span>
+                        <div>
+                            <strong>Fiverr & Upwork Grind:</strong>
+                            <p class="text-muted" style="margin-top: 4px; font-size: 0.82rem;">Competing with 10,000 other sellers for cheap $5 data entry gigs.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>🔴</span>
+                        <div>
+                            <strong>Outdated Recycled Content:</strong>
+                            <p class="text-muted" style="margin-top: 4px; font-size: 0.82rem;">Watching long, boring theoretical guides with zero real-world client value.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>🔴</span>
+                        <div>
+                            <strong>Expensive PC Hardware:</strong>
+                            <p class="text-muted" style="margin-top: 4px; font-size: 0.82rem;">Needing a heavy graphic-card desktop rig just to render basic assets.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Positive State -->
+            <div class="contrast-col positive">
+                <h3>✅ The New AI Way</h3>
+                <ul class="contrast-list">
+                    <li>
+                        <span>🟢</span>
+                        <div>
+                            <strong>Direct Brand Retainers:</strong>
+                            <p class="text-muted" style="margin-top: 4px; font-size: 0.82rem;">Pitching direct to e-commerce owners on Instagram to close $300-$1,000 monthly payments.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>🟢</span>
+                        <div>
+                            <strong>100% Mobile Workflows:</strong>
+                            <p class="text-muted" style="margin-top: 4px; font-size: 0.82rem;">Create studio product shots, character models, and cinematic ads using standard smartphone apps.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>🟢</span>
+                        <div>
+                            <strong>878+ Member Feedback Group:</strong>
+                            <p class="text-muted" style="margin-top: 4px; font-size: 0.82rem;">Active student community with daily critique and support from mentor Farman Ali.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
     <!-- ── WHAT YOU'LL CREATE (WITH INTEGRATED PROOF) ── -->
     <section class="creation-section">
