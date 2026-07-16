@@ -489,7 +489,7 @@
                     <div id="previewName" class="preview-name">receipt.png</div>
                     <div id="previewSize" class="preview-size">0 KB</div>
                 </div>
-                <button type="button" class="change-file-btn" onclick="document.getElementById('receiptFile').click()">Change</button>
+                <button type="button" class="change-file-btn" onclick="resetReceiptSelection(event)">Change</button>
             </div>
 
             <!-- Direct Submit Button -->
@@ -763,10 +763,22 @@
             document.getElementById('previewSize').innerText = (file.size / 1024).toFixed(1) + ' KB';
             document.getElementById('filePreview').style.display = 'flex';
             
+            // Hide the large upload box to slide the submit button above the fold
+            document.getElementById('uploadBox').style.display = 'none';
+            
             // Enable submit button
             document.getElementById('submitBtn').removeAttribute('disabled');
         };
         reader.readAsDataURL(file);
+    }
+
+    function resetReceiptSelection(e) {
+        if (e) e.stopPropagation();
+        selectedFile = null;
+        document.getElementById('receiptFile').value = '';
+        document.getElementById('filePreview').style.display = 'none';
+        document.getElementById('uploadBox').style.display = 'flex';
+        document.getElementById('submitBtn').setAttribute('disabled', 'true');
     }
 
     // Drag and drop event handlers for upload box
