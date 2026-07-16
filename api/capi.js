@@ -101,7 +101,9 @@ module.exports = async (req, res) => {
             "ttclid": user_data.ttclid || '',
             "Traffic Type": custom_data.traffic_type || 'paid',
             "Value": custom_data.value || 1999,
-            "Upsell Selected": (custom_data.value && custom_data.value > 1999) ? 'Yes' : 'No'
+            "Upsell Selected": (custom_data.value && custom_data.value > 1999) ? 'Yes' : 'No',
+            "Receipt Link": req.body.receipt_url || custom_data.receipt_url || '',
+            "Conversion Name": req.body.conversion_name || 'Lead'
         };
         
         tasks.push(
