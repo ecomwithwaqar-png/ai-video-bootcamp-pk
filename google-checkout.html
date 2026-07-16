@@ -25,12 +25,11 @@
     </script>
     <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
 
-    <style>
         /* ── CUSTOM RECEIPT UPLOAD STYLES (PREMIUM REDESIGN) ── */
         .receipt-upload-box {
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
             border: 2px dashed rgba(255, 255, 255, 0.12);
-            padding: 30px 20px;
+            padding: 24px 16px;
             border-radius: 16px;
             text-align: center;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.03) 100%);
@@ -46,13 +45,13 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
         .receipt-upload-box:hover, .receipt-upload-box.dragover {
-            border-color: var(--or);
+            border-color: var(--primary);
             background: rgba(249, 115, 22, 0.04);
             box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
         }
         .upload-icon {
-            font-size: 2.2rem;
-            margin-bottom: 12px;
+            font-size: 2rem;
+            margin-bottom: 8px;
             display: block;
             filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.3));
             transition: transform 0.3s ease;
@@ -61,14 +60,14 @@
             transform: scale(1.1) translateY(-2px);
         }
         .upload-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: #fff;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             letter-spacing: -0.01em;
         }
         .upload-subtitle {
-            font-size: 0.8rem;
+            font-size: 0.76rem;
             color: var(--text-muted);
             line-height: 1.4;
             max-width: 290px;
@@ -76,40 +75,40 @@
         }
         .upload-trigger-btn {
             display: inline-block;
-            margin-top: 14px;
+            margin-top: 10px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 8px 20px;
+            padding: 8px 18px;
             border-radius: 8px;
             color: #fff;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
         .receipt-upload-box:hover .upload-trigger-btn {
-            background: var(--or);
-            border-color: var(--or);
+            background: var(--primary);
+            border-color: var(--primary);
             box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
         }
         .file-preview-container {
             display: none;
             align-items: center;
             justify-content: flex-start;
-            gap: 14px;
-            margin-top: 16px;
-            padding: 12px;
+            gap: 12px;
+            margin-top: 12px;
+            padding: 10px;
             background: rgba(16, 185, 129, 0.03);
             border: 1px solid rgba(16, 185, 129, 0.2);
             border-radius: 12px;
             transition: all 0.3s;
         }
         .preview-img {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
@@ -118,16 +117,16 @@
             flex-grow: 1;
         }
         .preview-name {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: #10b981;
-            max-width: 200px;
+            max-width: 180px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .preview-size {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
@@ -135,7 +134,7 @@
             background: transparent;
             border: none;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-decoration: underline;
             cursor: pointer;
@@ -150,30 +149,46 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin-top: 1.5rem;
-            background: var(--or);
+            margin-top: 1.25rem;
+            background: linear-gradient(135deg, var(--primary), #ea580c) !important;
             border: none;
-            padding: 18px;
+            padding: 16px;
             border-radius: 12px;
             color: #fff;
+            font-family: 'Outfit', sans-serif;
             font-size: 1.05rem;
-            font-weight: 900;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 4px 25px rgba(249, 115, 22, 0.3);
+            box-shadow: 0 4px 25px rgba(249, 115, 22, 0.35);
             transition: all 0.2s ease;
-            letter-spacing: -0.01em;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .submit-checkout-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 2.5s infinite;
         }
         .submit-checkout-btn:hover {
             transform: translateY(-2px);
-            background: #ea580c;
             box-shadow: 0 6px 30px rgba(249, 115, 22, 0.55);
         }
         .submit-checkout-btn:disabled {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.05) !important;
             color: rgba(255, 255, 255, 0.25);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+        .submit-checkout-btn:disabled::after {
+            display: none;
         }
         
         /* Loading States */
@@ -196,8 +211,8 @@
         
         .whatsapp-fallback {
             text-align: center;
-            margin-top: 1.2rem;
-            font-size: 0.82rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
         .whatsapp-fallback a {
@@ -210,6 +225,41 @@
         .whatsapp-fallback a:hover {
             color: #059669;
             border-bottom-style: solid;
+        }
+
+        /* Mobile Screen Adjustments */
+        @media (max-width: 640px) {
+            .receipt-upload-box {
+                padding: 18px 12px;
+                margin-top: 1rem;
+                border-radius: 12px;
+            }
+            .upload-icon {
+                font-size: 1.8rem;
+                margin-bottom: 6px;
+            }
+            .upload-title {
+                font-size: 0.9rem;
+            }
+            .upload-subtitle {
+                font-size: 0.72rem;
+                max-width: 240px;
+            }
+            .upload-trigger-btn {
+                margin-top: 8px;
+                padding: 6px 14px;
+                font-size: 0.78rem;
+            }
+            .submit-checkout-btn {
+                padding: 14px;
+                font-size: 0.95rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+            .whatsapp-fallback {
+                margin-top: 0.8rem;
+                font-size: 0.78rem;
+            }
         }
     </style>
     <link rel="stylesheet" href="assets/css/checkout.css?v=2.1">
@@ -747,6 +797,47 @@
         }
     }
 
+    function compressImage(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    const MAX_WIDTH = 1000;
+                    const MAX_HEIGHT = 1000;
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((blob) => {
+                        resolve(blob || file);
+                    }, 'image/jpeg', 0.65);
+                };
+                img.onerror = () => resolve(file);
+                img.src = e.target.result;
+            };
+            reader.onerror = () => resolve(file);
+            reader.readAsDataURL(file);
+        });
+    }
+
     async function submitDirectPurchase() {
         if (!selectedFile) return;
 
@@ -754,17 +845,22 @@
         const origText = btn.querySelector('span').innerText;
         btn.disabled = true;
         btn.classList.add('loading');
-        btn.querySelector('span').innerText = 'Uploading Receipt...';
+        btn.querySelector('span').innerText = 'Optimizing Image...';
 
         try {
+            // Compress the image file to under 50KB for rapid upload
+            const compressedFile = await compressImage(selectedFile);
+
             // Step 1: Upload Image (Triple-Fallback: ImgBB -> Telegra.ph -> Pixeldrain)
             let receiptUrl = "";
             let uploadSuccess = false;
 
+            btn.querySelector('span').innerText = 'Uploading Receipt...';
+
             // Attempt 1: ImgBB with new key
             try {
                 const formData = new FormData();
-                formData.append('image', selectedFile);
+                formData.append('image', compressedFile, 'receipt.jpg');
                 
                 const uploadRes = await fetch('https://api.imgbb.com/1/upload?key=c23c9c80a7382365aa420a4633b59c80', {
                     method: 'POST',
@@ -786,7 +882,7 @@
             if (!uploadSuccess) {
                 try {
                     const formData = new FormData();
-                    formData.append('file', selectedFile);
+                    formData.append('file', compressedFile, 'receipt.jpg');
 
                     const uploadRes = await fetch('https://telegra.ph/upload', {
                         method: 'POST',
@@ -809,7 +905,7 @@
             if (!uploadSuccess) {
                 try {
                     const formData = new FormData();
-                    formData.append('file', selectedFile);
+                    formData.append('file', compressedFile, 'receipt.jpg');
 
                     const uploadRes = await fetch('https://pixeldrain.com/api/file', {
                         method: 'POST',
