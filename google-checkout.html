@@ -26,79 +26,100 @@
     <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
 
     <style>
-        /* ── CUSTOM RECEIPT UPLOAD STYLES ── */
+        /* ── CUSTOM RECEIPT UPLOAD STYLES (PREMIUM REDESIGN) ── */
         .receipt-upload-box {
             margin-top: 1.5rem;
-            border: 2px dashed rgba(255, 255, 255, 0.15);
-            padding: 24px;
-            border-radius: 12px;
+            border: 2px dashed rgba(255, 255, 255, 0.12);
+            padding: 30px 20px;
+            border-radius: 16px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            transition: border-color 0.3s, background 0.3s;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
         .receipt-upload-box:hover, .receipt-upload-box.dragover {
             border-color: var(--or);
             background: rgba(249, 115, 22, 0.04);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
         }
         .upload-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
             display: block;
+            filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.3));
+            transition: transform 0.3s ease;
+        }
+        .receipt-upload-box:hover .upload-icon {
+            transform: scale(1.1) translateY(-2px);
         }
         .upload-title {
-            font-size: 0.95rem;
-            font-weight: 700;
+            font-size: 1rem;
+            font-weight: 800;
             color: #fff;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
         }
         .upload-subtitle {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             line-height: 1.4;
+            max-width: 290px;
+            margin: 0 auto;
         }
         .upload-trigger-btn {
             display: inline-block;
-            margin-top: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px 18px;
-            border-radius: 6px;
+            margin-top: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 8px 20px;
+            border-radius: 8px;
             color: #fff;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
         .receipt-upload-box:hover .upload-trigger-btn {
             background: var(--or);
             border-color: var(--or);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
         }
         .file-preview-container {
             display: none;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 12px;
-            padding: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 8px;
+            justify-content: flex-start;
+            gap: 14px;
+            margin-top: 16px;
+            padding: 12px;
+            background: rgba(16, 185, 129, 0.03);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s;
         }
         .preview-img {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .preview-details {
             text-align: left;
+            flex-grow: 1;
         }
         .preview-name {
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             color: #10b981;
             max-width: 200px;
             white-space: nowrap;
@@ -106,8 +127,23 @@
             text-overflow: ellipsis;
         }
         .preview-size {
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .change-file-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: color 0.2s;
+        }
+        .change-file-btn:hover {
+            color: #ef4444;
         }
         .submit-checkout-btn {
             display: flex;
@@ -117,23 +153,24 @@
             margin-top: 1.5rem;
             background: var(--or);
             border: none;
-            padding: 16px;
-            border-radius: 10px;
+            padding: 18px;
+            border-radius: 12px;
             color: #fff;
-            font-size: 1rem;
-            font-weight: 800;
+            font-size: 1.05rem;
+            font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
-            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 25px rgba(249, 115, 22, 0.3);
+            transition: all 0.2s ease;
+            letter-spacing: -0.01em;
         }
         .submit-checkout-btn:hover {
             transform: translateY(-2px);
             background: #ea580c;
-            box-shadow: 0 6px 25px rgba(249, 115, 22, 0.5);
+            box-shadow: 0 6px 30px rgba(249, 115, 22, 0.55);
         }
         .submit-checkout-btn:disabled {
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.4);
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.25);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -141,13 +178,13 @@
         
         /* Loading States */
         .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 0.8s linear infinite;
-            margin-right: 10px;
+            margin-right: 12px;
             display: none;
         }
         @keyframes spin {
@@ -159,16 +196,20 @@
         
         .whatsapp-fallback {
             text-align: center;
-            margin-top: 1rem;
-            font-size: 0.8rem;
+            margin-top: 1.2rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
         }
         .whatsapp-fallback a {
             color: #10b981;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
+            border-bottom: 1px dashed rgba(16, 185, 129, 0.4);
+            transition: all 0.2s;
         }
         .whatsapp-fallback a:hover {
-            text-decoration: underline;
+            color: #059669;
+            border-bottom-style: solid;
         }
     </style>
     <link rel="stylesheet" href="assets/css/checkout.css?v=2.1">
@@ -397,6 +438,7 @@
                     <div id="previewName" class="preview-name">receipt.png</div>
                     <div id="previewSize" class="preview-size">0 KB</div>
                 </div>
+                <button type="button" class="change-file-btn" onclick="document.getElementById('receiptFile').click()">Change</button>
             </div>
 
             <!-- Direct Submit Button -->
@@ -715,25 +757,81 @@
         btn.querySelector('span').innerText = 'Uploading Receipt...';
 
         try {
-            // Step 1: Upload Image to ImgBB
-            const formData = new FormData();
-            formData.append('image', selectedFile);
+            // Step 1: Upload Image (Triple-Fallback: ImgBB -> Telegra.ph -> Pixeldrain)
+            let receiptUrl = "";
+            let uploadSuccess = false;
 
-            const uploadRes = await fetch('https://api.imgbb.com/1/upload?key=92bd51b9e072b217ff24f5df34279b9b', {
-                method: 'POST',
-                body: formData
-            });
+            // Attempt 1: ImgBB with new key
+            try {
+                const formData = new FormData();
+                formData.append('image', selectedFile);
+                
+                const uploadRes = await fetch('https://api.imgbb.com/1/upload?key=c23c9c80a7382365aa420a4633b59c80', {
+                    method: 'POST',
+                    body: formData
+                });
 
-            if (!uploadRes.ok) {
-                throw new Error('Image upload failed. Please try again.');
+                if (uploadRes.ok) {
+                    const uploadJson = await uploadRes.json();
+                    if (uploadJson.success && uploadJson.data?.url) {
+                        receiptUrl = uploadJson.data.url;
+                        uploadSuccess = true;
+                    }
+                }
+            } catch (e) {
+                console.warn("ImgBB upload failed, trying Telegra.ph...", e);
             }
 
-            const uploadJson = await uploadRes.json();
-            if (!uploadJson.success) {
-                throw new Error(uploadJson.error?.message || 'Image host rejected file.');
+            // Attempt 2: Telegra.ph Fallback (Keyless & Anonymous)
+            if (!uploadSuccess) {
+                try {
+                    const formData = new FormData();
+                    formData.append('file', selectedFile);
+
+                    const uploadRes = await fetch('https://telegra.ph/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (uploadRes.ok) {
+                        const uploadJson = await uploadRes.json();
+                        if (uploadJson && uploadJson[0]?.src) {
+                            receiptUrl = 'https://telegra.ph' + uploadJson[0].src;
+                            uploadSuccess = true;
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Telegra.ph upload failed, trying Pixeldrain...", e);
+                }
             }
 
-            const receiptUrl = uploadJson.data.url;
+            // Attempt 3: Pixeldrain Fallback (Keyless & Anonymous)
+            if (!uploadSuccess) {
+                try {
+                    const formData = new FormData();
+                    formData.append('file', selectedFile);
+
+                    const uploadRes = await fetch('https://pixeldrain.com/api/file', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (uploadRes.ok) {
+                        const uploadJson = await uploadRes.json();
+                        if (uploadJson && uploadJson.success && uploadJson.id) {
+                            receiptUrl = 'https://pixeldrain.com/api/file/' + uploadJson.id;
+                            uploadSuccess = true;
+                        }
+                    }
+                } catch (e) {
+                    console.error("All upload fallback channels failed.", e);
+                }
+            }
+
+            if (!uploadSuccess) {
+                throw new Error("Receipt upload failed. Please verify your connection or click the WhatsApp link below to complete payment manually.");
+            }
+
             btn.querySelector('span').innerText = 'Registering Account...';
 
             // Step 2: Grab user info
