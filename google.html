@@ -858,8 +858,27 @@
             <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/terms#refund-policy">Refund Policy</a><br>
             © 2026 AIBootcamp. All rights reserved.
         </div>
-    </footer>
-
+    <script>
+        // Dynamically forward all landing page URL parameters (like gclid, utm_, fbclid) to checkout links
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentParams = window.location.search;
+            if (currentParams) {
+                const checkoutLinks = document.querySelectorAll('a[href*="google-checkout"]');
+                checkoutLinks.forEach(function (link) {
+                    try {
+                        const url = new URL(link.href, window.location.origin);
+                        const searchParams = new URLSearchParams(currentParams);
+                        searchParams.forEach(function (value, key) {
+                            url.searchParams.set(key, value);
+                        });
+                        link.href = url.pathname + url.search + url.hash;
+                    } catch (e) {
+                        console.error('Error appending params to checkout link:', e);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
