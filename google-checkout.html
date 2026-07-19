@@ -748,7 +748,7 @@
         const file = e.target.files[0];
         if (!file) return;
         
-        // Validate file type & size (max 5MB)
+        // 1. Validate file type & size (max 5MB)
         if (!file.type.startsWith('image/')) {
             alert('Please select an image file (PNG, JPG, JPEG).');
             return;
@@ -758,23 +758,56 @@
             return;
         }
 
-        selectedFile = file;
+        // 2. Freshness Check: Limit to screenshots taken in the last 36 hours
+        const fileAgeHours = (Date.now() - file.lastModified) / (1000 * 60 * 60);
+        if (fileAgeHours > 36) {
+            alert('Security Alert: This screenshot appears to be older than 24 hours. Please upload a fresh screenshot of today\'s payment transaction.');
+            e.target.value = '';
+            return;
+        }
 
-        // Display preview
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            document.getElementById('previewThumb').src = event.target.result;
-            document.getElementById('previewName').innerText = file.name;
-            document.getElementById('previewSize').innerText = (file.size / 1024).toFixed(1) + ' KB';
-            document.getElementById('filePreview').style.display = 'flex';
-            
-            // Hide the large upload box to slide the submit button above the fold
-            document.getElementById('uploadBox').style.display = 'none';
-            
-            // Enable submit button
-            document.getElementById('submitBtn').removeAttribute('disabled');
+        // 3. Aspect Ratio Check: Must be a vertical mobile screenshot (width / height <= 0.8)
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+        img.src = objectUrl;
+        
+        img.onload = function() {
+            const width = img.width;
+            const height = img.height;
+            URL.revokeObjectURL(objectUrl);
+
+            // Most mobile screenshots have a width-to-height ratio of 0.45 to 0.6.
+            // Square (1:1) or landscape (>1) images like product photos are blocked.
+            if (width / height > 0.8) {
+                alert('Security Alert: Please upload a vertical screenshot taken directly on a mobile phone (EasyPaisa/JazzCash app). Square or landscape images are not accepted.');
+                e.target.value = '';
+                return;
+            }
+
+            // All checks passed
+            selectedFile = file;
+
+            // Display preview
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('previewThumb').src = event.target.result;
+                document.getElementById('previewName').innerText = file.name;
+                document.getElementById('previewSize').innerText = (file.size / 1024).toFixed(1) + ' KB';
+                document.getElementById('filePreview').style.display = 'flex';
+                
+                // Hide the large upload box to slide the submit button above the fold
+                document.getElementById('uploadBox').style.display = 'none';
+                
+                // Enable submit button
+                document.getElementById('submitBtn').removeAttribute('disabled');
+            };
+            reader.readAsDataURL(file);
         };
-        reader.readAsDataURL(file);
+
+        img.onerror = function() {
+            URL.revokeObjectURL(objectUrl);
+            alert('Failed to process image. Please upload a valid receipt screenshot.');
+        };
     }
 
     function resetReceiptSelection(e) {
