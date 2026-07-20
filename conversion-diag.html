@@ -6,12 +6,12 @@
     <title>Conversion Diagnostic</title>
 
     <!-- Google Tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10327926458"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18327926458"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'AW-10327926458', { 'allow_enhanced_conversions': true });
+        gtag('config', 'AW-18327926458', { 'allow_enhanced_conversions': true });
     </script>
 
     <style>
@@ -85,7 +85,7 @@
             const tid = 'diag_' + Date.now();
             log('');
             log('─── Firing Submit Lead Form (Lead) ───', 'info');
-            log('send_to: AW-10327926458/2bx7CKWUxdecELrtt6NE', 'info');
+            log('send_to: AW-18327926458/2bx7CKWUxdEcELrtt6NE', 'info');
             log('transaction_id: ' + tid + '_lead', 'info');
 
             try {
@@ -94,7 +94,7 @@
                 });
 
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-10327926458/2bx7CKWUxdecELrtt6NE',
+                    'send_to': 'AW-18327926458/2bx7CKWUxdEcELrtt6NE',
                     'value': 1999.0,
                     'currency': 'PKR',
                     'transaction_id': tid + '_lead',
@@ -109,12 +109,12 @@
 
             log('');
             log('─── Firing Purchase ───', 'info');
-            log('send_to: AW-10327926458/3BddCKShxdZcELztt8EB', 'info');
+            log('send_to: AW-18327926458/33ddCKSHxdEcELrtt6NE', 'info');
             log('transaction_id: ' + tid + '_purchase', 'info');
 
             try {
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-10327926458/3BddCKShxdZcELztt8EB',
+                    'send_to': 'AW-18327926458/33ddCKSHxdEcELrtt6NE',
                     'value': 1999.0,
                     'currency': 'PKR',
                     'transaction_id': tid + '_purchase',

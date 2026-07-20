@@ -109,7 +109,7 @@ function CheckoutPanel({ spotsLeft }) {
         'phone_number': formattedPhone
       })
       window.gtag('event', 'conversion', {
-        'send_to': 'AW-10327926458/2bx7CKWUxdecELrtt6NE',
+        'send_to': 'AW-18327926458/2bx7CKWUxdEcELrtt6NE',
         'value': parseFloat(totalPrice),
         'currency': 'PKR',
         'transaction_id': gads_eid
