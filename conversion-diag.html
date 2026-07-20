@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Diagnostic</title>
+
+    <!-- Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10327926458"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-10327926458', { 'allow_enhanced_conversions': true });
+    </script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e2e8f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .card { background: #111; border: 1px solid #333; border-radius: 16px; padding: 40px; max-width: 600px; width: 90%; }
+        h1 { color: #f97316; margin-bottom: 8px; font-size: 22px; }
+        .subtitle { color: #64748b; margin-bottom: 24px; font-size: 14px; }
+        .log { background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 13px; line-height: 1.8; max-height: 400px; overflow-y: auto; }
+        .log .ok { color: #22c55e; }
+        .log .fail { color: #ef4444; }
+        .log .info { color: #3b82f6; }
+        .log .warn { color: #eab308; }
+        .btn { display: block; width: 100%; margin-top: 16px; padding: 14px; background: #f97316; color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; }
+        .btn:hover { background: #ea580c; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔬 Conversion Diagnostic</h1>
+        <p class="subtitle">This page fires ALL conversion tags on load. No form needed.</p>
+        <div class="log" id="log"></div>
+        <button class="btn" onclick="fireAll()">🔄 Re-fire All Tags Manually</button>
+    </div>
+
+    <script>
+        const logEl = document.getElementById('log');
+        function log(msg, cls) {
+            const line = document.createElement('div');
+            line.className = cls || '';
+            line.textContent = msg;
+            logEl.appendChild(line);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function fireAll() {
+            logEl.innerHTML = '';
+            log('─── Starting Diagnostic ───', 'info');
+
+            // Check 1: Is gtag loaded?
+            if (typeof gtag === 'function') {
+                log('✅ gtag() function exists', 'ok');
+            } else {
+                log('❌ gtag() NOT FOUND — script blocked?', 'fail');
+                return;
+            }
+
+            // Check 2: Is dataLayer present?
+            if (window.dataLayer && window.dataLayer.length > 0) {
+                log('✅ dataLayer has ' + window.dataLayer.length + ' entries', 'ok');
+            } else {
+                log('⚠️ dataLayer is empty or missing', 'warn');
+            }
+
+            // Check 3: GCLID
+            const gclid = localStorage.getItem('google_click_id');
+            if (gclid) {
+                log('✅ GCLID stored: ' + gclid, 'ok');
+            } else {
+                log('⚠️ No GCLID in localStorage (normal for organic visits)', 'warn');
+            }
+
+            // Check 4: URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlGclid = urlParams.get('gclid');
+            if (urlGclid) {
+                log('✅ GCLID in URL: ' + urlGclid, 'ok');
+                localStorage.setItem('google_click_id', urlGclid);
+            }
+
+            const tid = 'diag_' + Date.now();
+            log('');
+            log('─── Firing Submit Lead Form (Lead) ───', 'info');
+            log('send_to: AW-10327926458/2bx7CKWUxdecELrtt6NE', 'info');
+            log('transaction_id: ' + tid + '_lead', 'info');
+
+            try {
+                gtag('set', 'user_data', {
+                    'phone_number': '+923001234567'
+                });
+
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-10327926458/2bx7CKWUxdecELrtt6NE',
+                    'value': 1999.0,
+                    'currency': 'PKR',
+                    'transaction_id': tid + '_lead',
+                    'event_callback': function() {
+                        log('✅ LEAD event_callback received — Google got it!', 'ok');
+                    }
+                });
+                log('✅ Lead gtag() call executed', 'ok');
+            } catch(e) {
+                log('❌ Lead gtag() FAILED: ' + e.message, 'fail');
+            }
+
+            log('');
+            log('─── Firing Purchase ───', 'info');
+            log('send_to: AW-10327926458/3BddCKShxdZcELztt8EB', 'info');
+            log('transaction_id: ' + tid + '_purchase', 'info');
+
+            try {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-10327926458/3BddCKShxdZcELztt8EB',
+                    'value': 1999.0,
+                    'currency': 'PKR',
+                    'transaction_id': tid + '_purchase',
+                    'event_callback': function() {
+                        log('✅ PURCHASE event_callback received — Google got it!', 'ok');
+                    }
+                });
+                log('✅ Purchase gtag() call executed', 'ok');
+            } catch(e) {
+                log('❌ Purchase gtag() FAILED: ' + e.message, 'fail');
+            }
+
+            // Check 5: Monitor network requests
+            log('');
+            log('─── Checking Network Requests ───', 'info');
+            setTimeout(function() {
+                const entries = performance.getEntriesByType('resource');
+                const gadsRequests = entries.filter(e =>
+                    e.name.includes('googleadservices.com') ||
+                    e.name.includes('google.com/pagead') ||
+                    e.name.includes('googleads.g.doubleclick')
+                );
+
+                if (gadsRequests.length > 0) {
+                    log('✅ ' + gadsRequests.length + ' Google Ads network request(s) detected:', 'ok');
+                    gadsRequests.forEach(function(r) {
+                        const url = new URL(r.name);
+                        log('   → ' + url.hostname + url.pathname.substring(0, 40), 'ok');
+                    });
+                } else {
+                    log('❌ ZERO Google Ads network requests detected!', 'fail');
+                    log('   This means the browser is BLOCKING requests to Google Ads.', 'fail');
+                    log('   Check: ad blocker, Brave shields, DNS-level blocking (Pi-hole, NextDNS)', 'fail');
+                }
+
+                // Also check if gtag.js itself loaded
+                const gtagRequests = entries.filter(e =>
+                    e.name.includes('googletagmanager.com/gtag')
+                );
+                if (gtagRequests.length > 0) {
+                    log('✅ gtag.js script loaded from googletagmanager.com', 'ok');
+                } else {
+                    log('❌ gtag.js script did NOT load from googletagmanager.com!', 'fail');
+                }
+
+                log('');
+                log('─── Diagnostic Complete ───', 'info');
+                log('If you see event_callback messages above, your tags ARE sending.', 'info');
+                log('If not, something is blocking the outbound requests.', 'info');
+            }, 3000);
+        }
+
+        // Auto-fire on page load
+        window.addEventListener('load', function() {
+            setTimeout(fireAll, 500);
+        });
+    </script>
+</body>
+</html>
+</script>
+</body>
+</html>
