@@ -51,9 +51,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Generate a unique transaction ID for Google Ads to fix "Misconfigured" error
-            const transactionId = 'pur_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
-
             // 1. CAPI Bridge (Handles Meta & TikTok Browser + Server)
             if (window.CAPIBridge) {
                 CAPIBridge.pageView();
@@ -67,6 +64,7 @@
                 // Read checkout data saved by checkout.html to get phone and actual order value
                 let orderValue = 1999;
                 let phone = '';
+                let transactionId = '';
                 try {
                     const saved = sessionStorage.getItem('checkout_state');
                     if (saved) {
@@ -74,8 +72,14 @@
                         if (state.phone) phone = state.phone;
                         if (state.bump) orderValue += 499;
                         if (state.marketian) orderValue += 999;
+                        if (state.transactionId) transactionId = state.transactionId;
                     }
                 } catch(e) {}
+
+                // Generate fallback transaction ID if none was passed
+                if (!transactionId) {
+                    transactionId = 'pur_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+                }
 
                 // Set user_data for Enhanced Conversions matching
                 if (phone) {

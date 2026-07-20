@@ -1011,6 +1011,15 @@
             const offerName = offers.join(' + ');
             const gads_eid = sessionStorage.getItem('meta_eid_lead') || ('gads_' + Date.now());
 
+            // Retrieve attribution click IDs and traffic type
+            const fbc = localStorage.getItem('fb_click_id') || '';
+            const match = document.cookie.match(new RegExp('(^| )_fbp=([^;]+)'));
+            const fbp = match ? match[2] : (localStorage.getItem('meta_fbp') || '');
+            const gclid = localStorage.getItem('google_click_id') || '';
+            const ttclid = localStorage.getItem('tiktok_click_id') || '';
+            const isPaid = localStorage.getItem('is_paid_traffic') === 'true';
+            const trafficType = isPaid ? 'paid' : 'organic';
+
             // Step 3: Log Lead with screenshot link to Serverless API
             const payload = {
                 event_name: 'Lead',
@@ -1018,13 +1027,18 @@
                 event_source_url: window.location.href,
                 user_data: {
                     fn: name,
-                    ph: phone
+                    ph: phone,
+                    fbc: fbc,
+                    fbp: fbp,
+                    ttclid: ttclid
                 },
                 custom_data: {
                     city: city,
                     value: totalAmount,
-                    content_name: offerName
+                    content_name: offerName,
+                    traffic_type: trafficType
                 },
+                gclid: gclid,
                 receipt_url: receiptUrl,
                 conversion_name: 'Verified Purchase'
             };
@@ -1035,19 +1049,47 @@
                 body: JSON.stringify(payload)
             });
 
+            // Update sessionStorage to persist checkout state so success.html has customer details
+            try {
+                sessionStorage.setItem('checkout_state', JSON.stringify({
+                    step: 3,
+                    name: name,
+                    phone: phone,
+                    city: city || '',
+                    bump: hasBump,
+                    marketian: hasMarketian,
+                    transactionId: gads_eid // Sync transaction ID
+                }));
+            } catch (e) {
+                console.error('Error saving state:', e);
+            }
+
             // Step 4: Fire Browser-Side Google Ads Purchase Conversion tag
+            let redirected = false;
+            const doRedirect = () => {
+                if (redirected) return;
+                redirected = true;
+                window.location.href = '/success';
+            };
+
+            // Safety fallback: Redirect after 800ms if gtag is slow or blocked
+            const redirectTimeout = setTimeout(doRedirect, 800);
+
             if (window.gtag) {
                 gtag('event', 'conversion', {
                     'send_to': 'AW-10327926458/3BddCKShxdZcELztt8EB',
                     'value': parseFloat(totalAmount),
                     'currency': 'PKR',
-                    'transaction_id': gads_eid
+                    'transaction_id': gads_eid,
+                    'event_callback': () => {
+                        clearTimeout(redirectTimeout);
+                        doRedirect();
+                    }
                 });
+            } else {
+                clearTimeout(redirectTimeout);
+                doRedirect();
             }
-
-            // Step 5: Redirect to Success Page
-            sessionStorage.removeItem('checkout_state');
-            window.location.href = '/success';
 
         } catch (error) {
             console.error(error);
