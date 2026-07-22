@@ -1861,6 +1861,28 @@
         });
     </script>
 
+    <script>
+        // Forward all ad-attribution URL parameters (fbclid, gclid, ttclid, utm_*) to checkout links
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentParams = window.location.search;
+            if (currentParams) {
+                const checkoutLinks = document.querySelectorAll('a[href*="/checkout"]');
+                checkoutLinks.forEach(function (link) {
+                    try {
+                        const url = new URL(link.href, window.location.origin);
+                        const searchParams = new URLSearchParams(currentParams);
+                        searchParams.forEach(function (value, key) {
+                            url.searchParams.set(key, value);
+                        });
+                        link.href = url.pathname + url.search + url.hash;
+                    } catch (e) {
+                        console.error('Error appending params to checkout link:', e);
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

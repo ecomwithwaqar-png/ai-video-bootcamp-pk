@@ -30,15 +30,27 @@ window.CAPIBridge = (function () {
     // Reads fbclid from URL and formats it as the Meta fbc parameter.
     // Stored in localStorage so it survives navigation between pages.
     function captureFbc() {
+        // Priority 1: Read fbclid from URL (fresh ad click)
         const params = new URLSearchParams(window.location.search);
         const fbclid = params.get('fbclid');
         if (fbclid) {
             const fbc = 'fb.1.' + Date.now() + '.' + fbclid;
             localStorage.setItem('meta_fbc', fbc);
-            console.log('[CAPIBridge] ✅ fbc captured and stored:', fbc);
+            console.log('[CAPIBridge] ✅ fbc captured from URL:', fbc);
             return fbc;
         }
-        return localStorage.getItem('meta_fbc') || null;
+        // Priority 2: Read from localStorage (cross-page persistence)
+        const storedFbc = localStorage.getItem('meta_fbc');
+        if (storedFbc) return storedFbc;
+        // Priority 3: Read _fbc cookie set by Meta Pixel (in-app browser fallback)
+        const cookieMatch = document.cookie.match(/(^|;)\s*_fbc=([^;]+)/);
+        if (cookieMatch) {
+            const cookieFbc = cookieMatch[2];
+            localStorage.setItem('meta_fbc', cookieFbc);
+            console.log('[CAPIBridge] ✅ fbc recovered from _fbc cookie:', cookieFbc);
+            return cookieFbc;
+        }
+        return null;
     }
 
     // Reads the _fbp cookie set automatically by the Meta Pixel.
@@ -80,14 +92,26 @@ window.CAPIBridge = (function () {
 
     function isAdTraffic() {
         const params = new URLSearchParams(window.location.search);
-        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium') || params.has('gclid') || params.has('ttclid');
+        const hasParams = params.has('fbclid') || params.has('utm_source') || params.has('utm_medium') || params.has('gclid') || params.has('ttclid') || params.has('gad_source');
 
         if (hasParams) {
             localStorage.setItem('is_paid_traffic', 'true');
             return true;
         }
 
-        return localStorage.getItem('is_paid_traffic') === 'true';
+        // Fallback: check localStorage for any stored click IDs
+        if (localStorage.getItem('is_paid_traffic') === 'true') return true;
+        if (localStorage.getItem('meta_fbc')) return true;
+        if (localStorage.getItem('google_click_id')) return true;
+        if (localStorage.getItem('tiktok_click_id')) return true;
+
+        // Fallback: check _fbc cookie set by Meta Pixel
+        if (document.cookie.match(/(^|;)\s*_fbc=/)) {
+            localStorage.setItem('is_paid_traffic', 'true');
+            return true;
+        }
+
+        return false;
     }
 
     // Run attribution captures immediately on script load
