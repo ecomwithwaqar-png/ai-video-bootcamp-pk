@@ -473,34 +473,15 @@
                 </div>
             </div>
 
-            <!-- Warning Alert for Fake Screenshots -->
-            <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #EF4444; padding: 12px 16px; border-radius: 8px; margin: 20px 0; font-size: 0.9rem; line-height: 1.4; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                <span style="color: #EF4444; font-weight: 800;">[WARNING]</span> <span style="font-weight: 600; color: #f3f4f6;">Submitting a Fake Payment Screenshot won't get you access (payments are verified manually)!</span>
-            </div>
-
-            <!-- Direct Receipt Upload Box -->
-            <div class="receipt-upload-box" id="uploadBox" onclick="document.getElementById('receiptFile').click()">
-                <span class="upload-icon">📁</span>
-                <div class="upload-title">Upload Payment Screenshot</div>
-                <div class="upload-subtitle">Click or drag & drop your EasyPaisa, JazzCash, or Bank transfer receipt screenshot here.</div>
-                <button type="button" class="upload-trigger-btn">Select Image</button>
-                <input type="file" id="receiptFile" accept="image/*" style="display: none;" onchange="handleReceiptSelect(event)">
-            </div>
-
-            <!-- File Upload Preview Container -->
-            <div class="file-preview-container" id="filePreview">
-                <img id="previewThumb" class="preview-img" src="" alt="Receipt Preview">
-                <div class="preview-details">
-                    <div id="previewName" class="preview-name">receipt.png</div>
-                    <div id="previewSize" class="preview-size">0 KB</div>
-                </div>
-                <button type="button" class="change-file-btn" onclick="resetReceiptSelection(event)">Change</button>
+            <!-- Instructions Banner -->
+            <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10B981; padding: 14px 16px; border-radius: 12px; margin: 20px 0; font-size: 0.92rem; line-height: 1.5; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <span style="color: #10B981; font-weight: 800;">✓ NEXT STEP:</span> <span style="font-weight: 600; color: #f3f4f6;">Send payment to any account above, then click the button below to confirm your enrollment!</span>
             </div>
 
             <!-- Direct Submit Button -->
-            <button class="submit-checkout-btn" id="submitBtn" onclick="submitDirectPurchase()" disabled>
+            <button class="submit-checkout-btn" id="submitBtn" onclick="submitDirectPurchase()">
                 <div class="spinner"></div>
-                <span>Complete Registration & Activate →</span>
+                <span>I've Sent the Payment — Complete Registration →</span>
             </button>
 
             <!-- WhatsApp Secondary Fallback -->
@@ -890,98 +871,14 @@
     }
 
     async function submitDirectPurchase() {
-        if (!selectedFile) return;
-
         const btn = document.getElementById('submitBtn');
         const origText = btn.querySelector('span').innerText;
         btn.disabled = true;
         btn.classList.add('loading');
-        btn.querySelector('span').innerText = 'Optimizing Image...';
+        btn.querySelector('span').innerText = 'Registering Account...';
 
         try {
-            // Compress the image file to under 50KB for rapid upload
-            const compressedFile = await compressImage(selectedFile);
-
-            // Step 1: Upload Image (Triple-Fallback: ImgBB -> Telegra.ph -> Pixeldrain)
-            let receiptUrl = "";
-            let uploadSuccess = false;
-
-            btn.querySelector('span').innerText = 'Uploading Receipt...';
-
-            // Attempt 1: ImgBB with new key
-            try {
-                const formData = new FormData();
-                formData.append('image', compressedFile, 'receipt.jpg');
-                
-                const uploadRes = await fetch('https://api.imgbb.com/1/upload?key=c23c9c80a7382365aa420a4633b59c80', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (uploadRes.ok) {
-                    const uploadJson = await uploadRes.json();
-                    if (uploadJson.success && uploadJson.data?.url) {
-                        receiptUrl = uploadJson.data.url;
-                        uploadSuccess = true;
-                    }
-                }
-            } catch (e) {
-                console.warn("ImgBB upload failed, trying Telegra.ph...", e);
-            }
-
-            // Attempt 2: Telegra.ph Fallback (Keyless & Anonymous)
-            if (!uploadSuccess) {
-                try {
-                    const formData = new FormData();
-                    formData.append('file', compressedFile, 'receipt.jpg');
-
-                    const uploadRes = await fetch('https://telegra.ph/upload', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (uploadRes.ok) {
-                        const uploadJson = await uploadRes.json();
-                        if (uploadJson && uploadJson[0]?.src) {
-                            receiptUrl = 'https://telegra.ph' + uploadJson[0].src;
-                            uploadSuccess = true;
-                        }
-                    }
-                } catch (e) {
-                    console.warn("Telegra.ph upload failed, trying Pixeldrain...", e);
-                }
-            }
-
-            // Attempt 3: Pixeldrain Fallback (Keyless & Anonymous)
-            if (!uploadSuccess) {
-                try {
-                    const formData = new FormData();
-                    formData.append('file', compressedFile, 'receipt.jpg');
-
-                    const uploadRes = await fetch('https://pixeldrain.com/api/file', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (uploadRes.ok) {
-                        const uploadJson = await uploadRes.json();
-                        if (uploadJson && uploadJson.success && uploadJson.id) {
-                            receiptUrl = 'https://pixeldrain.com/api/file/' + uploadJson.id;
-                            uploadSuccess = true;
-                        }
-                    }
-                } catch (e) {
-                    console.error("All upload fallback channels failed.", e);
-                }
-            }
-
-            if (!uploadSuccess) {
-                throw new Error("Receipt upload failed. Please verify your connection or click the WhatsApp link below to complete payment manually.");
-            }
-
-            btn.querySelector('span').innerText = 'Registering Account...';
-
-            // Step 2: Grab user info
+            // Step 1: Grab user info
             const name = document.getElementById('inp-name').value.trim();
             const phoneInput = document.getElementById('inp-phone').value.trim();
             const city = document.getElementById('inp-city').value || 'Not specified';
@@ -1020,7 +917,7 @@
             const isPaid = localStorage.getItem('is_paid_traffic') === 'true';
             const trafficType = isPaid ? 'paid' : 'organic';
 
-            // Step 3: Log Lead with screenshot link to Serverless API
+            // Step 2: Log Lead to Serverless API & Google Sheet
             const payload = {
                 event_name: 'Lead',
                 event_id: gads_eid,
@@ -1039,11 +936,11 @@
                     traffic_type: trafficType
                 },
                 gclid: gclid,
-                receipt_url: receiptUrl,
+                receipt_url: 'Manual Transfer (Pending Verification)',
                 conversion_name: 'Verified Purchase'
             };
 
-            const sheetsRes = await fetch('/api/capi', {
+            await fetch('/api/capi', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -1064,7 +961,7 @@
                 console.error('Error saving state:', e);
             }
 
-            // Step 4: Fire Browser-Side Google Ads Purchase Conversion tag
+            // Step 3: Fire Browser-Side Google Ads Purchase Conversion tag
             let redirected = false;
             const doRedirect = () => {
                 if (redirected) return;
@@ -1093,7 +990,7 @@
 
         } catch (error) {
             console.error(error);
-            alert('Registration Error: ' + error.message + '\n\nIf this persists, please use the WhatsApp fallback link below to submit payment.');
+            alert('Registration Error: ' + error.message + '\n\nIf this persists, please use the WhatsApp contact link below to complete payment manually.');
             btn.disabled = false;
             btn.classList.remove('loading');
             btn.querySelector('span').innerText = origText;
