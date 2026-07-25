@@ -106,7 +106,7 @@ function onEditTrigger(e) {
           var pad = function(n) { return n < 10 ? '0' + n : n; };
           var convTime = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' +
                          pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' +0500';
-          var convValue = Number(u.value) || 1999;
+          var convValue = Number(u.value) || 2499;
           gadsSheet.appendRow([u.gclid, convTime, 'Verified Purchase', convValue, 'PKR']);
           Logger.log('Google Ads Upload: Verified Purchase row added for gclid: ' + u.gclid.substring(0, 30) + '...');
         } else {
@@ -163,8 +163,8 @@ function sendPurchaseToMeta(u) {
       user_data:         userData,
       custom_data: {
         currency:     'PKR',
-        value:        Number(u.value) || 1999,
-        content_name: Number(u.value) > 1999 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Masterclass',
+        value:        Number(u.value) || 2499,
+        content_name: Number(u.value) > 2499 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Masterclass',
         content_ids:  ['avb_001'],
         content_type: 'product'
       }

@@ -226,7 +226,7 @@ window.CAPIBridge = (function () {
                 content_category: 'Online Course',
                 content_ids: ['avb_001'],
                 content_type: 'product',
-                value: 1999,
+                value: 2499,
                 currency: 'PKR'
             });
         },
@@ -240,7 +240,7 @@ window.CAPIBridge = (function () {
                 content_name: 'AI Video Bootcamp',
                 content_category: 'Online Course',
                 currency: 'PKR',
-                value: 1999
+                value: 2499
             }, customParams, normalizedUserData);
         },
         initiateCheckout: function () {
@@ -249,7 +249,7 @@ window.CAPIBridge = (function () {
                 content_ids: ['avb_001'],
                 content_type: 'product',
                 currency: 'PKR',
-                value: 1999
+                value: 2499
             });
         },
         purchase: function (method = 'whatsapp_click') {
@@ -258,7 +258,7 @@ window.CAPIBridge = (function () {
                 content_ids: ['avb_001'],
                 content_type: 'product',
                 currency: 'PKR',
-                value: 1999
+                value: 2499
             }, {
                 payment_method: method
             });
