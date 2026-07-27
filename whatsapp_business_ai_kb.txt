@@ -8,7 +8,7 @@
 - Core Value: Learn to create cinematic, photorealistic AI-generated commercials and video editing in Urdu/Hindi to land freelance clients.
 
 ## 2. COURSE STRUCTURE & MODULES
-The course consists of 9 modules teaching hands-on AI video creation tools:
+The course consists of 10 modules teaching hands-on AI video creation tools:
 - Module 1: Introduction to AI Video Production
 - Module 2: Prompt Engineering Secrets for Video Creators
 - Module 3: Dynamic Image Generation (Midjourney, Flux, Stable Diffusion)
