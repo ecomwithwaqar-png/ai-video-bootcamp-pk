@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechPulse AI Bootcamp — Learn AI Videos, Earn in 14 Days</title>
+  <meta name="description" content="Pakistan's top AI Creative training. Learn high-demand AI video ads, land your first client during training — or get your money back.">
+  <meta property="og:image" content="/assets/img/og-image.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Facebook Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2537674906664372');
+  fbq('init', '1031867333130425');
+  fbq('init', '2246819142737969');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2537674906664372&ev=PageView&noscript=1"/></noscript>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1031867333130425&ev=PageView&noscript=1"/></noscript>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2246819142737969&ev=PageView&noscript=1"/></noscript>
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --light-gray: #f8fafc;
+      --navy: #0f172a;
+      --blue: #2563eb;
+      --cyan: #06b6d4;
+      --border: #e2e8f0;
+      --muted: #64748b;
+      --primary-gradient: linear-gradient(135deg, #2563eb, #06b6d4);
+      --green: #10b981;
+      
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-ui: 'Inter', sans-serif;
+      
+      --max-width: 1152px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      color: var(--navy);
+      background-color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Gradients & Utilities */
+    .text-gradient {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .bg-gradient {
+      background: var(--primary-gradient);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: var(--font-ui);
+      background: rgba(37,99,235,0.1);
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    
+    .badge-orange {
+      background: #fff7ed;
+      color: #ea580c;
+      border: 1px solid #ffedd5;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: var(--white);
+      box-shadow: 0 0 24px rgba(37,99,235,0.15);
+    }
+    
+    .btn-primary:hover {
+      box-shadow: 0 0 32px rgba(37,99,235,0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--border);
+    }
+    
+    .btn-outline:hover {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    section { padding: 80px 0; }
+    .bg-light { background-color: var(--light-gray); }
+    .bg-dark { background-color: var(--navy); color: var(--white); }
+
+    .section-title {
+      font-size: clamp(1.875rem, 3vw, 3rem);
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+    }
+
+    /* 1. STICKY HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-logo img { width: 40px; height: 40px; border-radius: 8px; }
+    .header-logo-text h3 { font-size: 1.125rem; line-height: 1; margin:0; }
+    .header-logo-text span { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; }
+    
+    .header-center { display: none; }
+    @media (min-width: 768px) {
+      .header-center {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+    
+    .pulsing-dot {
+      width: 8px; height: 8px;
+      background: #ea580c;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(234, 88, 12, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+    }
+
+    /* 2. HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 32px 0 24px;
+    }
+    
+    .hero h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      margin: 8px auto 8px;
+      max-width: 860px;
+      line-height: 1.15;
+    }
+    
+    .hero p.subheadline {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 16px;
+      line-height: 1.5;
+    }
+    
+    .hero-video {
+      max-width: 720px;
+      margin: 0 auto 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+      aspect-ratio: 16/9;
+      border: 1px solid var(--border);
+    }
+    
+    .hero-video iframe {
+      width: 100%; height: 100%; border: none;
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0;
+      max-width: 720px;
+      margin: 0 auto 16px;
+      overflow: hidden;
+    }
+    
+    .stats-strip > div {
+      text-align: center;
+      font-weight: 700;
+      font-family: var(--font-display);
+      padding: 16px 12px;
+      border-right: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .stats-strip > div:last-child { border-right: none; }
+    .stats-strip .stat-label {
+      display: block; font-size: 0.7rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); margin-top: 2px; font-family: var(--font-ui);
+    }
+    @media (max-width: 640px) {
+      .stats-strip { grid-template-columns: 1fr; }
+      .stats-strip > div { border-right: none; border-bottom: 1px solid var(--border); }
+      .stats-strip > div:last-child { border-bottom: none; }
+    }
+    
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .hero-tags .tag {
+      display: flex; align-items: center; gap: 6px;
+      background: #f0fdf4; color: #15803d;
+      padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 500;
+    }
+    .hero-tags .tag.skool { background: #f1f5f9; color: var(--navy); overflow: hidden; }
+    .hero-tags .tag.skool img { height: 18px; width: auto; max-width: 80px; vertical-align: middle; display: inline-block; }
+
+    /* 3. MARQUEE */
+    .marquee-container {
+      background: var(--primary-gradient);
+      color: var(--white);
+      padding: 16px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 25s linear infinite;
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+    .marquee-item { display: inline-flex; align-items: center; margin: 0 24px; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* 4. PRICING */
+    .pricing-card {
+      position: relative;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .pricing-card::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, rgba(255,255,255,0) 70%);
+      z-index: -1;
+    }
+    .price-wrap { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin: 24px 0; }
+    .price-wrap h3 { font-size: 3.5rem; line-height: 1; }
+    .price-wrap .strike { text-decoration: line-through; color: var(--muted); font-size: 1.5rem; }
+    .price-wrap .discount { color: var(--green); font-weight: 700; background: #ecfdf5; padding: 4px 8px; border-radius: 8px; }
+    
+    .progress-wrap { margin: 24px 0; text-align: left; }
+    .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+    .progress-fill { height: 100%; background: var(--primary-gradient); width: 96%; border-radius: 4px; }
+    .progress-text { display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600; }
+    
+    /* 5. SUCCESS STORIES */
+    .success-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 640px) { .success-grid { grid-template-columns: 1fr; gap: 24px; } }
+    .success-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 12px; 
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .success-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .success-card .ss-img-wrap {
+      border-radius: 14px; overflow: hidden; background: #0f172a;
+    }
+    .success-card img { width: 100%; display: block; object-fit: cover; }
+    .success-card figcaption {
+      padding: 16px 4px 4px; text-align: center;
+      font-size: 0.875rem; line-height: 1.5; color: var(--muted); font-weight: 500;
+    }
+
+    /* 6. MODULES */
+    .accordion { max-width: 800px; margin: 0 auto; }
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+      background: var(--white);
+    }
+    .accordion-header {
+      padding: 16px 20px; background: var(--white); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1rem;
+    }
+    .accordion-header-left {
+      display: flex; align-items: center; gap: 12px; text-align: left;
+    }
+    .module-badge {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--blue); font-weight: 700; font-size: 0.75rem;
+      padding: 4px 10px; border-radius: 8px; font-family: var(--font-display);
+      flex-shrink: 0;
+    }
+    .module-title { font-weight: 700; font-size: 1rem; color: var(--navy); }
+    .accordion-content {
+      padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+      background: var(--light-gray);
+    }
+    .accordion-item.active .accordion-content { padding: 16px 20px; max-height: 500px; }
+    .accordion-item.active .accordion-header .chevron { transform: rotate(180deg); }
+    .chevron { transition: transform 0.3s ease; flex-shrink: 0; color: var(--muted); }
+    
+    .module-bonus-card {
+      max-width: 800px; margin: 32px auto 0;
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      padding: 2px; border-radius: 16px; box-shadow: 0 0 24px rgba(37,99,235,0.15);
+    }
+    .module-bonus-inner {
+      background: var(--white); border-radius: 14px; padding: 24px 32px;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    }
+    @media (max-width: 640px) {
+      .module-bonus-inner { flex-direction: column; align-items: flex-start; text-align: left; }
+    }
+    .module-bonus-badge {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--blue); margin-bottom: 4px;
+    }
+    .module-bonus-title { font-size: 1.125rem; font-weight: 700; margin-bottom: 4px; }
+    .module-bonus-desc { font-size: 0.875rem; color: var(--muted); }
+    .module-bonus-price { text-align: right; flex-shrink: 0; }
+    .module-bonus-old { font-size: 0.875rem; text-decoration: line-through; color: var(--muted); }
+    .module-bonus-free { font-size: 1.5rem; font-weight: 800; font-family: var(--font-display); }
+
+    /* 7. REAL ACCOUNTS */
+    .real-accounts-grid {
+      display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center;
+    }
+    @media (max-width: 768px) { .real-accounts-grid { grid-template-columns: 1fr; } }
+    .ra-image img { width: 100%; border-radius: 16px; box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+    .ra-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 480px) { .ra-cards { grid-template-columns: 1fr; } }
+
+    /* 8. TESTIMONIALS */
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+    }
+    .testi-card { display: flex; flex-direction: column; }
+    .stars { color: #eab308; margin-bottom: 12px; }
+    .testi-card p { font-size: 1.125rem; font-style: italic; margin: 16px 0; flex-grow: 1; }
+    .testi-user { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--primary-gradient); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; }
+
+    /* 9 & 10. OUTCOMES / INCOME */
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    @media (max-width: 992px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .grid-4 { grid-template-columns: 1fr; } }
+
+    /* 11. ROADMAP */
+    .roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    @media (max-width: 768px) { .roadmap-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .roadmap-grid { grid-template-columns: 1fr; } }
+    .roadmap-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; position: relative;
+    }
+    .roadmap-card .day-badge {
+      position: absolute; top: -12px; left: 24px;
+      background: var(--navy); color: var(--white);
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; padding: 4px 12px; border-radius: 99px;
+    }
+    .roadmap-card .step-num {
+      font-family: var(--font-display); font-size: 2.5rem; font-weight: 800;
+      background: var(--primary-gradient); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .roadmap-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
+    .roadmap-card p { color: var(--muted); font-size: 0.875rem; margin: 0; }
+
+    /* 12. WHO IT'S FOR */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 768px) { .grid-3 { grid-template-columns: 1fr; } }
+    .who-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--primary-gradient); color: var(--white);
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+    .card:hover .who-icon { transform: scale(1.1); }
+
+    /* 14. FINAL CTA */
+    .final-cta { text-align: center; padding: 100px 0; }
+    .final-cta h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 24px; }
+
+    /* FOOTER */
+    footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); color: var(--muted); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
+    .footer-links a:hover { color: var(--navy); }
+
+    /* WHATSAPP FLOAT */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      width: 60px; height: 60px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease; animation: bounce 2s infinite;
+    }
+    .wa-float:hover { transform: scale(1.1); animation: none; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- 1. STICKY HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="header-logo">
+        <img src="/assets/logos/aibootcamp_square.png" alt="TechPulse" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcmV4PSI0MCIgZmlsbD0iIzI1NjNlYiIvPg=='">
+        <div class="header-logo-text">
+          <h3>TechPulse</h3>
+          <span>AI BOOTCAMP</span>
+        </div>
+      </div>
+      <div class="header-center badge badge-orange" style="margin:0;">
+        <span class="pulsing-dot"></span>
+        &nbsp; 1,057 slots filled
+      </div>
+      <a href="/checkout" class="btn btn-primary">Enroll Now &rarr;</a>
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section class="hero bg-light">
+    <div class="container fade-in">
+      <div class="badge">🇵🇰 Pakistan's Top AI Creative Training</div>
+      <h1>Learn the high-demand <span class="text-gradient">AI Videos</span> skill before the market gets saturated, and become the creator brands are looking for</h1>
+      <p class="subheadline">A 14-days result-oriented bootcamp built for Pakistani creators. Real tools, real clients, real income — <strong>Taught in Urdu and English</strong>.</p>
+      
+      <div class="hero-video">
+        <iframe src="https://www.youtube.com/embed/NBnLNuTauqY?rel=0&modestbranding=1&playsinline=1&enablejsapi=1" title="TechPulse AI Bootcamp" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="/checkout" class="btn btn-primary">Enroll Now &rarr;</a>
+        <a href="#modules" class="btn btn-outline">See Modules &darr;</a>
+      </div>
+      
+      <div class="trust-badges">
+        <span>&check; Money-back guarantee</span>
+        <span>&check; Lifetime access</span>
+        <span>&check; Built for Pakistan</span>
+      </div>
+      
+      <div class="stats-strip">
+        <div>10<span class="stat-label">Modules</span></div>
+        <div>Learn at your own Pace</div>
+        <div>Rs. 1,499<span class="stat-label">Today Only</span></div>
+      </div>
+      
+      <div class="hero-tags">
+        <div class="tag">&check; All sessions are recorded</div>
+        <div class="tag skool">
+          <img src="/assets/logos/aibootcamp_landscape.png" alt="" style="margin-right:4px;" onerror="this.style.display='none'"> Hosted on Skool Community
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MARQUEE BANNER -->
+  <div class="marquee-container">
+    <div class="marquee-content">
+      <div class="marquee-item">✨ Intro Price Rs. 1,499</div>
+      <div class="marquee-item">✨ 1,057 of 1,100 Slots Filled</div>
+      <div class="marquee-item">✨ 1,057 students enrolled</div>
+      <div class="marquee-item">✨ Price increasing soon</div>
+      <div class="marquee-item">✨ Free hidden methods included</div>
+      <!-- Duplicate for loop -->
+      <div class="marquee-item">✨ Intro Price Rs. 1,499</div>
+      <div class="marquee-item">✨ 1,057 of 1,100 Slots Filled</div>
+      <div class="marquee-item">✨ 1,057 students enrolled</div>
+      <div class="marquee-item">✨ Price increasing soon</div>
+      <div class="marquee-item">✨ Free hidden methods included</div>
+    </div>
+  </div>
+
+  <!-- 4. PRICING / ENROLL SECTION -->
+  <section id="enroll" class="fade-in">
+    <div class="container">
+      <div class="pricing-card">
+        <div class="badge badge-orange" style="margin:0 auto 16px;">🇵🇰 AZADI SPECIAL OFFER</div>
+        <h2>Join TechPulse AI Bootcamp</h2>
+        
+        <div class="price-wrap">
+          <span class="strike">Rs. 7,999</span>
+          <h3>Rs. 1,499</h3>
+          <span class="discount">69% OFF</span>
+        </div>
+        
+        <div class="progress-wrap">
+          <div class="progress-text">
+            <span>1,057 enrolled</span>
+            <span style="color: #ea580c;">43 slots left</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+        
+        <a href="/checkout" class="btn btn-primary" style="width: 100%; margin-bottom: 16px;">Enroll Now &rarr;</a>
+        <p style="color: var(--muted); font-size: 0.875rem;">🔒 Secure &middot; One-time payment &middot; Lifetime access</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SUCCESS STORIES SECTION -->
+  <section class="bg-light fade-in">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="badge">Success Stories</div>
+        <h2 class="section-title">A Glimpse of Our Previous Batch's Success</h2>
+      </div>
+      
+      <div class="success-grid">
+        <figure class="success-card">
+          <div class="ss-img-wrap">
+            <img src="assets/img/community/ss-kashif-earnings.png" alt="Student WhatsApp showing $194 earned from Facebook bonus" loading="lazy">
+          </div>
+          <figcaption>Student earned $194 just from Extra Bonus from Facebook with AI Content only.</figcaption>
+        </figure>
+        <figure class="success-card">
+          <div class="ss-img-wrap">
+            <img src="assets/img/community/ss-nimra-viral.png" alt="Student insights showing 2.8M views on AI podcast video" loading="lazy">
+          </div>
+          <figcaption>2.8M views on single video — AI Podcast Videos getting huge virality and it's an Evergreen niche to work on.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MODULES SECTION -->
+  <section id="modules" class="fade-in bg-light">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="badge">Curriculum</div>
+        <h2 class="section-title">10 Modules. Zero fluff.</h2>
+      </div>
+      
+      <div class="accordion">
+        <!-- Module 1 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 01</span>
+              <span class="module-title">Welcome to the Future</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Introduction to the AI landscape and setting up your creative environment.</p>
+          </div>
+        </div>
+        <!-- Module 2 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 02</span>
+              <span class="module-title">AI Ka Dimag Samjho</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Understanding how AI models work and how to communicate with them effectively.</p>
+          </div>
+        </div>
+        <!-- Module 3 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 03</span>
+              <span class="module-title">Prompt Engineering — Asli Game Yahan Hai</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Master the art of prompt engineering to get exactly what you want from AI.</p>
+          </div>
+        </div>
+        <!-- Module 4 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 04</span>
+              <span class="module-title">AI Image Generation — Yahan Se Maza Shuru Hota Hai</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Creating stunning visuals using Midjourney, Stable Diffusion, and other top tools.</p>
+          </div>
+        </div>
+        <!-- Module 5 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 05</span>
+              <span class="module-title">AI Voice & Audio — Bina Mic Ke Studio Quality</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Generate hyper-realistic voiceovers and audio tracks without any equipment.</p>
+          </div>
+        </div>
+        <!-- Module 6 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 06</span>
+              <span class="module-title">AI Video Generation — Lights, Camera, No Crew Needed</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Bringing images to life and generating video from scratch using AI.</p>
+          </div>
+        </div>
+        <!-- Module 7 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 07</span>
+              <span class="module-title">Editing & Final Ad Assembly — Jahan Raw Becomes Ready</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Editing workflows to combine AI assets into high-converting ads.</p>
+          </div>
+        </div>
+        <!-- Module 8 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 08</span>
+              <span class="module-title">AI Influencer & Faceless Content — Bina Chehra Dikhaye Famous Ho Jao</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Step-by-step guide to building a profitable faceless brand.</p>
+          </div>
+        </div>
+        <!-- Module 9 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 09</span>
+              <span class="module-title">Clients Lao, Paise Kamao — Skill Ko Business Banao</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Outreach scripts, pricing, and how to land international clients.</p>
+          </div>
+        </div>
+        <!-- Module 10 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left">
+              <span class="module-badge">Module 10</span>
+              <span class="module-title">Koi Bhi Viral Video Dekho — Wohi Banao</span>
+            </div>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Reverse engineering viral content and recreating it with AI.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="module-bonus-card">
+        <div class="module-bonus-inner">
+          <div>
+            <div class="module-bonus-badge">🎁 BONUS</div>
+            <div class="module-bonus-title">Hidden Methods to Access Paid Tools for Free</div>
+            <div class="module-bonus-desc">Secret workflows to unlock premium AI tools — at zero cost.</div>
+          </div>
+          <div class="module-bonus-price">
+            <div class="module-bonus-old">$50</div>
+            <div class="module-bonus-free text-gradient">FREE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. REAL ACCOUNTS SECTION -->
+  <section class="bg-light fade-in">
+    <div class="container">
+      <div class="badge">Real Accounts</div>
+      <h2 class="section-title" style="text-align: left;">Built with the same playbook</h2>
+      
+      <div class="real-accounts-grid">
+        <div class="ra-image">
+          <img src="/assets/img/community/ss-shadihub.jpeg" alt="WhatsApp Group" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiByZXg9IjQwMCIgZmlsbD0iI2UyZThmMCIvPg=='">
+          <p style="text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--muted);">Inside the private TechPulse student WhatsApp group</p>
+        </div>
+        <div class="ra-cards">
+          <div class="card">
+            <h4>@dr_arohi1</h4>
+            <p class="text-gradient">AI Visual Character</p>
+            <p style="margin-top: 8px;"><strong>374K</strong> followers<br><strong>$8,400</strong>/mo</p>
+          </div>
+          <div class="card">
+            <h4>@dahliamartinx</h4>
+            <p class="text-gradient">Creator &middot; CTRL/VAULT</p>
+            <p style="margin-top: 8px;"><strong>51.7K</strong> followers<br><strong>$3,200</strong>/mo</p>
+          </div>
+          <div class="card">
+            <h4>@tanvijoshii_</h4>
+            <p class="text-gradient">Reels &middot; Music &middot; Digital</p>
+            <p style="margin-top: 8px;"><strong>225K</strong> followers<br><strong>$6,800</strong>/mo</p>
+          </div>
+          <div class="card">
+            <h4>@zarairahh</h4>
+            <p class="text-gradient">Fashion &middot; Style</p>
+            <p style="margin-top: 8px;"><strong>135K</strong> followers<br><strong>$5,100</strong>/mo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. TESTIMONIALS SECTION -->
+  <section class="fade-in">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="badge">Testimonials</div>
+        <h2 class="section-title">18 students. Real money. Real Pakistan.</h2>
+      </div>
+      
+      <div class="testi-grid">
+        <div class="card testi-card">
+          <div class="stars">★★★★★</div>
+          <div class="badge" style="background:#ecfdf5; color:#10b981; margin:0; display:inline-block; width:fit-content;">Earned Rs. 45K</div>
+          <p>"Bhai pehli baar laga ke seekha hua kaam asli paisa de raha hai. 1st month mein 45k."</p>
+          <div class="testi-user">
+            <div class="avatar">AR</div>
+            <div>
+              <strong>Ahmed Raza</strong>
+              <div style="font-size:0.875rem; color:var(--muted);">Freelancer, Karachi</div>
+            </div>
+          </div>
+        </div>
+        <div class="card testi-card">
+          <div class="stars">★★★★★</div>
+          <div class="badge" style="background:#ecfdf5; color:#10b981; margin:0; display:inline-block; width:fit-content;">Earned Rs. 28K</div>
+          <p>"Course start kiya, 3 hafton mein local brand sign ki. Mind blown!"</p>
+          <div class="testi-user">
+            <div class="avatar">FS</div>
+            <div>
+              <strong>Fatima Sheikh</strong>
+              <div style="font-size:0.875rem; color:var(--muted);">Student, Lahore</div>
+            </div>
+          </div>
+        </div>
+        <div class="card testi-card">
+          <div class="stars">★★★★★</div>
+          <div class="badge" style="background:#ecfdf5; color:#10b981; margin:0; display:inline-block; width:fit-content;">Earned $1.2K</div>
+          <p>"Apne brand ke liye seekha, ab clients ke liye banata hoon. Game changer."</p>
+          <div class="testi-user">
+            <div class="avatar">BA</div>
+            <div>
+              <strong>Bilal Ahmed</strong>
+              <div style="font-size:0.875rem; color:var(--muted);">Business Owner, Islamabad</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. OUTCOMES SECTION -->
+  <section class="fade-in">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="badge">Outcomes</div>
+        <h2 class="section-title">By the end of this course, you will be able to:</h2>
+      </div>
+      
+      <div class="grid-4">
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">📸</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">AI Product Photography</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$300–$800</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Studio-quality shots for any brand.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">🎬</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">UGC Talking Ads</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$500–$2,000</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Avatars that sell on Meta & TikTok.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">🧠</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">AI Influencer Builds</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$2,000–$15,000</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Faceless personas with real income.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">🛍️</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">E-com Creative Sets</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$400–$1,200</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Full product creative kits per drop.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">💬</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">Multi-language Ads</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$300–$900</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Urdu, English, Arabic — one render.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">🎨</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">Brand Style Systems</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$600–$1,500</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Consistent AI aesthetic per brand.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">🎙️</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">AI Voiceover Reels</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$200–$600</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Hooks + voice + visuals — done.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.75rem; margin-bottom:8px;">📈</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:2px;">Performance Creative</h4>
+          <p class="text-gradient" style="font-weight:700; font-size:0.875rem; margin-bottom:6px;">$1,000–$5,000</p>
+          <p style="font-size:0.8125rem; color:var(--muted); margin:0;">Iterative test creatives for ad spend.</p>
+        </div>
+      </div>
+      
+      <div style="margin-top: 40px; background: #0f172a; border-radius: 20px; padding: 32px; color: #ffffff;">
+        <div style="color: #06b6d4; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;">+ BONUSES INCLUDED</div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 24px;">
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.875rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            200+ proven AI prompts pack
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.875rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            Cost-cutting tool stack hack
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.875rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            Pakistan payment guide (Payoneer, Wise)
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.875rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            Free Client Acquisition Ebook
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.875rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            Private WhatsApp support group
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. INCOME POTENTIAL SECTION -->
+  <section class="fade-in">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="badge">Income Potential</div>
+        <h2 class="section-title">What students earn in 14 days</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card text-center" style="text-align:center;">
+          <h3 class="text-gradient" style="font-size:1.5rem;">$300–$800</h3>
+          <p style="margin-top:8px; font-weight:500;">AI Product Photography</p>
+        </div>
+        <div class="card text-center" style="text-align:center;">
+          <h3 class="text-gradient" style="font-size:1.5rem;">$500–$2,000</h3>
+          <p style="margin-top:8px; font-weight:500;">UGC Talking Ad Videos</p>
+        </div>
+        <div class="card text-center" style="text-align:center;">
+          <h3 class="text-gradient" style="font-size:1.5rem;">$1,000–$5,000</h3>
+          <p style="margin-top:8px; font-weight:500;">Monthly Brand Retainer</p>
+        </div>
+        <div class="card text-center" style="text-align:center;">
+          <h3 class="text-gradient" style="font-size:1.5rem;">$2,000–$15,000</h3>
+          <p style="margin-top:8px; font-weight:500;">Faceless AI Influencer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. 14-DAY ROADMAP SECTION -->
+  <section class="fade-in">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="badge">14-Day Roadmap</div>
+        <h2 class="section-title">From zero to first paycheck</h2>
+      </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-card">
+          <div class="day-badge">Day 1–5</div>
+          <div class="step-num">01</div>
+          <h4>Foundations</h4>
+          <p>Master the AI stack — prompts, tools, workflows.</p>
+        </div>
+        <div class="roadmap-card">
+          <div class="day-badge">Day 6–10</div>
+          <div class="step-num">02</div>
+          <h4>First Asset</h4>
+          <p>Ship your first paid AI ad. Build your portfolio.</p>
+        </div>
+        <div class="roadmap-card">
+          <div class="day-badge">Day 10–13</div>
+          <div class="step-num">03</div>
+          <h4>First Client</h4>
+          <p>Outreach scripts + DMs. Sign your first paying brand.</p>
+        </div>
+        <div class="roadmap-card">
+          <div class="day-badge">Day 14</div>
+          <div class="step-num">04</div>
+          <h4>Scale</h4>
+          <p>Retainer + faceless brand. $1K–$5K monthly target.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. WHO IT'S FOR SECTION -->
+  <section class="fade-in">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="badge">Who It's For</div>
+        <h2 class="section-title">If any of these is you — you're in</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="who-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg></div>
+          <h4>Beginner</h4>
+          <p style="color:var(--muted); margin-top:8px;">Zero experience? Start here. Roman Urdu friendly.</p>
+        </div>
+        <div class="card">
+          <div class="who-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <h4>Freelancer</h4>
+          <p style="color:var(--muted); margin-top:8px;">Add AI to your stack and 3x your rates.</p>
+        </div>
+        <div class="card">
+          <div class="who-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/></svg></div>
+          <h4>Business Owner</h4>
+          <p style="color:var(--muted); margin-top:8px;">Cut creative costs and ship ads in-house.</p>
+        </div>
+        <div class="card">
+          <div class="who-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h4>Dollar Earner</h4>
+          <p style="color:var(--muted); margin-top:8px;">International clients with Wise/Payoneer payouts.</p>
+        </div>
+        <div class="card">
+          <div class="who-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></div>
+          <h4>Student</h4>
+          <p style="color:var(--muted); margin-top:8px;">Side income while you study. Mobile-friendly.</p>
+        </div>
+        <div class="card">
+          <div class="who-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></div>
+          <h4>Creator</h4>
+          <p style="color:var(--muted); margin-top:8px;">Build a faceless brand that scales globally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. FAQ SECTION -->
+  <section class="bg-light fade-in">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="badge">FAQ</div>
+        <h2 class="section-title">Everything you need to know</h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>Do I need a high-end laptop?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>No, most of the tools we use are cloud-based. A basic laptop or even a smartphone with internet access is enough to get started.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>I'm a complete beginner — will this work?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Absolutely. We start from the very basics and guide you step-by-step. No prior tech or design experience is required.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>What if I don't earn anything?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>We provide a money-back guarantee. If you implement all the steps and still don't see results, we'll refund your fee.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>Is it in Urdu or English?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>The bootcamp is taught in a mix of Urdu and English (Roman Urdu friendly) to ensure everyone understands the concepts clearly.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>How do I receive payments from abroad?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>We include a dedicated guide on setting up and receiving international payments using Payoneer and Wise in Pakistan.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>Can I do this alongside my job?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Yes! The sessions are recorded, and you can learn at your own pace, making it perfect for students and professionals.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>How much time per day?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Just 1–2 hours per day is enough. All content is recorded so you can learn at your own schedule.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>Will I get support after enrollment?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>Yes! You get lifetime access to the private WhatsApp group, community support, and direct Q&A with instructors.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>When does the next batch start?</span>
+            <svg class="chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="accordion-content">
+            <p>New batches start every month. Once you enroll, you get immediate access to all existing content and join the next live batch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. FINAL CTA SECTION -->
+  <section class="bg-dark final-cta fade-in">
+    <div class="container">
+      <h2>Your next client is already looking for AI creatives</h2>
+      <p style="font-size:1.25rem; color:#cbd5e1; margin-bottom:40px;">Start today — spots are running out.</p>
+      <a href="/checkout" class="btn btn-primary" style="font-size:1.25rem; padding: 16px 40px;">Enroll Now &rarr; Rs. 1,499</a>
+      <p style="margin-top:24px; color:#94a3b8;">🔒 Secure checkout &middot; Lifetime access &middot; Money-back guarantee</p>
+    </div>
+  </section>
+
+  <!-- 15. FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 TechPulse AI Bootcamp. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms</a>
+        <a href="https://instagram.com/aivideobootcamppk" target="_blank">Instagram (@aivideobootcamppk)</a>
+        <a href="#" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 16. FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/+923194448530" class="wa-float" target="_blank" title="Chat with us">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- SCRIPTS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Accordion functionality
+      const accordions = document.querySelectorAll('.accordion-header');
+      accordions.forEach(acc => {
+        acc.addEventListener('click', function() {
+          const parent = this.parentElement;
+          const isActive = parent.classList.contains('active');
+          
+          // Close all
+          document.querySelectorAll('.accordion-item').forEach(item => {
+            item.classList.remove('active');
+          });
+          
+          // Open clicked if it wasn't active
+          if (!isActive) {
+            parent.classList.add('active');
+          }
+        });
+      });
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

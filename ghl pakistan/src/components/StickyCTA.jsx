@@ -52,7 +52,7 @@ function StickyCTA({ onNavigate, spotsLeft }) {
       {/* Price & Scarcity */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <span style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--accent)', lineHeight: 1.1 }}>
-          Rs. 2,499
+          Rs. 1,499
         </span>
         <span style={{ fontSize: '0.6rem', color: '#fca5a5', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
           <span className="red-dot" style={{ width: '5px', height: '5px', background: '#ef4444', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 6px #ef4444', animation: 'dotPulse 1.2s infinite' }}></span>

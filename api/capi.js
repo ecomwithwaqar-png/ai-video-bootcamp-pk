@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
             },
             custom_data: {
                 currency: 'PKR',
-                value: custom_data.value || 2499,
+                value: custom_data.value || 1499,
                 content_name: 'AI Video Masterclass'
             }
         }]
@@ -100,8 +100,8 @@ module.exports = async (req, res) => {
             "Google Click ID": req.body.gclid || custom_data.gclid || '',
             "ttclid": user_data.ttclid || '',
             "Traffic Type": custom_data.traffic_type || 'paid',
-            "Value": custom_data.value || 2499,
-            "Upsell Selected": (custom_data.value && custom_data.value > 2499) ? 'Yes' : 'No',
+            "Value": custom_data.value || 1499,
+            "Upsell Selected": (custom_data.value && custom_data.value > 1499) ? 'Yes' : 'No',
             "Receipt Link": req.body.receipt_url || custom_data.receipt_url || '',
             "Conversion Name": req.body.conversion_name || 'Lead'
         };
