@@ -4,12 +4,10 @@ var META_ACCESS_TOKEN = 'EAAVEgSnZBQVcBRoSoiLR0qzwZBkPHn4cfkgzHRT0TnhFZBfwpiSV7o
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Simple Trigger — automatically executed by Google Sheets on cell edits
+ * CAPI TRIGGER — GOD LEVEL FINAL VERSION
+ * code.gs — Fires Meta & GA4 Purchase CAPI when "Payment Verified" checkbox is ticked.
+ * Requires an Installable Trigger on "onEditTrigger" (Spreadsheet -> On edit).
  */
-function onEdit(e) {
-  onEditTrigger(e);
-}
-
 function onEditTrigger(e) {
   if (!e) return;
 
