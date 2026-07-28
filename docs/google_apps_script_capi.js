@@ -4,10 +4,12 @@ var META_ACCESS_TOKEN = 'EAAVEgSnZBQVcBRoSoiLR0qzwZBkPHn4cfkgzHRT0TnhFZBfwpiSV7o
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * CAPI TRIGGER — GOD LEVEL FINAL VERSION
- * code.gs — Fires Meta Purchase CAPI when "Payment Verified" checkbox is ticked.
- * Features: deduplication lock, full response logging, clean payload, E.164 phone.
+ * Simple Trigger — automatically executed by Google Sheets on cell edits
  */
+function onEdit(e) {
+  onEditTrigger(e);
+}
+
 function onEditTrigger(e) {
   if (!e) return;
 
