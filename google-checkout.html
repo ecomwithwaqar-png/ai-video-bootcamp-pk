@@ -934,7 +934,7 @@
             const gads_eid = sessionStorage.getItem('meta_eid_lead') || ('gads_' + Date.now());
 
             // Retrieve attribution click IDs and traffic type
-            const fbc = localStorage.getItem('fb_click_id') || '';
+            const fbc = localStorage.getItem('meta_fbc') || '';
             const match = document.cookie.match(new RegExp('(^| )_fbp=([^;]+)'));
             const fbp = match ? match[2] : (localStorage.getItem('meta_fbp') || '');
             const gclid = localStorage.getItem('google_click_id') || '';
@@ -986,35 +986,13 @@
                 console.error('Error saving state:', err);
             }
 
-            // Step 3: Fire Browser-Side Google Ads Purchase Conversion tag
-            let redirected = false;
-            const doRedirect = () => {
-                if (redirected) return;
-                redirected = true;
-                if (waHref) {
-                    window.open(waHref, '_blank');
-                }
-                window.location.href = '/success';
-            };
-
-            // Safety fallback: Redirect after 600ms if gtag is slow or blocked
-            const redirectTimeout = setTimeout(doRedirect, 600);
-
-            if (window.gtag) {
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-18327926458/33ddCKSHxdEcELrtt6NE',
-                    'value': parseFloat(totalAmount),
-                    'currency': 'PKR',
-                    'transaction_id': gads_eid,
-                    'event_callback': () => {
-                        clearTimeout(redirectTimeout);
-                        doRedirect();
-                    }
-                });
-            } else {
-                clearTimeout(redirectTimeout);
-                doRedirect();
+            // Step 3: Redirect to success page + open WhatsApp
+            // Purchase tracking is EXCLUSIVELY handled by Google Sheet onEditTrigger.
+            // No browser gtag purchase event — prevents fake conversions before payment verification.
+            if (waHref) {
+                window.open(waHref, '_blank');
             }
+            window.location.href = '/success';
 
         } catch (error) {
             console.error(error);

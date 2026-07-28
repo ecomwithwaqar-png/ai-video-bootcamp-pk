@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
             custom_data: {
                 currency: 'PKR',
                 value: custom_data.value || 1499,
-                content_name: 'AI Video Masterclass'
+                content_name: custom_data.content_name || 'AI Video Bootcamp'
             }
         }]
     };
@@ -86,10 +86,14 @@ module.exports = async (req, res) => {
 
     // Task 2: Google Sheets (Log Lead)
     if (event_name === 'Lead' && SHEETS_WEBHOOK) {
+        // Prefix phone with apostrophe to prevent Google Sheets scientific notation
+        const phoneForSheet = (user_data.ph || user_data.phone || custom_data.phone || 'N/A').toString();
+        const safePhone = phoneForSheet.startsWith("'") ? phoneForSheet : "'" + phoneForSheet;
+        
         const dataToSubmit = {
             "Conversion Time": new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
             "Name": user_data.fn || user_data.name || custom_data.name || 'N/A',
-            "Phone": user_data.ph || user_data.phone || custom_data.phone || 'N/A',
+            "Phone": safePhone,
             "Event ID": event_id || 'N/A',
             "City": city || 'N/A',
             "URL": event_source_url || 'N/A',

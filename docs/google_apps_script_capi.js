@@ -107,7 +107,7 @@ function onEditTrigger(e) {
           var convTime = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' +
                          pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' +0500';
           var convValue = Number(u.value) || 1499;
-          gadsSheet.appendRow([u.gclid, convTime, 'Verified Purchase', convValue, 'PKR']);
+          gadsSheet.appendRow([u.gclid, 'Verified Purchase', convTime, convValue, 'PKR']);
           Logger.log('Google Ads Upload: Verified Purchase row added for gclid: ' + u.gclid.substring(0, 30) + '...');
         } else {
           Logger.log('Google Ads Upload: GoogleAds_Upload sheet not found');
@@ -139,7 +139,7 @@ function sendPurchaseToMeta(u) {
   // If already has country code (e.g. 923001234567), keep it as is
 
   const hashedPhone = hashSHA256(phone);
-  const hashedName  = hashSHA256(u.name.split(' ')[0]);
+  const hashedName  = hashSHA256(u.name);
   const hashedCity  = hashSHA256(u.city);
 
   // Build user_data — Meta v19 expects arrays for ph, fn, ct

@@ -15,7 +15,8 @@ function doPost(e) {
       const defaultHeaders = [
         "Conversion Time", "Name", "Phone", "Event ID", "City",
         "URL", "Traffic Type", "fbc", "fbp", "IP", "UA",
-        "Google Click ID", "ttclid", "Payment Verified", "Pixel Status"
+        "Google Click ID", "ttclid", "Value", "Upsell Selected",
+        "Receipt Link", "Conversion Name", "Payment Verified", "Pixel Status"
       ];
       sheet.appendRow(defaultHeaders);
 

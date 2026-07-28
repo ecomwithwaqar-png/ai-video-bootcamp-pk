@@ -51,50 +51,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. CAPI Bridge (Handles Meta & TikTok Browser + Server)
+            // CAPI Bridge (Handles Meta & TikTok Browser + Server)
             if (window.CAPIBridge) {
                 CAPIBridge.pageView();
-                // Purchase DISABLED here — Google Sheet onEditTrigger is the
-                // single source of truth for Purchase events to avoid duplicates.
-                // See: docs/google_apps_script_capi.js
             }
-
-            // 2. Google Ads Conversion (Browser) — Enhanced Conversions + Dynamic Value
-            if (window.gtag) {
-                // Read checkout data saved by checkout.html to get phone and actual order value
-                let orderValue = 1499;
-                let phone = '';
-                let transactionId = '';
-                try {
-                    const saved = sessionStorage.getItem('checkout_state');
-                    if (saved) {
-                        const state = JSON.parse(saved);
-                        if (state.phone) phone = state.phone;
-                        if (state.bump) orderValue += 499;
-                        if (state.marketian) orderValue += 999;
-                        if (state.transactionId) transactionId = state.transactionId;
-                    }
-                } catch(e) {}
-
-                // Generate fallback transaction ID if none was passed
-                if (!transactionId) {
-                    transactionId = 'pur_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
-                }
-
-                // Set user_data for Enhanced Conversions matching
-                if (phone) {
-                    gtag('set', 'user_data', {
-                        'phone_number': phone.startsWith('+') ? phone : '+92' + phone.replace(/^0/, '')
-                    });
-                }
-
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-18327926458/33ddCKSHxdEcELrtt6NE',
-                    'value': parseFloat(orderValue),
-                    'currency': 'PKR',
-                    'transaction_id': transactionId
-                });
-            }
+            // Purchase tracking is EXCLUSIVELY handled by Google Sheet onEditTrigger
+            // when "Payment Verified" checkbox is ticked. This prevents fake conversions
+            // from users who land on this page but haven't actually paid yet.
+            // See: docs/google_apps_script_capi.js
         });
     </script>
 </head>
