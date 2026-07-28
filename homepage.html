@@ -25,6 +25,16 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1622955485439618');
     fbq('track', 'PageView');
+    fbq('track', 'ViewContent', { content_name: 'AI Video Bootcamp', value: 1499, currency: 'PKR' });
+  </script>
+  <script src="assets/js/capi-bridge.js?v=1.0.5"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.CAPIBridge) {
+        CAPIBridge.pageView();
+        setTimeout(function () { CAPIBridge.viewContent(); }, 500);
+      }
+    });
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1622955485439618&ev=PageView&noscript=1"/></noscript>
 
