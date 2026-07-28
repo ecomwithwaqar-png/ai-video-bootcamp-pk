@@ -95,9 +95,16 @@ function onEditTrigger(e) {
       }
     }
 
-    // ── GOOGLE ADS OFFLINE CONVERSION UPLOAD ───────────────────────────────
-    // Write "Verified Purchase" row to GoogleAds_Upload tab so Google Ads
-    // can import it on its next scheduled scan of this sheet.
+    // ── GOOGLE ANALYTICS 4 DIRECT SERVER PURCHASE (INSTANT) ───────────────
+    try {
+      var ga4Resp = sendPurchaseToGA4(u);
+      Logger.log('GA4 MP Response Code: ' + ga4Resp.getResponseCode());
+    } catch (ga4Err) {
+      Logger.log('GA4 MP Error: ' + ga4Err.toString());
+    }
+    // ──────────────────────────────────────────────────────────────────────
+
+    // ── GOOGLE ADS OFFLINE CONVERSION UPLOAD (FALLBACK) ───────────────────
     if (u.gclid) {
       try {
         var gadsSheet = e.source.getSheetByName('GoogleAds_Upload');
@@ -201,6 +208,44 @@ function hashSHA256(input) {
     const hex = (b < 0 ? b + 256 : b).toString(16);
     return hex.length === 1 ? '0' + hex : hex;
   }).join('');
+}
+
+// ─── GA4 MEASUREMENT PROTOCOL SENDER ─────────────────────────────────────────
+var GA4_MEASUREMENT_ID = 'G-NHWQLSQ5D5';
+var GA4_API_SECRET     = 'CAyRIw8oSRaCuOnq1w3LmA';
+
+function sendPurchaseToGA4(u) {
+  var clientId = u.gclid || u.fbp || u.eventId || ('ga_' + Date.now());
+  var val = Number(u.value) || 1499;
+  
+  var payload = {
+    client_id: clientId,
+    user_id: u.phone ? u.phone.replace(/\D/g, '') : undefined,
+    events: [{
+      name: 'purchase',
+      params: {
+        currency: 'PKR',
+        value: val,
+        transaction_id: u.eventId || ('pur_' + Date.now()),
+        gclid: u.gclid || '',
+        items: [{
+          item_id: 'avb_001',
+          item_name: val > 1499 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Bootcamp',
+          price: val,
+          quantity: 1
+        }]
+      }
+    }]
+  };
+
+  var endpoint = 'https://www.google-analytics.com/mp/collect?measurement_id=' + GA4_MEASUREMENT_ID + '&api_secret=' + GA4_API_SECRET;
+
+  return UrlFetchApp.fetch(endpoint, {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
 }
 
 // ─── TEST FUNCTION ───────────────────────────────────────────────────────────
