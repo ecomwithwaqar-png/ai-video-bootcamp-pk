@@ -390,7 +390,7 @@
             <div class="cta-next-step" style="font-size: 0.82rem; color: #fdba74; text-align: center; margin-top: 0.5rem; font-weight: 600;">
                 Aapko payment ke baad WhatsApp pe instant access mil jayega — within 2 minutes.
             </div>
-            <div class="cta-trust">🔒 Secure checkout · JazzCash & EasyPaisa accepted · Instant activation</div>
+            <div class="cta-trust">🔒 Secure checkout · HBL Bank Transfer · Instant activation</div>
 
             <!-- Order Bump -->
             <div class="order-bump" id="orderBumpContainer" onclick="toggleOrderBump(event)" style="margin-top: 1.5rem;">
@@ -440,49 +440,19 @@
                     <span class="timer-clock" style="color: #22C55E; font-size: 1.1rem; font-weight: 800;">ACTIVE</span>
                 </div>
 
-                <!-- Payment Method Tabs -->
+                <!-- Payment Method: HBL Only -->
                 <div class="pay-tabs">
-                    <button class="pay-tab active" data-tab="jazz" onclick="switchPayTab('jazz')">JazzCash</button>
-                    <button class="pay-tab" data-tab="easy" onclick="switchPayTab('easy')">EasyPaisa</button>
-                    <button class="pay-tab" data-tab="bank" onclick="switchPayTab('bank')">Bank Transfer</button>
+                    <button class="pay-tab active" data-tab="bank" onclick="switchPayTab('bank')">Bank Transfer</button>
                 </div>
 
-                <!-- JazzCash -->
-                <div class="pay-card active" id="card-jazz">
-                    <div class="pay-card-header">
-                        <span class="pay-method-name jazz">JazzCash</span>
-                        <span class="verified-chip">✓ VERIFIED</span>
-                    </div>
-                    <div class="pay-row">
-                        <span class="pay-number" id="jazz-num">03180236635</span>
-                        <span class="copy-btn" onclick="copyText('jazz-num', this)">Copy</span>
-                    </div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">Account: Farman Ali</div>
-                    <div class="amount-chip">
-                        <span>Amount to Send</span>
-                        <span class="payment-amount-display">Rs. 1,499</span>
-                    </div>
-                </div>
+                <!-- JazzCash (HIDDEN) -->
+                <div class="pay-card" id="card-jazz" style="display:none !important;"></div>
 
-                <!-- EasyPaisa -->
-                <div class="pay-card" id="card-easy">
-                    <div class="pay-card-header">
-                        <span class="pay-method-name easy">EasyPaisa</span>
-                        <span class="verified-chip">✓ VERIFIED</span>
-                    </div>
-                    <div class="pay-row">
-                        <span class="pay-number" id="easy-num">0345 8996578</span>
-                        <span class="copy-btn" onclick="copyText('easy-num', this)">Copy</span>
-                    </div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">Account: Farman Ali</div>
-                    <div class="amount-chip">
-                        <span>Amount to Send</span>
-                        <span class="payment-amount-display">Rs. 1,499</span>
-                    </div>
-                </div>
+                <!-- EasyPaisa (HIDDEN) -->
+                <div class="pay-card" id="card-easy" style="display:none !important;"></div>
 
-                <!-- Bank -->
-                <div class="pay-card" id="card-bank">
+                <!-- Bank (DEFAULT ACTIVE) -->
+                <div class="pay-card active" id="card-bank">
                     <div class="pay-card-header">
                         <span class="pay-method-name bank">HBL Bank Transfer</span>
                         <span class="verified-chip">✓ VERIFIED</span>
@@ -529,14 +499,9 @@
 </div>
 
 <script>
-    // Payment tab rotation based on hours (even/odd)
+    // Default to Bank Transfer (HBL only)
     document.addEventListener('DOMContentLoaded', function() {
-        const currentHour = new Date().getHours();
-        if (currentHour % 2 === 0) {
-            switchPayTab('easy');
-        } else {
-            switchPayTab('jazz');
-        }
+        switchPayTab('bank');
     });
 
     function switchPayTab(tabName) {
