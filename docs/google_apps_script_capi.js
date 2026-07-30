@@ -4,10 +4,49 @@ var META_ACCESS_TOKEN = 'EAAVEgSnZBQVcBRoSoiLR0qzwZBkPHn4cfkgzHRT0TnhFZBfwpiSV7o
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * CAPI TRIGGER — GOD LEVEL FINAL VERSION
+ * CAPI TRIGGER & MENU — PERMANENT FINAL VERSION
  * code.gs — Fires Meta & GA4 Purchase CAPI when "Payment Verified" checkbox is ticked.
- * Requires an Installable Trigger on "onEditTrigger" (Spreadsheet -> On edit).
+ * 
+ * Includes:
+ * 1. Automatic Installable Trigger: onEditTrigger(e)
+ * 2. Custom Sheet Menu: "🚀 CAPI Tools" -> "Process Verified Payments"
  */
+
+// Custom Menu in Google Sheets Toolbar
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('🚀 CAPI Tools')
+    .addItem('Process Verified Payments Now', 'processAllVerified')
+    .addToUi();
+}
+
+// Process all checked rows manually (Bulletproof Backup)
+function processAllVerified() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Leads");
+  if (!sheet) return;
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const metaBoxIdx = headers.indexOf('Payment Verified') + 1;
+  if (metaBoxIdx === 0) return;
+
+  const lastRow = sheet.getLastRow();
+  let count = 0;
+
+  for (let r = 2; r <= lastRow; r++) {
+    const isChecked = sheet.getRange(r, metaBoxIdx).getValue() === true;
+    if (isChecked) {
+      const mockEvent = {
+        source: SpreadsheetApp.getActiveSpreadsheet(),
+        range: sheet.getRange(r, metaBoxIdx)
+      };
+      onEditTrigger(mockEvent);
+      count++;
+    }
+  }
+
+  SpreadsheetApp.getUi().alert(`Processed ${count} verified payment(s)!`);
+}
+
 function onEditTrigger(e) {
   if (!e) return;
 
