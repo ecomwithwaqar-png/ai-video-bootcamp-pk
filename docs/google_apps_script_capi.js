@@ -4,49 +4,16 @@ var META_ACCESS_TOKEN = 'EAAVEgSnZBQVcBRoSoiLR0qzwZBkPHn4cfkgzHRT0TnhFZBfwpiSV7o
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * CAPI TRIGGER & MENU — PERMANENT FINAL VERSION
- * code.gs — Fires Meta & GA4 Purchase CAPI when "Payment Verified" checkbox is ticked.
- * 
- * Includes:
- * 1. Automatic Installable Trigger: onEditTrigger(e)
- * 2. Custom Sheet Menu: "🚀 CAPI Tools" -> "Process Verified Payments"
+ * INSTALLABLE TRIGGER — tick "Payment Verified" checkbox → auto-fires to Meta + GA4.
+ *
+ * ONE-TIME SETUP (already done if it was working before):
+ *   Apps Script Editor → Triggers (⏰) → + Add Trigger →
+ *     Function: onEditTrigger | Event source: From spreadsheet | Event type: On edit → Save
+ *
+ * ONE-TIME AUTHORIZATION (if you see "Specified permissions" error):
+ *   Run the "testMeta" function once from the editor (▶️ button) → Authorize when prompted.
+ *   After that, checkbox ticks will work forever.
  */
-
-// Custom Menu in Google Sheets Toolbar
-function onOpen() {
-  const ui = SpreadsheetApp.getUi();
-  ui.createMenu('🚀 CAPI Tools')
-    .addItem('Process Verified Payments Now', 'processAllVerified')
-    .addToUi();
-}
-
-// Process all checked rows manually (Bulletproof Backup)
-function processAllVerified() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Leads");
-  if (!sheet) return;
-
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const metaBoxIdx = headers.indexOf('Payment Verified') + 1;
-  if (metaBoxIdx === 0) return;
-
-  const lastRow = sheet.getLastRow();
-  let count = 0;
-
-  for (let r = 2; r <= lastRow; r++) {
-    const isChecked = sheet.getRange(r, metaBoxIdx).getValue() === true;
-    if (isChecked) {
-      const mockEvent = {
-        source: SpreadsheetApp.getActiveSpreadsheet(),
-        range: sheet.getRange(r, metaBoxIdx)
-      };
-      onEditTrigger(mockEvent);
-      count++;
-    }
-  }
-
-  SpreadsheetApp.getUi().alert(`Processed ${count} verified payment(s)!`);
-}
-
 function onEditTrigger(e) {
   if (!e) return;
 
