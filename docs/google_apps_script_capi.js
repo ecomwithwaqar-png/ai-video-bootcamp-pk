@@ -119,7 +119,7 @@ function onEditTrigger(e) {
           var pad = function(n) { return n < 10 ? '0' + n : n; };
           var convTime = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' +
                          pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' +0500';
-          var convValue = Number(u.value) || 1499;
+          var convValue = Number(u.value) || 1999;
           gadsSheet.appendRow([u.gclid, convTime, 'Verified Purchase', convValue, 'PKR']);
           Logger.log('Google Ads Upload: Verified Purchase row added for gclid: ' + u.gclid.substring(0, 30) + '...');
         } else {
@@ -176,8 +176,8 @@ function sendPurchaseToMeta(u) {
       user_data:         userData,
       custom_data: {
         currency:     'PKR',
-        value:        Number(u.value) || 1499,
-        content_name: Number(u.value) > 1499 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Masterclass',
+        value:        Number(u.value) || 1999,
+        content_name: Number(u.value) > 1999 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Masterclass',
         content_ids:  ['avb_001'],
         content_type: 'product'
       }
@@ -222,7 +222,7 @@ var GA4_API_SECRET     = 'CAyRIw8oSRaCuOnq1w3LmA';
 
 function sendPurchaseToGA4(u) {
   var clientId = u.gclid || u.fbp || u.eventId || ('ga_' + Date.now());
-  var val = Number(u.value) || 1499;
+  var val = Number(u.value) || 1999;
   
   var payload = {
     client_id: clientId,
@@ -236,7 +236,7 @@ function sendPurchaseToGA4(u) {
         gclid: u.gclid || '',
         items: [{
           item_id: 'avb_001',
-          item_name: val > 1499 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Bootcamp',
+          item_name: val > 1999 ? 'AI Video Bootcamp + AI Creator Vault' : 'AI Video Bootcamp',
           price: val,
           quantity: 1
         }]
