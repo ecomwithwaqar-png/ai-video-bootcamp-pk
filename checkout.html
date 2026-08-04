@@ -153,8 +153,8 @@
                 <input type="text" id="inp-city" placeholder="City (e.g. Lahore)" autocomplete="address-level2">
             </div>
 
-            <!-- Hero Order Bump (Rs. 499 Vault) -->
-            <div class="order-bump" id="orderBumpContainer" onclick="toggleOrderBump(event)" style="margin-top: 0.75rem; margin-bottom: 0.75rem;">
+            <!-- Hero Order Bump 1 (Rs. 499 Vault) -->
+            <div class="order-bump" id="orderBumpContainer" onclick="toggleOrderBump(event)" style="margin-top: 0.75rem; margin-bottom: 0.5rem;">
                 <div class="order-bump-header">
                     <input type="checkbox" id="bump-check" class="order-bump-checkbox" onchange="handleBumpChange(event)">
                     <span class="order-bump-badge">SPECIAL UPGRADE</span>
@@ -166,13 +166,26 @@
                 </div>
             </div>
 
+            <!-- Order Bump 2 (Marketian Course +Rs. 999) -->
+            <div class="order-bump" id="marketianBumpContainer" onclick="toggleMarketianBump(event)" style="margin-top: 0.25rem; margin-bottom: 0.75rem;">
+                <div class="order-bump-header">
+                    <input type="checkbox" id="marketian-check" class="order-bump-checkbox" onchange="handleBumpChange(event)">
+                    <span class="order-bump-badge" style="background: #8b5cf6;">PREMIUM UPGRADE</span>
+                    <span class="order-bump-title">Add Marketian: Meta (Facebook) Ads Masterclass</span>
+                </div>
+                <div class="order-bump-desc">
+                    Master Facebook & Instagram Ads to scale your business and land high-paying client contracts. Save 80% today!
+                    <span class="order-bump-price">+ Rs. 999 (Usually Rs. 4,999)</span>
+                </div>
+            </div>
+
             <button class="btn-reveal" onclick="revealPayment()">
                 🔐 Continue to Secure Payment →
             </button>
             <div class="cta-next-step" style="font-size: 0.82rem; color: #fdba74; text-align: center; margin-top: 0.5rem; font-weight: 600;">
                 Aapko payment ke baad WhatsApp pe instant access mil jayega — within 2 minutes.
             </div>
-            <div class="cta-trust">🔒 Secure checkout · HBL Bank Transfer · Instant activation</div>
+            <div class="cta-trust">🔒 Secure checkout · HBL, JazzCash & EasyPaisa accepted · Instant activation</div>
         </div>
 
         <!-- Trust Review Widget (Mobile Only - positioned right below the CTA button) -->
@@ -196,19 +209,14 @@
                     <span class="timer-clock" id="timer">15:00</span>
                 </div>
 
-                <!-- Payment Method Tabs -->
-                <!-- Payment Method: HBL Only -->
+                <!-- Payment Method Tabs: 1st HBL Bank, 2nd JazzCash, 3rd EasyPaisa -->
                 <div class="pay-tabs">
                     <button class="pay-tab active" data-tab="bank" onclick="switchPayTab('bank')">Bank Transfer</button>
+                    <button class="pay-tab" data-tab="jazz" onclick="switchPayTab('jazz')">JazzCash</button>
+                    <button class="pay-tab" data-tab="easy" onclick="switchPayTab('easy')">EasyPaisa</button>
                 </div>
 
-                <!-- JazzCash (HIDDEN) -->
-                <div class="pay-card" id="card-jazz" style="display:none !important;"></div>
-
-                <!-- EasyPaisa (HIDDEN) -->
-                <div class="pay-card" id="card-easy" style="display:none !important;"></div>
-
-                <!-- Bank (DEFAULT ACTIVE) -->
+                <!-- 1. HBL Bank Transfer (DEFAULT ACTIVE) -->
                 <div class="pay-card active" id="card-bank">
                     <div class="pay-card-header">
                         <span class="pay-method-name bank">HBL Bank Transfer</span>
@@ -219,6 +227,40 @@
                         <span class="pay-number" id="bank-acc" style="font-size: 1rem;">22567902223303</span>
                         <span class="copy-btn" onclick="copyText('bank-acc', this)">Copy</span>
                     </div>
+                    <div class="amount-chip">
+                        <span>Amount to Send</span>
+                        <span class="payment-amount-display">Rs. 1,999</span>
+                    </div>
+                </div>
+
+                <!-- 2. JazzCash -->
+                <div class="pay-card" id="card-jazz">
+                    <div class="pay-card-header">
+                        <span class="pay-method-name jazz">JazzCash</span>
+                        <span class="verified-chip">✓ VERIFIED</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="pay-number" id="jazz-num">03180236635</span>
+                        <span class="copy-btn" onclick="copyText('jazz-num', this)">Copy</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">Account: Farman Ali</div>
+                    <div class="amount-chip">
+                        <span>Amount to Send</span>
+                        <span class="payment-amount-display">Rs. 1,999</span>
+                    </div>
+                </div>
+
+                <!-- 3. EasyPaisa -->
+                <div class="pay-card" id="card-easy">
+                    <div class="pay-card-header">
+                        <span class="pay-method-name easy">EasyPaisa</span>
+                        <span class="verified-chip">✓ VERIFIED</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="pay-number" id="easy-num">0345 8996578</span>
+                        <span class="copy-btn" onclick="copyText('easy-num', this)">Copy</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">Account: Farman Ali</div>
                     <div class="amount-chip">
                         <span>Amount to Send</span>
                         <span class="payment-amount-display">Rs. 1,999</span>
